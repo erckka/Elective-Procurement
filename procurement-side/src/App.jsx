@@ -1,7 +1,21 @@
-export default function App() {
+import React from 'react'
+import NavBarMobile from './components/NavBarMobile'
+import {
+	BrowserRouter,
+	Routes,
+	Route,
+} from 'react-router-dom'
+
+function App() {
 	return (
-		<h1 className="text-3xl font-bold underline">
-			Hello world hehe!
-		</h1>
+		<div>
+			<BrowserRouter>
+				<Routes>
+					<Route path="/" element={<NavBarMobile />} />
+				</Routes>
+			</BrowserRouter>
+		</div>
 	)
 }
+
+export default App
