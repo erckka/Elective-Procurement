@@ -8,5 +8,9 @@ figure,
 blockquote,
 dl,
 dd {
-	font-family: 'Archivo', 'San-serif';
+  font-family: 'Archivo', 'San-serif';
+}
+.gradient-outline {
+  border: 2px solid transparent; /* Set the initial border */
+  border-image: linear-gradient(135deg, #690d65, #0b61b0) 1; /* Apply gradient as border image */
 }
