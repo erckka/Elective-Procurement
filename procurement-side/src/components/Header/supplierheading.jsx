@@ -1,11 +1,13 @@
 import React from 'react'
 
-const supplierheading = () => {
+const SupplierHeading = () => {
   return (
-    <div className="flex justify-end mt-10">
-      <div className="bg-red-400 w-72">Supplier</div>
+    <div className="flex justify-end  w-full mt-[8rem]">
+      <div className="bg-gradient-color w-[10rem] py-2 flex justify-center h-[3rem] rounded shadow text-white text-xl rounded-l-full">
+        Supplier
+      </div>
     </div>
   )
 }
 
-export default supplierheading
+export default SupplierHeading
