@@ -1,5 +1,5 @@
 import React from 'react'
-import NavBarMobile from './components/NavBarMobile'
+import Supplier from './pages/Supplier'
 import './App.css'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
@@ -9,7 +9,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<NavBarMobile />} />
+          <Route path="/" element={<Supplier />} />
         </Routes>
       </BrowserRouter>
     </div>

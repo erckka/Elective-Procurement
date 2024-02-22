@@ -14,3 +14,6 @@ dd {
   border: 2px solid transparent; /* Set the initial border */
   border-image: linear-gradient(135deg, #690d65, #0b61b0) 1; /* Apply gradient as border image */
 }
+.gradient-color {
+  background: linear-gradient(135deg, #690d65, #0b61b0);
+}
