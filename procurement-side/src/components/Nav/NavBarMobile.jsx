@@ -15,7 +15,7 @@ const NavBarMobile = () => {
   }
 
   return (
-    <div className="fixed z-20 w-[100%] md:hidden">
+    <div className=" z-20 w-[100%] md:hidden">
       <div className="bg-dark-blue  rounded-b-8 flex flex-row items-center justify-between p-6">
         <img
           src="https://bloggytalky.com/wp-content/uploads/2017/07/create-a-free-logo-design-logo-designs-design-a-free-logo-design-a-free-logo-alltech-just-free-logo-design-1068x974.png"
@@ -59,7 +59,7 @@ const NavBarMobile = () => {
                 damping: 20,
                 delay: 0.1 + 1 / 10,
               }}
-              className="dashboard border-gray  gradient-outline rounded-10 grid grid-cols-2 items-center gap-5 border-4 px-[5.5rem] py-4  "
+              className="hover:bg-gray-500  dashboard border-gray  gradient-outline rounded-10 grid grid-cols-2 items-center gap-5 border-4 px-[5.5rem] py-4  "
             >
               <HiOutlineViewBoards className="-ml-8 h-auto w-[40px]" />
               <p className="-ml-2 text-[14px]">Dashboard</p>
@@ -75,7 +75,7 @@ const NavBarMobile = () => {
                 damping: 20,
                 delay: 0.1 + 1 / 10,
               }}
-              className="dashboard gradient-outline rounded-10 grid grid-cols-2 items-center gap-5 border-4 px-[6.2rem] py-4"
+              className="hover:bg-gray-500 dashboard gradient-outline rounded-10 grid grid-cols-2 items-center gap-5 border-4 px-[6.2rem] py-4"
             >
               <MdShoppingBag className="-ml-12 h-auto w-[40px]" />
               <p className="-ml-2 text-[14px]">Supplier</p>
@@ -91,7 +91,7 @@ const NavBarMobile = () => {
                 damping: 20,
                 delay: 0.1 + 1 / 10,
               }}
-              className="dashboard gradient-outline rounded-10 grid grid-cols-2 items-center whitespace-nowrap gap-5 border-4 px-[3.7rem] py-4 "
+              className="hover:bg-gray-500 dashboard gradient-outline rounded-10 grid grid-cols-2 items-center whitespace-nowrap gap-5 border-4 px-[3.7rem] py-4 "
             >
               <FaClipboardList className="-ml-1 h-auto w-[40px]" />
               <p className="-ml-8 text-[14px] whitespace-nowrap">
@@ -109,7 +109,7 @@ const NavBarMobile = () => {
                 damping: 20,
                 delay: 0.1 + 1 / 10,
               }}
-              className=" dashboard gradient-outline rounded-10 grid grid-cols-2 items-center gap-5 border-4 px-[3.7rem] py-4 "
+              className="hover:bg-gray-500 dashboard gradient-outline rounded-10 grid grid-cols-2 items-center gap-5 border-4 px-[3.7rem] py-4 "
             >
               <BiSolidPurchaseTag className="-ml-2 h-auto w-[40px]" />
               <p className="-ml-2 text-[14px]">Purchase Order</p>

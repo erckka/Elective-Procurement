@@ -1,16 +1,16 @@
-import React from 'react'
-// import NavBarMobile from '../components/Nav/NavBarMobile'
-import NavBar from '../components/Nav/NavBar'
-import Heading from '../components/Header/supplierheading'
+import React from 'react';
+import NavBarMobile from '../components/Nav/NavBarMobile';
+import NavBar from '../components/Nav/NavBar';
+import Heading from '../components/Header/supplierheading';
 
 const Supplier = () => {
   return (
     <div>
       <NavBar />
+      <NavBarMobile  />
       <Heading />
-      {/* <NavBarMobile /> */}
     </div>
-  )
-}
+  );
+};
 
-export default Supplier
+export default Supplier;

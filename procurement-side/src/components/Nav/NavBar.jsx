@@ -16,7 +16,7 @@ const App = () => {
   ]
 
   return (
-    <div className="flex  md:block">
+    <div className="hidden md:block">
       <div
         className={` ${
           open ? 'w-72' : 'w-20 '
@@ -43,14 +43,32 @@ const App = () => {
             Logo
           </h1>
         </div>
-        <ul className="pt-[6rem]">
+        <div className=" flex flex-col items-center mt-9 ">
+            <img
+              src="https://i.pinimg.com/originals/10/7f/bf/107fbfe59b4df60a921e04e804cc0561.jpg"
+              alt="profile-pic"
+              className={`w-[60px] h-[60px] rounded-full ${
+                !open && `w-[40px] h-[39px] rounded-full ml-3 `
+              }`}
+            />
+            <h1
+              className={`text-white text-[18px] mt-4 ${
+                !open && 'scale-0 text-[3px]'
+              }`}
+            >
+             Chen E. Lyn
+            </h1>
+        </div>
+        
+
+        <ul className="pt-[2rem]">
           {Menus.map((Menu, index) => (
             <li
               key={index}
-              className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 md:text-xl
+              className={`flex  rounded-md m p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 md:text-xl hover:bg-gray-500 transition-all duration-300
               ${Menu.gap ? 'mt-12' : 'mt-2'} ${
-                index === 0 && 'bg-light-white'
-              } `}
+                index === 0 && 'hover:bg-gray-500'
+              } ${!open && 'w-[52px]'}`}
             >
               <span className={`text-white gradient-color rounded-full p-2`}>
                 {Menu.icon}
