@@ -80,11 +80,7 @@ const App = () => {
                 !open && 'w-[52px]'
               }`}
             >
-              <NavLink
-                to={Menu.path}
-                className="flex items-center gap-x-4  "
-                activeClassName="text-gradient-color"
-              >
+              <NavLink to={Menu.path} className="flex items-center gap-x-4  ">
                 <span className={`text-white gradient-color rounded-full p-2`}>
                   {Menu.icon}
                 </span>
