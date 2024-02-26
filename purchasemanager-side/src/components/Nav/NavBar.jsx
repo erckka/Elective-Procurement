@@ -5,7 +5,7 @@ import { FaClipboardList } from 'react-icons/fa'
 import { HiOutlineViewBoards, HiOutlineLogout } from 'react-icons/hi'
 import { NavLink } from 'react-router-dom'
 
-const App = () => {
+const NavBar = () => {
   const [open, setOpen] = useState(true)
   const Menus = [
     { title: 'Dashboard', icon: <HiOutlineViewBoards />, path: '/dashboard' },
@@ -40,7 +40,7 @@ const App = () => {
           <img
             src="./src/assets/logo.png"
             className={`cursor-pointer duration-500 ${
-              open && 'rotate-[360deg]'
+              open && 'rotate-[360deg] h-16'
             }`}
           />
           <h1
@@ -99,4 +99,4 @@ const App = () => {
     </div>
   )
 }
-export default App
+export default NavBar
