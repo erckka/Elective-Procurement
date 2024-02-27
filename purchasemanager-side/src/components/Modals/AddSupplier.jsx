@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
 import { RiFileAddFill } from 'react-icons/ri'
+import React, { useState, useEffect } from 'react'
 
 const AddModal = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -53,6 +53,32 @@ const AddModal = () => {
   const closeModal = () => {
     setIsOpen(false)
   }
+
+  useEffect(() => {
+    const handleResize = () => {
+      const vw = Math.max(
+        document.documentElement.clientWidth || 0,
+        window.innerWidth || 0
+      )
+      const vh = Math.max(
+        document.documentElement.clientHeight || 0,
+        window.innerHeight || 0
+      )
+      const maxWidth = vw * 0.6 // 60% of viewport width
+      const maxHeight = vh * 0.7 // 70% of viewport height
+      document.documentElement.style.setProperty(
+        '--modal-max-width',
+        `${maxWidth}px`
+      )
+      document.documentElement.style.setProperty(
+        '--modal-max-height',
+        `${maxHeight}px`
+      )
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   return (
     <div className="relative">
