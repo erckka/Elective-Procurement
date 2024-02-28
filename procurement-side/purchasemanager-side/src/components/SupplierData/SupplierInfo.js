@@ -1,0 +1,36 @@
+export const SupplierInfo = [
+  {
+    Supplier_Name: 'Unilab',
+    Contact_Person: 'Chen E Lyn',
+    Contact_Number: '09564562315',
+    Company_Email: 'unilab@gmail.com',
+    Address: '123 Apple St',
+    City: 'Amsterdam',
+    State: 'NY',
+    ZipCode: '5725',
+    Country: 'US',
+  },
+  {
+    Supplier_Name: 'Unilever',
+    Contact_Person: 'Chen E Lyn',
+    Contact_Number: '09564562315',
+    Company_Email: 'unilab@gmail.com',
+    Address: '123 Apple St',
+    City: 'Amsterdam',
+    State: 'NY',
+    ZipCode: '5725',
+    Country: 'US',
+  },
+  {
+    Supplier_Name: 'Paracetamol',
+    Contact_Person: 'Chen E Lyn',
+    Contact_Number: '09564562315',
+    Company_Email: 'unilab@gmail.com',
+    Address: '123 Apple St',
+    City: 'Amsterdam',
+    State: 'NY',
+    ZipCode: '5725',
+    Country: 'US',
+  },
+]
+export default SupplierInfo
