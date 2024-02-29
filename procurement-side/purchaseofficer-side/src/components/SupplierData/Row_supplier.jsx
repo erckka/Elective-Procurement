@@ -7,8 +7,8 @@ const Row_supplier = () => {
   return (
     <div className="flex flex-col  md:ml-20 mt-12 ">
       <div className="flex flex-row ml-0 mt-4 gap-x-8">
-        <h1 className="text-[12px]  md:px-8 font-bold ">Supplier Name</h1>
-        <h1 className="text-[12px]  md:px-8 font-bold">Contact Number</h1>
+        <h1 className="text-[12px] ml-6 md:px-8 font-bold ">Supplier Name</h1>
+        <h1 className="text-[12px] ml-2 md:px-8 font-bold">Contact Number</h1>
         <h1 className="text-[12px] px-2 lg:ml-2 md:px-8 font-bold hidden md:block">
           Email Address
         </h1>

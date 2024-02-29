@@ -49,7 +49,7 @@ const NavBarMobile = () => {
           </div>
           <h1 className="text-white text-[18px]"> Chen E. Lyn</h1>
 
-          <NavLink to="/dashboard" onClick={closeMenuOnClick}>
+          <NavLink to="/Dashboard" onClick={closeMenuOnClick}>
             <motion.button
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -65,7 +65,7 @@ const NavBarMobile = () => {
               <p className="-ml-2 text-[14px]">Dashboard</p>
             </motion.button>
           </NavLink>
-          <NavLink to="/supplier" onClick={closeMenuOnClick}>
+          <NavLink to="/Supplier" onClick={closeMenuOnClick}>
             <motion.button
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -81,7 +81,7 @@ const NavBarMobile = () => {
               <p className="-ml-2 text-[14px]">Supplier</p>
             </motion.button>
           </NavLink>
-          <NavLink to="/pr" onClick={closeMenuOnClick}>
+          <NavLink to="/ProductReq" onClick={closeMenuOnClick}>
             <motion.button
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -99,7 +99,7 @@ const NavBarMobile = () => {
               </p>
             </motion.button>
           </NavLink>
-          <NavLink to="/po" onClick={closeMenuOnClick}>
+          <NavLink to="/PurchaseOrder" onClick={closeMenuOnClick}>
             <motion.button
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
