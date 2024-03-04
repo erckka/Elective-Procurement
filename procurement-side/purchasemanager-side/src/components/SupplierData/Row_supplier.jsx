@@ -17,48 +17,43 @@ const Row_supplier = () => {
       selector: (row) => row.Contact_Number,
       sortable: true,
     },
-    // {
-    //   name: 'Email',
-    //   selector: (row) => row.Company_Email,
-    //   sortable: false,
-    // },
     {
       name: 'Actions',
       cell: (row) => (
         <div className="flex">
-          <CiEdit className="bg-brand-blue text-white rounded-sm w-5 h-5 mr-2 lg:w-6 lg:h-6" />
-          <PiDotsThreeDuotone className="bg-slate-600 text-white rounded-sm w-5 h-5 mr-2 lg:w-6 lg:h-6" />
-          <FaClipboard className="bg-brand-purple text-white rounded-sm w-5 h-5 lg:w-6 lg:h-6" />
+          <CiEdit className="bg-blue-500 text-white rounded-sm w-5 h-5 mr-2 lg:w-6 lg:h-6" />
+          <PiDotsThreeDuotone className="bg-gray-700 text-white rounded-sm w-5 h-5 mr-2 lg:w-6 lg:h-6" />
+          <FaClipboard className="bg-purple-500 text-white rounded-sm w-5 h-5 lg:w-6 lg:h-6" />
         </div>
       ),
     },
   ]
 
   return (
-    <div className="flex flex-col mx-4 mt-10 lg:ml-10 lg:mx-4  ">
+    <div className="flex flex-col mx-4 mt-10  md:mx-6 md:ml-[6rem]">
       <DataTable
         columns={columns}
         data={SupplierInfo}
         dense
-        selectableRows={false} // Set to false to remove checkbox column
-        selectableRowsVisible={false} // Set to false to hide checkbox
+        selectableRows={false}
+        selectableRowsVisible={false}
         pagination
-        paginationPosition="bottom" // Set pagination to the bottom
-        className="border gap-1  "
+        paginationPosition="bottom"
+        className="border border-gray-200 rounded-lg shadow-sm"
         customStyles={{
           headCells: {
             style: {
-              padding: '2px',
+              padding: '6px', // Update padding to match Tailwind CSS spacing
             },
           },
           cells: {
             style: {
-              padding: '2px',
+              padding: '2px', // Update padding to match Tailwind CSS spacing
             },
           },
           table: {
             style: {
-              width: '100%', // Set the width of the table to 100%
+              width: '100%',
             },
           },
         }}
