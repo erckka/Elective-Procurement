@@ -1,9 +1,9 @@
 import React from 'react'
 import { CiEdit } from 'react-icons/ci'
 import { PiDotsThreeDuotone } from 'react-icons/pi'
-import { FaClipboard } from 'react-icons/fa'
 import { SupplierInfo } from './SupplierInfo'
 import DataTable from 'react-data-table-component'
+import { SiGoogleforms } from 'react-icons/si'
 
 const Row_supplier = () => {
   const columns = [
@@ -18,19 +18,25 @@ const Row_supplier = () => {
       sortable: true,
     },
     {
+      name: 'Contact Person',
+      selector: (row) => row.Contact_Person,
+      sortable: true,
+      hide: 'md',
+    },
+    {
       name: 'Actions',
       cell: (row) => (
-        <div className="flex">
-          <CiEdit className="bg-blue-500 text-white rounded-sm w-5 h-5 mr-2 lg:w-6 lg:h-6" />
-          <PiDotsThreeDuotone className="bg-gray-700 text-white rounded-sm w-5 h-5 mr-2 lg:w-6 lg:h-6" />
-          <FaClipboard className="bg-purple-500 text-white rounded-sm w-5 h-5 lg:w-6 lg:h-6" />
+        <div className="flex gap-x-2">
+          <CiEdit className="bg-blue-500 text-white  text-[18px] rounded-sm shadow-sm w-auto h-6 lg:h-6 p-[0.2rem] cursor-pointer" />
+          <PiDotsThreeDuotone className="bg-gray-700 text-white text-[18px] rounded-sm shadow-sm w-auto h-6 lg:h-6 p-[0.2rem] cursor-pointer" />
+          <SiGoogleforms className="bg-purple-light text-white  text-[18px] rounded-sm shadow-sm w-auto h-6 lg:h-6 p-[0.2rem] cursor-pointer  " />
         </div>
       ),
     },
   ]
 
   return (
-    <div className="flex flex-col mx-4 mt-10  md:mx-6 md:ml-[6rem]">
+    <div className="flex flex-col mx-4 mt-10  md:mx-6 md:ml-[6rem] lg:mx-28">
       <DataTable
         columns={columns}
         data={SupplierInfo}
@@ -39,7 +45,7 @@ const Row_supplier = () => {
         selectableRowsVisible={false}
         pagination
         paginationPosition="bottom"
-        className="border border-gray-200 rounded-lg shadow-sm"
+        className=" rounded-lg shadow-sm"
         customStyles={{
           headCells: {
             style: {

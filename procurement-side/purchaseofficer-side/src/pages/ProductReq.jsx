@@ -6,7 +6,7 @@ import ProductReq from '../components/ProductReq/ProductReq'
 
 const PurchaseReq = () => {
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col  ">
       <NavBar />
       <NavBarMobile />
       <PRheading />

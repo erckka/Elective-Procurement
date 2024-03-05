@@ -99,7 +99,7 @@ const AddModal = () => {
         Add Supplier
       </button>
       {isOpen && (
-        <div className=" flex justify-center overflow-y-auto inset-2 fixed   items-center md:mt-[-4rem] mt-[4rem]  ">
+        <div className=" flex justify-center overflow-y-auto inset-2 fixed   items-center md:mt-[-4rem] mt-[4rem] z-50  ">
           <div className="  inset-0" onClick={closeModal}></div>
           <div className=" flex justify-center   ">
             <div className="p-2 rounded-lg mt-[8rem] bg-white shadow-md w-[18rem] md:w-[20rem]  xl:w-[100%]">

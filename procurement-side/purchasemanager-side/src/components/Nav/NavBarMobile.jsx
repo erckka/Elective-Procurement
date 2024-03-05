@@ -18,9 +18,9 @@ const NavBarMobile = () => {
     <div className=" z-20 w-[100%] md:hidden">
       <div className="bg-dark-blue  rounded-b-8 flex flex-row items-center justify-between p-6">
         <img
-          src="https://bloggytalky.com/wp-content/uploads/2017/07/create-a-free-logo-design-logo-designs-design-a-free-logo-design-a-free-logo-alltech-just-free-logo-design-1068x974.png"
+          src="./src/assets/logo.png"
           alt="logo"
-          className="w-[60px] h-[60px]  "
+          className="w-[60px] h-[60px] rounded-full shadow-lg "
         />
 
         <Hamburger

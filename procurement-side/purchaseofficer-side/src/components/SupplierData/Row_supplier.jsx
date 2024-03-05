@@ -1,45 +1,68 @@
 import React from 'react'
 import { PiDotsThreeDuotone } from 'react-icons/pi'
-import { FaClipboard } from 'react-icons/fa'
+import { SiGoogleforms } from 'react-icons/si'
+
 import { SupplierInfo } from './SupplierInfo'
+import DataTable from 'react-data-table-component'
 
 const Row_supplier = () => {
-  return (
-    <div className="flex flex-col  md:ml-20 mt-12 ">
-      <div className="flex flex-row ml-0 mt-4 gap-x-8">
-        <h1 className="text-[12px] ml-6 md:px-8 font-bold ">Supplier Name</h1>
-        <h1 className="text-[12px] ml-2 md:px-8 font-bold">Contact Number</h1>
-        <h1 className="text-[12px] px-2 lg:ml-2 md:px-8 font-bold hidden md:block">
-          Email Address
-        </h1>
-        <h1 className="text-[12px] px-2 md:px-8 font-bold hidden lg:block">
-          Contact Person
-        </h1>
-      </div>
-      <div className="mx-4 ">
-        {SupplierInfo.map((item, index) => (
-          <div
-            key={index}
-            className="shadow-md w-full md:w-full mt-4 h-8 border-b border-black flex items-center  justify-between my-2"
-          >
-            <div className="grid grid-cols-3 lg:grid-cols-4 justify-start ml-2 gap-x-10 whitespace-nowrap">
-              <span className="text-black mr-4 ml-2">{item.Supplier_Name}</span>
-              <span className="text-black -ml-2">{item.Contact_Number}</span>
-              <span className="text-black mr-4  hidden md:block">
-                {item.Company_Email}
-              </span>
-              <span className="text-black mr-4 hidden md:hidden lg:block">
-                {item.Contact_Person}
-              </span>
-            </div>
+  const columns = [
+    {
+      name: 'Supplier Name',
+      selector: (row) => row.Supplier_Name,
+      sortable: true,
+    },
+    {
+      name: 'Contact Number',
+      selector: (row) => row.Contact_Number,
+      sortable: true,
+    },
+    {
+      name: 'Contact Person',
+      selector: (row) => row.Contact_Person,
+      sortable: true,
+      hide: 'md',
+    },
+    {
+      name: 'Actions',
+      cell: (row) => (
+        <div className="flex flex-row gap-x-2">
+          <PiDotsThreeDuotone className="bg-gray-700 text-white text-[18px] rounded-sm shadow-sm w-auto h-6 lg:h-6 p-[0.2rem] cursor-pointer" />
+          <SiGoogleforms className="bg-purple-light text-white  text-[18px] rounded-sm shadow-sm w-auto h-6 lg:h-6 p-[0.2rem] cursor-pointer" />
+        </div>
+      ),
+    },
+  ]
 
-            <div className="flex  lg:-ml-10 ">
-              <PiDotsThreeDuotone className="bg-slate-600 text-white rounded-sm w-5 h-5 mr-2 lg:w-6 lg:h-6" />
-              <FaClipboard className="bg-brand-purple text-white rounded-sm w-5 h-5 mr-2 lg:w-6 lg:h-6" />
-            </div>
-          </div>
-        ))}
-      </div>
+  return (
+    <div className="flex flex-col mx-4 mt-10  md:mx-6 md:ml-[6rem] lg:mx-28">
+      <DataTable
+        columns={columns}
+        data={SupplierInfo}
+        dense
+        selectableRows={false}
+        selectableRowsVisible={false}
+        pagination
+        paginationPosition="bottom"
+        className="rounded-lg shadow-sm"
+        customStyles={{
+          headCells: {
+            style: {
+              padding: '6px', // Update padding to match Tailwind CSS spacing
+            },
+          },
+          cells: {
+            style: {
+              padding: '2px', // Update padding to match Tailwind CSS spacing
+            },
+          },
+          table: {
+            style: {
+              width: '100%',
+            },
+          },
+        }}
+      />
     </div>
   )
 }

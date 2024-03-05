@@ -12,7 +12,7 @@ export const SupplierInfo = [
   },
   {
     Supplier_Name: 'Unilever',
-    Contact_Person: 'Chen E Lyn',
+    Contact_Person: 'Kinemerut',
     Contact_Number: '09564562315',
     Company_Email: 'unilab@gmail.com',
     Address: '123 Apple St',
@@ -23,7 +23,7 @@ export const SupplierInfo = [
   },
   {
     Supplier_Name: 'Paracetamol',
-    Contact_Person: 'Chen E Lyn',
+    Contact_Person: 'Ate Chona',
     Contact_Number: '09564562315',
     Company_Email: 'unilab@gmail.com',
     Address: '123 Apple St',

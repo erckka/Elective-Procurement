@@ -14,6 +14,21 @@ const PRdata = [
     ItemDesc: 'box',
     Qty: '5',
   },
+  {
+    PRNumber: '202403041058',
+    Supplier: 'Luxe Organics',
+    ContactPerson: 'Kinemberly Chu',
+    OrderCreated: '03-04-2024 10:58',
+    Status: 'Approved',
+    Street: 'Apple Street',
+  },
+  {
+    PRNumber: '202403041058',
+    Supplier: 'P&G',
+    ContactPerson: 'Kinemberly Chu',
+    OrderCreated: '03-04-2024 10:58',
+    Status: 'Rejected',
+  },
 ]
 
 export default PRdata

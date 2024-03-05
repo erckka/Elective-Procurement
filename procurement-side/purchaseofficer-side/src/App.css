@@ -24,3 +24,34 @@ dd {
   border-style: solid;
   border-image: linear-gradient(135deg, #690d65, #0b61b0) 1;
 }
+/* DataTableStyles.css */
+
+/* Common styles for all screen sizes */
+.react-data-table-component .rdt_TableHead .rdt_TableCol {
+  font-weight: bold;
+}
+
+/* Small screens */
+@media (max-width: 640px) {
+  .react-data-table-component .rdt_TableHead .rdt_TableCol {
+    width: auto; /* Let columns take full width on small screens */
+  }
+}
+
+/* Medium screens */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .react-data-table-component .rdt_TableHead .rdt_TableCol[data-tag='name'] {
+    width: 120px; /* Purchase No. column width on medium screens */
+  }
+
+  /* Adjust other columns as needed for medium screens */
+}
+
+/* Large screens */
+@media (min-width: 1025px) {
+  .react-data-table-component .rdt_TableHead .rdt_TableCol[data-tag='name'] {
+    width: 150px; /* Purchase No. column width on large screens */
+  }
+
+  /* Adjust other columns as needed for large screens */
+}

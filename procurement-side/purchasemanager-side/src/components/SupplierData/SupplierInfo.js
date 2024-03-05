@@ -12,7 +12,7 @@ export const SupplierInfo = [
   },
   {
     Supplier_Name: 'Unilever',
-    Contact_Person: 'Chen E Lyn',
+    Contact_Person: 'KinemberLyn',
     Contact_Number: '09564562315',
     Company_Email: 'unilab@gmail.com',
     Address: '123 Apple St',
