@@ -1,11 +1,31 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { FaCheck } from 'react-icons/fa'
 
 const ApprovePR = ({ closeModal, row }) => {
-  const [isOpen, setIsOpen] = React.useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const [isApproved, setIsApproved] = useState(false)
+  const [isRejected, setIsRejected] = useState(false)
 
   const openModal = () => {
     setIsOpen(true)
+  }
+
+  useEffect(() => {
+    if (isApproved) {
+      console.log('Product requisition approved!')
+
+      const timer = setTimeout(() => {
+        console.log('Timer expired! Additional action after approval.')
+
+        closeModal()
+      }, 3000)
+
+      return () => clearTimeout(timer)
+    }
+  }, [isApproved, closeModal])
+
+  const handleApproveClick = () => {
+    setIsApproved(true)
   }
 
   return (
@@ -24,7 +44,10 @@ const ApprovePR = ({ closeModal, row }) => {
             Do you want to Proceed?
           </h1>
           <div className="flex flex-row gap-x-2 py-2">
-            <button className="bg-green-500 w-[5rem] font-bold py-[0.2rem] text-[12px]">
+            <button
+              className="bg-green-500 w-[5rem] font-bold py-[0.2rem] text-[12px]"
+              onClick={handleApproveClick}
+            >
               Approve
             </button>
             <button

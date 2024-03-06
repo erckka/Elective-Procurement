@@ -1,7 +1,27 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { FaTimes } from 'react-icons/fa'
 
 const RejectPR = ({ isOpen, closeModal }) => {
+  const [isRejected, setIsRejected] = useState(false)
+
+  useEffect(() => {
+    if (isRejected) {
+      console.log('Product requisition rejected!')
+
+      const timer = setTimeout(() => {
+        console.log('Timer expired! Additional action after approval.')
+
+        closeModal()
+      }, 3000)
+
+      return () => clearTimeout(timer)
+    }
+  }, [isRejected, closeModal])
+
+  const handleApproveClick = () => {
+    setIsRejected(true)
+  }
+
   return (
     <div className="">
       <div className="fixed inset-0 flex items-center justify-center z-50 mt-28">
@@ -17,7 +37,10 @@ const RejectPR = ({ isOpen, closeModal }) => {
             Do you want to Proceed?
           </h1>
           <div className="flex flex-row gap-x-2 py-2">
-            <button className="bg-yellow-400 w-[5rem] font-bold py-[0.2rem] text-[12px]">
+            <button
+              className="bg-yellow-500 w-[5rem] font-bold py-[0.2rem] text-[12px]"
+              onClick={handleApproveClick}
+            >
               Reject
             </button>
             <button
