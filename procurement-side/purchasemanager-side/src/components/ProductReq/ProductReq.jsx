@@ -46,7 +46,7 @@ const ProductReq = () => {
   }
   const openPRSummary = (row) => {
     setSelectedRow(row)
-    setIsPRSummaryModalOpen(true) // Fix the typo here
+    setIsPRSummaryModalOpen(true)
   }
 
   const closeModal = () => {
@@ -101,9 +101,10 @@ const ProductReq = () => {
       {isApproveModalOpen && <ApprovePR closeModal={closeModal} />}
       {isRejectModalOpen && <RejectPR closeModal={closeModal} />}
       {isPRSummaryModalOpen && <PRSummary closeModal={closeModal} />}
-      <div className="bg-dark-blue text-white py-[0.25rem] px-2 flex justify-center w-[12rem] whitespace-nowrap rounded-sm mt-6 my-4">
+      <div className="flex justify-center text-center whitespace-nowrap mt-6 my-4 font-bold">
         Pending For Approval
       </div>
+
       <div className="container  ">
         <DataTable
           columns={columns}
