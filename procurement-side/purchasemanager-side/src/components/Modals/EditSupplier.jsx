@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import InputField from '../InputField/InputField'
 
 const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
   const [formData, setFormData] = useState(initialData)
@@ -34,38 +34,25 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
   return (
     <div>
       {isOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75">
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <h1 className="text-xl font-bold mb-4">Edit Supplier</h1>
+        <div className="flex justify-center overflow-y-auto inset-2 fixed p-2 items-center md:mt-[-4rem] mt-[4rem] z-50">
+          <div className="inset-0 rounded-lg mt-[8rem] bg-white shadow-md w-[20rem] md:w-[20rem] lg:w-[25rem] lg:p-2 lg:px-6 p-2 px-4">
+            <h1 className="text-xl text-center font-bold mb-4">
+              Edit Supplier
+            </h1>
+            <div className="border-b-2 border-transparent border-gradient my-[0.3rem] mb-4"></div>
+
             <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label htmlFor="companyName" className="block font-bold mb-1">
-                  Supplier Name
-                </label>
-                <input
-                  type="text"
-                  id="companyName"
-                  name="companyName"
-                  value={formData.companyName}
-                  onChange={handleChange}
-                  className="border w-full py-2 px-3 rounded focus:outline-none focus:border-blue-400"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="contactPerson" className="block font-bold mb-1">
-                  Contact Person
-                </label>
-                <input
-                  type="text"
-                  id="contactPerson"
-                  name="contactPerson"
-                  value={formData.contactPerson}
-                  onChange={handleChange}
-                  className="border w-full py-2 px-3 rounded focus:outline-none focus:border-blue-400"
-                  required
-                />
-              </div>
+              <InputField
+                type="SupplierName"
+                value={formData.companyName}
+                onChange={handleChange}
+              />
+
+              <InputField
+                type="ContactPerson"
+                value={formData.contactPerson}
+                onChange={handleChange}
+              />
               <div className="mb-4">
                 <label htmlFor="contactNumber" className="block font-bold mb-1">
                   Contact Number

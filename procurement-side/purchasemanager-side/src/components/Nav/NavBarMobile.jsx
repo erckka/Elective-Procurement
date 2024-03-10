@@ -15,8 +15,8 @@ const NavBarMobile = () => {
   }
 
   return (
-    <div className=" z-20 w-[100%] md:hidden">
-      <div className="bg-dark-blue  rounded-b-8 flex flex-row items-center justify-between p-6">
+    <div className="  w-[100%] md:hidden">
+      <div className="bg-dark-blue z-80 rounded-b-8 flex flex-row items-center justify-between p-6">
         <img
           src="./src/assets/logo.png"
           alt="logo"
@@ -38,7 +38,7 @@ const NavBarMobile = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="shadow-4xl bg-dark-blue rounded-10   fixed left-0 right-0 top-[6\.15rem] flex flex-col items-center gap-5 border-4 py-[10rem] pt-10 text-[1rem] text-[#c9c9c9] md:text-[1.25rem] "
+          className="shadow-4xl bg-dark-blue rounded-10  z-50 fixed left-0 right-0 top-[6\.15rem] flex flex-col items-center gap-5 border-4 py-[10rem] pt-10 text-[1rem] text-[#c9c9c9] md:text-[1.25rem] "
         >
           <div className="flex ">
             <img

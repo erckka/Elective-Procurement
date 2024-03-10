@@ -101,11 +101,11 @@ const ProductReq = () => {
       {isApproveModalOpen && <ApprovePR closeModal={closeModal} />}
       {isRejectModalOpen && <RejectPR closeModal={closeModal} />}
       {isPRSummaryModalOpen && <PRSummary closeModal={closeModal} />}
-      <div className="flex justify-center text-center whitespace-nowrap mt-6 my-4 font-bold">
+      <div className="flex justify-center text-center whitespace-nowrap mt-12 my-4 font-bold">
         Pending For Approval
       </div>
 
-      <div className="container  ">
+      <div className="overflow-auto rounded-lg shadow w-full">
         <DataTable
           columns={columns}
           data={PReqData}
