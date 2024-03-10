@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import NavBarMobile from '../components/Nav/NavBarMobile'
 import NavBar from '../components/Nav/NavBar'
 import Heading from '../components/Header/supplierheading'
