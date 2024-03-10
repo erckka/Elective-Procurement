@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
 import PReqData from './PRdata'
 import { FaCheck, FaTimes } from 'react-icons/fa'
@@ -14,6 +14,27 @@ const ProductReq = () => {
 
   const [selectedRow, setSelectedRow] = useState(null)
 
+  const customStyles = {
+    headRow: {
+      style: {
+        fontWeight: 'bold',
+      },
+    },
+
+    headCells: {
+      style: {
+        paddingLeft: '10px', // Padding for header cells
+        paddingRight: '10px',
+      },
+    },
+    cells: {
+      style: {
+        paddingLeft: '10px', // Padding for cells
+        paddingRight: '10px',
+      },
+    },
+  }
+
   const openApproveModal = (row) => {
     setSelectedRow(row)
     setIsApproveModalOpen(true)
@@ -25,7 +46,7 @@ const ProductReq = () => {
   }
   const openPRSummary = (row) => {
     setSelectedRow(row)
-    setIsPRSummaryModalOpen(true) // Fix the typo here
+    setIsPRSummaryModalOpen(true)
   }
 
   const closeModal = () => {
@@ -80,17 +101,20 @@ const ProductReq = () => {
       {isApproveModalOpen && <ApprovePR closeModal={closeModal} />}
       {isRejectModalOpen && <RejectPR closeModal={closeModal} />}
       {isPRSummaryModalOpen && <PRSummary closeModal={closeModal} />}
-
-      <div className="bg-dark-blue text-white py-[0.25rem] px-2 flex justify-center w-[12rem] whitespace-nowrap rounded-sm mt-6 my-4">
+      <div className="flex justify-center text-center whitespace-nowrap mt-6 my-4 font-bold">
         Pending For Approval
       </div>
-      <DataTable
-        columns={columns}
-        data={PReqData}
-        pagination
-        paginationPerPage={10}
-        paginationRowsPerPageOptions={[10, 15]}
-      />
+
+      <div className="container  ">
+        <DataTable
+          columns={columns}
+          data={PReqData}
+          pagination
+          paginationPerPage={10}
+          paginationRowsPerPageOptions={[10, 15]}
+          customStyles={customStyles}
+        />
+      </div>
     </div>
   )
 }
