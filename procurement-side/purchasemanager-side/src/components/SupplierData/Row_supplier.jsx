@@ -9,7 +9,7 @@ import EditModal from '../Modals/EditSupplier' // Import the EditModal component
 const Row_supplier = () => {
   const [editModalOpen, setEditModalOpen] = useState(false)
   const [selectedSupplier, setSelectedSupplier] = useState(null)
-  const [SupplierInfo, setSupplierInfo] = useState(initialSupplierInfo) // State for SupplierInfo
+  const [SupplierInfo, setSupplierInfo] = useState(initialSupplierInfo)
 
   const openEditModal = (supplier) => {
     setSelectedSupplier(supplier)
@@ -22,32 +22,12 @@ const Row_supplier = () => {
   }
 
   const handleSaveChanges = (formData) => {
-    console.log('Form data:', formData)
-
-    // Create a copy of the SupplierInfo array
-    const updatedSupplierInfo = [...SupplierInfo]
-
-    // Find the index of the supplier to update
-    const updatedSupplierIndex = updatedSupplierInfo.findIndex(
-      (supplier) => supplier.id === formData.id
+    const updatedSupplierInfo = SupplierInfo.map((supplier) =>
+      supplier.id === formData.id ? formData : supplier
     )
-
-    console.log('Updated supplier index:', updatedSupplierIndex)
-
-    if (updatedSupplierIndex !== -1) {
-      // Update the supplier data immutably
-      updatedSupplierInfo[updatedSupplierIndex] = formData
-
-      console.log('SupplierInfo after update:', updatedSupplierInfo)
-
-      // Update the state with the new array
-      setSupplierInfo(updatedSupplierInfo)
-
-      // Perform any action to save changes, e.g., making an API call
-      console.log('Changes saved:', formData)
-    } else {
-      console.error('Supplier not found for update:', formData)
-    }
+    setSupplierInfo(updatedSupplierInfo)
+    console.log('Changes saved:', formData)
+    closeEditModal() // Close modal after saving changes
   }
 
   const columns = [
@@ -117,7 +97,7 @@ const Row_supplier = () => {
           isOpen={editModalOpen}
           closeModal={closeEditModal}
           initialData={selectedSupplier}
-          onSave={handleSaveChanges} // Assuming you have defined this function
+          onSave={handleSaveChanges}
         />
       )}
     </div>

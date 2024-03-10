@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import InputField from '../InputField/InputField'
+import DeleteS from '../Modals/DeleteS'
 
-const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
-  const [formData, setFormData] = useState(initialData)
+const EditModal = ({ isOpen, closeModal, initialData, onSave, onDelete }) => {
+  const [formData, setFormData] = useState(initialData || {})
+  const [showDeleteModal, setShowDeleteModal] = useState(false) // State to control DeleteS modal
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -12,24 +14,21 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
     })
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    try {
-      console.log('Form data submitted:', formData)
-      onSave(formData) // Assuming onSave callback is provided correctly
-      closeModal()
-    } catch (err) {
-      console.error('Error submitting form', err)
-    }
-  }
-
-  const handleDelete = () => {
-    onDelete(formData.id)
+    onSave(formData)
     closeModal()
   }
 
-  console.log('Initial data:', initialData) // Check initialData passed to modal
-  console.log('FormData:', formData) // Check formData state
+  const handleDelete = () => {
+    setShowDeleteModal(true) // Show the DeleteS modal
+  }
+
+  const handleConfirmDelete = () => {
+    onDelete(formData.id)
+    setShowDeleteModal(false) // Close the DeleteS modal
+    closeModal() // Close the EditModal
+  }
 
   return (
     <div>
@@ -44,99 +43,54 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
             <form onSubmit={handleSubmit}>
               <InputField
                 type="SupplierName"
-                value={formData.companyName}
+                value={formData?.companyName || ''}
                 onChange={handleChange}
               />
 
               <InputField
                 type="ContactPerson"
-                value={formData.contactPerson}
+                value={formData?.contactPerson || ''}
                 onChange={handleChange}
               />
-              <div className="mb-4">
-                <label htmlFor="contactNumber" className="block font-bold mb-1">
-                  Contact Number
-                </label>
-                <input
-                  type="text"
-                  id="contactNumber"
-                  name="contactNumber"
-                  value={formData.contactNumber}
-                  onChange={handleChange}
-                  className="border w-full py-2 px-3 rounded focus:outline-none focus:border-blue-400"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="companyEmail" className="block font-bold mb-1">
-                  Company Email
-                </label>
-                <input
-                  type="text"
-                  id="companyEmail"
-                  name="companyEmail"
-                  value={formData.companyEmail}
-                  onChange={handleChange}
-                  className="border w-full py-2 px-3 rounded focus:outline-none focus:border-blue-400"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="address" className="block font-bold mb-1">
-                  Address
-                </label>
-                <input
-                  type="text"
-                  id="address"
-                  name="address"
-                  value={formData.address}
-                  onChange={handleChange}
-                  className="border w-full py-2 px-3 rounded focus:outline-none focus:border-blue-400"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="city" className="block font-bold mb-1">
-                  City
-                </label>
-                <input
-                  type="text"
-                  id="city"
-                  name="city"
-                  value={formData.city}
-                  onChange={handleChange}
-                  className="border w-full py-2 px-3 rounded focus:outline-none focus:border-blue-400"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="zipCode" className="block font-bold mb-1">
-                  Zip Code
-                </label>
-                <input
-                  type="text"
-                  id="zipCode"
-                  name="zipCode"
-                  value={formData.zipCode}
-                  onChange={handleChange}
-                  className="border w-full py-2 px-3 rounded focus:outline-none focus:border-blue-400"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="country" className="block font-bold mb-1">
-                  Country
-                </label>
-                <input
-                  type="text"
-                  id="country"
-                  name="country"
-                  value={formData.country}
-                  onChange={handleChange}
-                  className="border w-full py-2 px-3 rounded focus:outline-none focus:border-blue-400"
-                  required
-                />
-              </div>
+              <InputField
+                type="ContactNumber"
+                value={formData?.contactNumber || ''}
+                onChange={handleChange}
+              />
+
+              <InputField
+                type="CompanyEmail"
+                value={formData?.companyEmail || ''}
+                onChange={handleChange}
+              />
+              <InputField
+                type="Address"
+                value={formData?.address || ''}
+                onChange={handleChange}
+              />
+
+              <InputField
+                type="City"
+                value={formData?.city || ''}
+                onChange={handleChange}
+              />
+              <InputField
+                type="State"
+                value={formData?.state || ''}
+                onChange={handleChange}
+              />
+
+              <InputField
+                type="ZipCode"
+                value={formData?.zipCode || ''}
+                onChange={handleChange}
+              />
+
+              <InputField
+                type="Country"
+                value={formData?.country || ''}
+                onChange={handleChange}
+              />
 
               <div className="flex justify-between">
                 <button
@@ -147,7 +101,7 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
                 </button>
                 <button
                   type="button"
-                  onClick={handleDelete} // Call handleDelete instead of handleDiscardChanges
+                  onClick={handleDelete}
                   className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700"
                 >
                   Delete
@@ -156,6 +110,13 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
             </form>
           </div>
         </div>
+      )}
+      {showDeleteModal && (
+        <DeleteS
+          isOpen={true}
+          closeModal={() => setShowDeleteModal(false)}
+          onDelete={handleConfirmDelete}
+        />
       )}
     </div>
   )

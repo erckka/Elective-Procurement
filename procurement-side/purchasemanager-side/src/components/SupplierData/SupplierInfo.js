@@ -1,5 +1,6 @@
 export const SupplierInfo = [
   {
+    id: 1,
     companyName: 'Unilab',
     contactPerson: 'Chen E Lyn',
     contactNumber: '09564562315',
@@ -11,17 +12,19 @@ export const SupplierInfo = [
     country: 'US',
   },
   {
+    id: 2,
     companyName: 'Unilever',
     contactPerson: 'KinemberLyn',
     contactNumber: '09564562315',
     companyEmail: 'unilab@gmail.com',
-    Address: '123 Apple St',
-    City: 'Amsterdam',
-    State: 'NY',
-    ZipCode: '5725',
-    Country: 'US',
+    address: '123 Apple St',
+    city: 'Amsterdam',
+    state: 'NY',
+    zipCode: '5725',
+    country: 'US',
   },
   {
+    id: 3,
     companyName: 'Paracetamol',
     contactPerson: 'Chen E Lyn',
     contactNumber: '09564562315',

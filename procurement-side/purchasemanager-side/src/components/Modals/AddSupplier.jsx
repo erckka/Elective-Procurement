@@ -62,10 +62,7 @@ const AddModal = () => {
             <form onSubmit={handleSubmit}>
               <div className="supplier-credentials">
                 <InputField type="SupplierName" />
-                <InputField
-                  type="ContactPerson"
-                  value={formData.contactPerson}
-                />
+                <InputField type="ContactPerson" />
                 <InputField type="CompanyEmail" />
                 <InputField type="Address" />
                 <div className="grid grid-cols-2 w-[100%]  gap-x-4">

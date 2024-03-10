@@ -1,11 +1,11 @@
 import React from 'react'
 
-export default function InputField({ type }) {
+export default function InputField({ type, value, onChange }) {
   let labelText = ''
-  let htmlForValue = '' // Initialize htmlForValue
+  let htmlForValue = ''
 
   if (type === 'SupplierName') {
-    labelText = 'Company Name'
+    labelText = 'Supplier Name'
     htmlForValue = 'companyName'
   } else if (type === 'ContactPerson') {
     labelText = 'Contact Person'
@@ -44,6 +44,10 @@ export default function InputField({ type }) {
       <div className="flex flex-col">
         <input
           type="text"
+          id={htmlForValue}
+          name={htmlForValue}
+          value={value}
+          onChange={onChange}
           required
           className="border px-2 text-[14px] rounded py-[0.2rem] lg:py-[0.3rem] focus:outline-brand-blue mb-2"
         />
