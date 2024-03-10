@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { FaCheck } from 'react-icons/fa'
+import CloseBtn from '../Buttons/CloseBtn'
 
 const ApprovePR = ({ closeModal, row }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [isApproved, setIsApproved] = useState(false)
-  const [isRejected, setIsRejected] = useState(false)
 
   const openModal = () => {
     setIsOpen(true)
@@ -45,17 +45,12 @@ const ApprovePR = ({ closeModal, row }) => {
           </h1>
           <div className="flex flex-row gap-x-2 py-2">
             <button
-              className="bg-green-500 w-[5rem] font-bold py-[0.2rem] text-[12px]"
+              className="bg-green-500 w-[5rem] font-bold py-[0.2rem] text-sm rounded"
               onClick={handleApproveClick}
             >
               Approve
             </button>
-            <button
-              className="bg-red-500 w-[5rem] font-bold rounded-sm text-[12px]"
-              onClick={closeModal}
-            >
-              Go Back
-            </button>
+            <CloseBtn type="cancel" closeModal={closeModal} />
           </div>
         </div>
       </div>
