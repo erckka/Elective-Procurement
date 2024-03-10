@@ -23,8 +23,8 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
     }
   }
 
-  const handleDiscardChanges = () => {
-    setFormData(initialData)
+  const handleDelete = () => {
+    onDelete(formData.id)
     closeModal()
   }
 
@@ -160,10 +160,10 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
                 </button>
                 <button
                   type="button"
-                  onClick={handleDiscardChanges}
-                  className="bg-gray-300 text-gray-800 py-2 px-4 rounded hover:bg-gray-400"
+                  onClick={handleDelete} // Call handleDelete instead of handleDiscardChanges
+                  className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700"
                 >
-                  Discard
+                  Delete
                 </button>
               </div>
             </form>
