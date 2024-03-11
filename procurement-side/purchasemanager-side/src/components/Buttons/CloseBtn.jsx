@@ -6,6 +6,8 @@ export default function CloseBtn({ closeModal, type }) {
       closeModal()
     } else if (type === 'goBack') {
       closeModal()
+    } else if (type === 'close') {
+      closeModal()
     }
   }
 
@@ -14,12 +16,14 @@ export default function CloseBtn({ closeModal, type }) {
       <button
         type="button"
         onClick={handleDiscardChanges}
-        className="bg-red-500 hover:bg-red-700 w-[100%] text-white font-bold py-2 px-4 text-sm rounded focus:outline-none focus:shadow-outline whitespace-nowrap"
+        className="bg-red-500 hover:bg-red-700 w-[100%] text-white font-bold py-2 px-2 text-sm rounded focus:outline-none focus:shadow-outline whitespace-nowrap"
       >
         {type === 'discard'
           ? 'Discard'
           : type === 'cancel'
           ? 'Cancel'
+          : type === 'close'
+          ? 'Close'
           : 'Go Back'}
       </button>
     </div>

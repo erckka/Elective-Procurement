@@ -13,6 +13,7 @@ const PRdata = [
     Item: 'Paracetamol',
     ItemDesc: 'box',
     Qty: '5',
+    InvoiceNo: '',
   },
   {
     PRNumber: '202403041058',
@@ -21,6 +22,7 @@ const PRdata = [
     OrderCreated: '03-04-2024 10:58',
     Status: 'Approved',
     Street: 'Apple Street',
+    InvoiceNo: '',
   },
   {
     PRNumber: '202403041058',
@@ -28,6 +30,7 @@ const PRdata = [
     ContactPerson: 'Kinemberly Chu',
     OrderCreated: '03-04-2024 10:58',
     Status: 'Rejected',
+    InvoiceNo: '',
   },
 ]
 

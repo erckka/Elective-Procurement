@@ -5,15 +5,21 @@ import { SiGoogleforms } from 'react-icons/si'
 import DataTable from 'react-data-table-component'
 import { SupplierInfo as initialSupplierInfo } from '../SupplierData/SupplierInfo'
 import EditModal from '../Modals/EditSupplier' // Import the EditModal component
-
+import SupplierSumm from '../Modals/SupplierSumm'
 const Row_supplier = () => {
   const [editModalOpen, setEditModalOpen] = useState(false)
   const [selectedSupplier, setSelectedSupplier] = useState(null)
   const [SupplierInfo, setSupplierInfo] = useState(initialSupplierInfo)
+  const [SupplierSummary, setSupplierSummary] = useState(false)
+  const [selectedRow, setSelectedRow] = useState(null)
 
   const openEditModal = (supplier) => {
     setSelectedSupplier(supplier)
     setEditModalOpen(true)
+  }
+  const openSupplierSummary = (row) => {
+    setSelectedRow(row)
+    setSupplierSummary(true)
   }
 
   const closeEditModal = () => {
@@ -55,7 +61,11 @@ const Row_supplier = () => {
             onClick={() => openEditModal(row)}
             className="bg-blue-500 text-white  text-[18px] rounded-sm shadow-sm w-auto h-6 lg:h-6 p-[0.2rem] cursor-pointer"
           />
-          <PiDotsThreeDuotone className="bg-gray-700 text-white text-[18px] rounded-sm shadow-sm w-auto h-6 lg:h-6 p-[0.2rem] cursor-pointer" />
+          <PiDotsThreeDuotone
+            onClick={() => openSupplierSummary(row)}
+            className="bg-gray-700 text-white text-[18px] rounded-sm shadow-sm w-auto h-6 lg:h-6 p-[0.2rem] cursor-pointer"
+          />
+
           <SiGoogleforms className="bg-purple-light text-white  text-[18px] rounded-sm shadow-sm w-auto h-6 lg:h-6 p-[0.2rem] cursor-pointer  " />
         </div>
       ),
@@ -98,6 +108,13 @@ const Row_supplier = () => {
           closeModal={closeEditModal}
           initialData={selectedSupplier}
           onSave={handleSaveChanges}
+        />
+      )}
+      {SupplierSummary && selectedRow && (
+        <SupplierSumm
+          isOpen={SupplierSummary}
+          closeModal={() => setSupplierSummary(false)}
+          rowData={selectedRow}
         />
       )}
     </div>

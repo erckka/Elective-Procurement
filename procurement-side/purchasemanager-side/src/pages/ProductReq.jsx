@@ -13,12 +13,12 @@ const PurchaseReq = () => {
   }
 
   return (
-    <div className="relative min-h-screen">
+    <div className="flex flex-col">
       <NavBar />
       <NavBarMobile />
       <PRheading />
 
-      <div className="absolute mt-4 mr-2 md:mr-2  right-0 flex items-center">
+      <div className="absolute mt-[11rem] lg:mt-14 mr-2 md:mr-2  right-0 flex items-center">
         <div className=" w-1/2 px-2">
           <select
             id="selectOption"
