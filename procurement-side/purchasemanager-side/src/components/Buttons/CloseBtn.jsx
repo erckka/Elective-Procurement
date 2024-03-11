@@ -14,7 +14,7 @@ export default function CloseBtn({ closeModal, type }) {
       <button
         type="button"
         onClick={handleDiscardChanges}
-        className="bg-red-500 hover:bg-red-700 w-[100%] text-white font-bold py-2 px-4 text-sm rounded focus:outline-none focus:shadow-outline"
+        className="bg-red-500 hover:bg-red-700 w-[100%] text-white font-bold py-2 px-4 text-sm rounded focus:outline-none focus:shadow-outline whitespace-nowrap"
       >
         {type === 'discard'
           ? 'Discard'

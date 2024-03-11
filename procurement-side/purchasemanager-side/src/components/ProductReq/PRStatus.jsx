@@ -107,8 +107,8 @@ const PRStatus = () => {
       {isEmailModalOpen && <EmailModal closeModal={closeModal} />}
       {isPRSummaryModalOpen && <PRSummary closeModal={closeModal} />}
 
-      <div className="bg-gradient-color text-white py-[0.25rem] px-2 flex justify-center w-[12rem] whitespace-nowrap rounded-sm mt-14 my-4">
-        Pending For Approval
+      <div className="bg-gradient-color text-white py-[0.25rem] px-2 flex justify-center w-[15rem] whitespace-nowrap rounded-sm mt-14 my-4">
+        Purchase Requisition Status
       </div>
       <DataTable
         columns={columns}
