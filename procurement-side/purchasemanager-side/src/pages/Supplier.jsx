@@ -11,16 +11,20 @@ import Row_supplier from '../components/SupplierData/Row_supplier'
 
 const Supplier = () => {
   return (
-    <div className="flex flex-col ">
-      <NavBar />
-      <NavBarMobile />
-      <Heading />
-      <AddSupplier />
-      {/* <PurchaseRequest /> */}
-      <Row_supplier />
-      {/* <EditForm /> */}
-      {/* <Addsupplierbtn /> */}
-      {/* <SearchBar /> */}
+    <div className="flex flex-col h-screen md:flex-row">
+      <div className="md:h-screen mb-4 md:mb-0">
+        <NavBar />
+        <NavBarMobile />
+      </div>
+      <div className="h-screen md:w-full flex flex-col overflow-x-auto ">
+        <Heading />
+        <AddSupplier />
+        {/* <PurchaseRequest /> */}
+        <Row_supplier />
+        {/* <EditForm /> */}
+        {/* <Addsupplierbtn /> */}
+        {/* <SearchBar /> */}
+      </div>
     </div>
   )
 }

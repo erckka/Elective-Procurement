@@ -6,11 +6,15 @@ import PO from '../components/ProductOrder.jsx/PO'
 
 const PurchaseOrder = () => {
   return (
-    <div className="flex flex-col ">
-      <NavBar />
-      <NavBarMobile />
-      <HeadingPO />
-      <PO />
+    <div className="flex flex-col h-screen md:flex-row">
+      <div className="md:h-screen mb-4 md:mb-0">
+        <NavBar />
+        <NavBarMobile />
+      </div>
+      <div className="h-screen md:w-full flex flex-col overflow-x-auto ">
+        <HeadingPO />
+        <PO />
+      </div>
     </div>
   )
 }

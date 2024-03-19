@@ -8,6 +8,7 @@ import Select from 'react-select'
 const PO = () => {
   const [isPRSummaryModalOpen, setIsPRSummaryModalOpen] = useState(false)
   const [selectedRow, setSelectedRow] = useState(null)
+  const [data, setData] = useState(PRdata)
 
   const openPRSummary = (row) => {
     setSelectedRow(row)
@@ -17,9 +18,17 @@ const PO = () => {
   const closeModal = () => {
     setIsPRSummaryModalOpen(false)
   }
+
   const handleStatusChange = (index, selectedOption) => {
     const updatedData = [...data]
-    updatedData[index] = { ...updatedData[index], Status: selectedOption.value }
+    updatedData[index].Status = selectedOption.value
+    setData(updatedData)
+  }
+
+  const handleInvoiceChange = (index, e) => {
+    const { value } = e.target
+    const updatedData = [...data]
+    updatedData[index].OrderCreated = value
     setData(updatedData)
   }
 
@@ -34,19 +43,23 @@ const PO = () => {
       name: 'PO#',
       selector: (row) => row.PRNumber,
       sortable: true,
-      width: '150px',
     },
     {
       name: 'Supplier',
       selector: (row) => row.Supplier,
       sortable: true,
-      width: '100px',
     },
     {
       name: 'Invoice No.',
-      selector: (row) => row.OrderCreated,
+      cell: (row, index) => (
+        <input
+          type="text"
+          value={row.OrderCreated}
+          onChange={(e) => handleInvoiceChange(index, e)}
+          className="h-8 px-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+        />
+      ),
       sortable: true,
-      width: '140px',
     },
     {
       name: 'Status',
@@ -57,10 +70,10 @@ const PO = () => {
           onChange={(selectedOption) =>
             handleStatusChange(index, selectedOption)
           }
+          menuPosition="fixed" // Fix the dropdown menu position
         />
       ),
       sortable: true,
-      width: '140px',
     },
     {
       name: 'Actions',
@@ -76,7 +89,7 @@ const PO = () => {
   ]
 
   return (
-    <div className="mx-2 ml-6 mt-6 md:mx-6 md:ml-[6rem]">
+    <div className="mx-2 mt-6">
       {isPRSummaryModalOpen && <PRSummary closeModal={closeModal} />}
       <div className="flex justify-center text-center whitespace-nowrap mt-12 my-4 font-bold">
         Purchase Order
