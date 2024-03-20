@@ -9,9 +9,19 @@ function PurchaseRequest({ closeModal }) {
   const formArray = [1, 2]
   const [formNo, setFormNo] = useState(formArray[0])
   const [itemInfoCount, setItemInfoCount] = useState(1)
+  const [isHovered, setIsHovered] = useState(false)
+  const [showPopup, setShowPopup] = useState(false)
 
   const addNewItemInfo = () => {
     setItemInfoCount(itemInfoCount + 1)
+  }
+  const handleMouseEnter = () => {
+    setIsHovered(true)
+  }
+
+  const handleMouseLeave = () => {
+    setIsHovered(false)
+    setTimeout(() => setShowPopup(false), 300) // Delay hiding the popup
   }
 
   const [state, setState] = useState({
@@ -159,16 +169,27 @@ function PurchaseRequest({ closeModal }) {
         {formNo === 2 && (
           <div className=" max-h-[500px] overflow-y-scroll    ">
             <div className="flex flex-col mb-2">
-              <div className="flex flex-row justify-between items-center">
-                Item Info
-                <IoAddCircle
-                  className="text-purple-light text-lg mr-2"
-                  onClick={addNewItemInfo} // Add this line to trigger adding new item info fields
-                />
+              <h1 className="self-center font-bold text-lg">Order Info</h1>
+              <div className="flex items-center justify-end  mt-4">
+                <div
+                  className="relative"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <IoAddCircle
+                    className="text-purple-light text-2xl cursor-pointer"
+                    onClick={addNewItemInfo}
+                  />
+                  {isHovered && (
+                    <div className="absolute top-0 right-full ml-2 mt-2 text-white bg-dark-blue px-2 py-1 text-[11px] rounded-tr-lg whitespace-nowrap ">
+                      Add New Item
+                    </div>
+                  )}
+                </div>
               </div>
+
               {[...Array(itemInfoCount)].map((_, index) => (
                 <div key={index} className="flex flex-col mb-2">
-                  {/* New item info UI */}
                   <InputField
                     type="Item"
                     value={state.item}
@@ -193,7 +214,6 @@ function PurchaseRequest({ closeModal }) {
                   </div>
                 </div>
               ))}
-              {/* Existing code for buttons */}
               <div className="mt-4 gap-3 flex justify-center items-center">
                 <button
                   onClick={pre}
