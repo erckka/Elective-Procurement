@@ -74,10 +74,10 @@ function PurchaseRequest({ closeModal }) {
   }
 
   return (
-    <div className="flex justify-center inset-2 absolute p-2 items-center min-h-lvh md:mt-[-4rem] mt-[120px]">
+    <div className="flex justify-center inset-0 absolute p-2 items-center min-h-lvh md:mt-[5px] mt-[120px]">
       <ToastContainer />
-      <div className="card w-[370px] rounded-md shadow-md bg-white p-5">
-        <div className="flex justify-center items-center">
+      <div className="card w-[370px] rounded-md shadow-md  p-5 bg-white ">
+        <div className="flex justify-center items-center ">
           {formArray.map((v, i) => (
             <React.Fragment key={i}>
               <div
@@ -157,7 +157,7 @@ function PurchaseRequest({ closeModal }) {
           </div>
         )}
         {formNo === 2 && (
-          <div className=" max-h-[400px] overflow-y-scroll no-scrollbar ">
+          <div className=" max-h-[500px] overflow-y-scroll    ">
             <div className="flex flex-col mb-2">
               <div className="flex flex-row justify-between items-center">
                 Item Info

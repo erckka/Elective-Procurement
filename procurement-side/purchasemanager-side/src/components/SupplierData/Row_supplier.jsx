@@ -42,6 +42,14 @@ const Row_supplier = () => {
     console.log('Changes saved:', formData)
     closeEditModal() // Close modal after saving changes
   }
+  const customStyles = {
+    headRow: {
+      style: {
+        fontWeight: 'bold',
+        fontSize: '14px',
+      },
+    },
+  }
 
   const columns = [
     {
@@ -93,23 +101,7 @@ const Row_supplier = () => {
         pagination
         paginationPosition="bottom"
         className=" rounded-lg shadow-sm"
-        customStyles={{
-          headCells: {
-            style: {
-              padding: '6px', // Update padding to match Tailwind CSS spacing
-            },
-          },
-          cells: {
-            style: {
-              padding: '2px', // Update padding to match Tailwind CSS spacing
-            },
-          },
-          table: {
-            style: {
-              width: '100%',
-            },
-          },
-        }}
+        customStyles={customStyles}
       />
       {editModalOpen && (
         <EditModal
