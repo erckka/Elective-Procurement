@@ -8,6 +8,11 @@ import CloseBtn from '../Buttons/CloseBtn'
 function PurchaseRequest({ closeModal }) {
   const formArray = [1, 2]
   const [formNo, setFormNo] = useState(formArray[0])
+  const [itemInfoCount, setItemInfoCount] = useState(1)
+
+  const addNewItemInfo = () => {
+    setItemInfoCount(itemInfoCount + 1)
+  }
 
   const [state, setState] = useState({
     companyName: '',
@@ -69,7 +74,7 @@ function PurchaseRequest({ closeModal }) {
   }
 
   return (
-    <div className="flex justify-center overflow-y-auto inset-2 fixed p-2 items-center md:mt-[-4rem] mt-[4rem] z-50">
+    <div className="flex justify-center inset-2 absolute p-2 items-center min-h-lvh md:mt-[-4rem] mt-[120px]">
       <ToastContainer />
       <div className="card w-[370px] rounded-md shadow-md bg-white p-5">
         <div className="flex justify-center items-center">
@@ -152,32 +157,47 @@ function PurchaseRequest({ closeModal }) {
           </div>
         )}
         {formNo === 2 && (
-          <div>
+          <div className=" max-h-[400px] overflow-y-scroll no-scrollbar ">
             <div className="flex flex-col mb-2">
-              Item Info
-              <InputField
-                type="Item"
-                value={state.item}
-                onChange={inputHandle}
-              />
-              <div className="grid grid-cols-2 w-[100%] gap-x-4">
-                <InputField
-                  type="Quantity"
-                  value={state.quantity}
-                  onChange={inputHandle}
-                  className="w-[20%]"
+              <div className="flex flex-row justify-between items-center">
+                Item Info
+                <IoAddCircle
+                  className="text-purple-light text-lg mr-2"
+                  onClick={addNewItemInfo} // Add this line to trigger adding new item info fields
                 />
-                <InputField
-                  type="ItemDescription"
-                  value={state.itemDescription}
-                  onChange={inputHandle}
-                />
-                <IoAddCircle className="text-purple-light text-base" />
               </div>
+              {[...Array(itemInfoCount)].map((_, index) => (
+                <div key={index} className="flex flex-col mb-2">
+                  {/* New item info UI */}
+                  <InputField
+                    type="Item"
+                    value={state.item}
+                    onChange={inputHandle}
+                  />
+                  <div className="grid grid-cols-3 w-[100%] gap-x-4">
+                    <div className="">
+                      <InputField
+                        type="Quantity"
+                        value={state.quantity}
+                        onChange={inputHandle}
+                        className=" border border-blue-500"
+                      />
+                    </div>
+                    <div className="col-span-2 ">
+                      <InputField
+                        type="ItemDescription"
+                        value={state.itemDescription}
+                        onChange={inputHandle}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+              {/* Existing code for buttons */}
               <div className="mt-4 gap-3 flex justify-center items-center">
                 <button
                   onClick={pre}
-                  className="px-3 py-2 text-base  rounded-md w-full text-white bg-purple-400"
+                  className="px-3 py-2 text-base rounded-md w-full text-white bg-purple-400"
                 >
                   Previous
                 </button>

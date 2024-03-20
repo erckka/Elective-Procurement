@@ -16,7 +16,7 @@ const Supplier = () => {
         <NavBar />
         <NavBarMobile />
       </div>
-      <div className="h-screen md:w-full flex flex-col overflow-x-auto ">
+      <div className="h-screen md:w-full w-full flex flex-col">
         <Heading />
         <AddSupplier />
         {/* <PurchaseRequest /> */}
