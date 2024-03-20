@@ -18,19 +18,7 @@ const ProductReq = (type) => {
     headRow: {
       style: {
         fontWeight: 'bold',
-      },
-    },
-
-    headCells: {
-      style: {
-        paddingLeft: '10px', // Padding for header cells
-        paddingRight: '10px',
-      },
-    },
-    cells: {
-      style: {
-        paddingLeft: '10px', // Padding for cells
-        paddingRight: '10px',
+        fontSize: '14px',
       },
     },
   }

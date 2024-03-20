@@ -10,6 +10,15 @@ const PO = () => {
   const [selectedRow, setSelectedRow] = useState(null)
   const [data, setData] = useState(PRdata)
 
+  const customStyles = {
+    headRow: {
+      style: {
+        fontWeight: 'bold',
+        fontSize: '14px',
+      },
+    },
+  }
+
   const openPRSummary = (row) => {
     setSelectedRow(row)
     setIsPRSummaryModalOpen(true)
@@ -54,6 +63,7 @@ const PO = () => {
       cell: (row, index) => (
         <input
           type="text"
+          value={row.OrderCreated}
           onChange={(e) => handleInvoiceChange(index, e)}
           className="h-8 px-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
         />
@@ -102,6 +112,7 @@ const PO = () => {
           pagination
           paginationPerPage={2}
           paginationRowsPerPageOptions={[10, 15]}
+          customStyles={customStyles}
         />
       </div>
     </div>

@@ -25,7 +25,14 @@ const PRStatus = () => {
     setIsEmailModalOpen(false)
     setIsPRSummaryModalOpen(false)
   }
-
+  const customStyles = {
+    headRow: {
+      style: {
+        fontWeight: 'bold',
+        fontSize: '14px',
+      },
+    },
+  }
   const columns = [
     {
       name: 'Purchase No.',
@@ -114,23 +121,7 @@ const PRStatus = () => {
         pagination
         paginationPerPage={10}
         paginationRowsPerPageOptions={[10, 15]}
-        customStyles={{
-          headCells: {
-            style: {
-              padding: '6px', // Update padding to match Tailwind CSS spacing
-            },
-          },
-          cells: {
-            style: {
-              padding: '6px', // Update padding to match Tailwind CSS spacing
-            },
-          },
-          table: {
-            style: {
-              width: '100%',
-            },
-          },
-        }}
+        customStyles={customStyles}
       />
     </div>
   )
