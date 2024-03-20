@@ -21,12 +21,12 @@ const PurchaseReq = () => {
 
       <div className="h-screen md:w-full flex flex-col overflow-x-auto">
         <PRheading />
-        <div className="absolute mt-[11rem] lg:mt-14 mr-2 md:mr-2  right-0 flex items-center">
-          <div className=" w-1/2 px-2">
+        <div className="absolute  lg:mt-24 mr-2 md:mr-2  right-0 flex items-center ">
+          <div className=" w-1/2 px-2 ">
             <select
               id="selectOption"
               value={selectedOption}
-              className="bg-slate-100 p-1 focus:outline-slate-100 shadow-md"
+              className="bg-purple-200 p-1 focus:outline-slate-100 shadow-md"
               onChange={(e) => handleOptionChange(e.target.value)}
             >
               <option value="">Choose an Action</option>

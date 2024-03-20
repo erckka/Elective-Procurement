@@ -31,27 +31,23 @@ const PRStatus = () => {
       name: 'Purchase No.',
       selector: (row) => row.PRNumber,
       sortable: true,
-      width: '130px',
     },
     {
       name: 'Supplier',
       selector: (row) => row.Supplier,
       sortable: true,
-      width: '140px',
       hide: 'sm',
     },
     {
       name: 'Order Created',
       selector: (row) => row.OrderCreated,
       sortable: true,
-      width: '140px',
       hide: 'sm',
     },
     {
       name: 'Status',
       selector: (row) => row.Status,
       sortable: true,
-      width: '100px',
       cell: (row) => (
         <div
           className={`font-bold text-[12px] status-indicator ${
@@ -105,10 +101,12 @@ const PRStatus = () => {
   return (
     <div className="mx-2 ml-6 mt-6 md:mx-6 md:ml-[6rem] lg:mx-36 ">
       {isEmailModalOpen && <EmailModal closeModal={closeModal} />}
-      {isPRSummaryModalOpen && <PRSummary closeModal={closeModal} />}
+      {isPRSummaryModalOpen && (
+        <PRSummary closeModal={closeModal} type="PurchaseRequest" />
+      )}
 
-      <div className="bg-gradient-color text-white py-[0.25rem] px-2 flex justify-center w-[15rem] whitespace-nowrap rounded-sm mt-14 my-4">
-        Purchase Requisition Status
+      <div className="flex justify-center text-center whitespace-nowrap mt-12 my-4 font-bold mb-8">
+        Product Requisition Status
       </div>
       <DataTable
         columns={columns}

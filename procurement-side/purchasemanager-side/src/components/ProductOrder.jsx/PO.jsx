@@ -54,7 +54,6 @@ const PO = () => {
       cell: (row, index) => (
         <input
           type="text"
-          value={row.OrderCreated}
           onChange={(e) => handleInvoiceChange(index, e)}
           className="h-8 px-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
         />
@@ -90,11 +89,12 @@ const PO = () => {
 
   return (
     <div className="mx-2 mt-6">
-      {isPRSummaryModalOpen && <PRSummary closeModal={closeModal} />}
+      {isPRSummaryModalOpen && (
+        <PRSummary closeModal={closeModal} type="PurchaseOrder" />
+      )}{' '}
       <div className="flex justify-center text-center whitespace-nowrap mt-12 my-4 font-bold">
         Purchase Order
       </div>
-
       <div className="overflow-auto rounded-lg shadow w-full">
         <DataTable
           columns={columns}

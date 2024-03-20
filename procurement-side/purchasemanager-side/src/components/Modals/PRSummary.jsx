@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PRdata from '../ProductReq/PRdata'
 
-const PRSummary = ({ closeModal }) => {
+const PRSummary = ({ closeModal, type }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
 
@@ -17,14 +17,16 @@ const PRSummary = ({ closeModal }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 mt-[14rem] shadow">
-      <div className="bg-white flex justify-center shadow-lg flex-col items-center w-[70%] md:w-[30%] md:-mt-[7rem] lg:w-[20%] lg:-mt-[14rem] lg:ml-44">
-        <h1 className="flex text-center text-[14px] font-bold py-1 mt-2">
-          Purchase Request Summary
+      <div className="bg-white flex justify-center shadow-lg flex-col z-50 items-center px-2 w-[90%] md:w-[30%] md:-mt-[7rem] lg:w-[40%] lg:-mt-[14rem] lg:ml-44">
+        <h1 className="title flex text-center text-[14px] font-bold py-1 mt-2">
+          {type === 'PurchaseRequest'
+            ? 'Purchase Request Summary'
+            : 'Purchase Order Summary'}
         </h1>
 
-        <div className="border-b-[0.1rem] w-[14rem] border-transparent border-gradient my-[0.3rem] mb-4"></div>
+        <div className="border-b-[0.1rem] w-[16rem] border-transparent border-gradient my-[0.3rem] mb-4"></div>
 
-        <div className="flex  px-4 ">
+        <div className="flex justify-start  ">
           <div className="font-semibold text-[11px] text-left">
             <h1>Supplier Name</h1>
             <h1 className="font-light mb-4">{PRdata[currentIndex].Supplier}</h1>
@@ -45,7 +47,7 @@ const PRSummary = ({ closeModal }) => {
                 {PRdata[currentIndex].ZipCode}
               </h1>
             </div>
-            <div className="grid grid-cols-3 gap-x-2">
+            <div className="item grid grid-cols-4 gap-x-2">
               <div>
                 <h1 className="mb-2">Item Name</h1>
                 <h1 className="font-light text-center">
@@ -64,6 +66,12 @@ const PRSummary = ({ closeModal }) => {
                   {PRdata[currentIndex].Qty}
                 </h1>
               </div>
+              {type === 'PurchaseOrder' && (
+                <div>
+                  <h1 className="mb-2">Unit Price:</h1>
+                  <input type="number" className="font-light text-center" />
+                </div>
+              )}
             </div>{' '}
           </div>
         </div>

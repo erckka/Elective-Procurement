@@ -7,7 +7,7 @@ import RejectPR from '../Modals/RejectPR'
 import PRSummary from '../Modals/PRSummary'
 import { PiDotsThreeDuotone } from 'react-icons/pi'
 
-const ProductReq = () => {
+const ProductReq = (type) => {
   const [isApproveModalOpen, setIsApproveModalOpen] = useState(false)
   const [isRejectModalOpen, setIsRejectModalOpen] = useState(false)
   const [isPRSummaryModalOpen, setIsPRSummaryModalOpen] = useState(false)
@@ -60,19 +60,16 @@ const ProductReq = () => {
       name: 'Purchase No.',
       selector: (row) => row.PRNumber,
       sortable: true,
-      width: '130px',
     },
     {
       name: 'Supplier',
       selector: (row) => row.Supplier,
       sortable: true,
-      width: '100px',
     },
     {
       name: 'Order Created',
       selector: (row) => row.OrderCreated,
       sortable: true,
-      width: '140px',
       hide: 'sm',
     },
     {
@@ -88,8 +85,8 @@ const ProductReq = () => {
             onClick={() => openRejectModal(row)}
           />
           <PiDotsThreeDuotone
+            onClick={() => openPRSummary('purchaseRequest')} // Pass 'purchaseRequest' as type
             className="bg-gray-700 text-white text-[18px] rounded-sm shadow-sm w-auto h-6 lg:h-6 p-[0.2rem] cursor-pointer"
-            onClick={() => openPRSummary(row)}
           />
         </div>
       ),
@@ -100,11 +97,12 @@ const ProductReq = () => {
     <div className="mx-2 ml-6 mt-6 md:mx-6 md:ml-[6rem]">
       {isApproveModalOpen && <ApprovePR closeModal={closeModal} />}
       {isRejectModalOpen && <RejectPR closeModal={closeModal} />}
-      {isPRSummaryModalOpen && <PRSummary closeModal={closeModal} />}
+      {isPRSummaryModalOpen && (
+        <PRSummary closeModal={closeModal} type="PurchaseRequest" />
+      )}{' '}
       <div className="flex justify-center text-center whitespace-nowrap mt-12 my-4 font-bold">
         Pending For Approval
       </div>
-
       <div className="overflow-auto rounded-lg shadow w-full">
         <DataTable
           columns={columns}

@@ -53,7 +53,7 @@ const NavBar = () => {
         </div>
         <div className=" flex flex-col items-center mt-9 ">
           <img
-            src="https://i.pinimg.com/originals/10/7f/bf/107fbfe59b4df60a921e04e804cc0561.jpg"
+            src="https://tse4.mm.bing.net/th?id=OIP.fxcgWODxbtULw9WFufGg7gAAAA&pid=Api&P=0&h=180"
             alt="profile-pic"
             className={`w-[60px] h-[60px] rounded-full md:w-[60px] ${
               !open &&
@@ -65,7 +65,7 @@ const NavBar = () => {
               !open && 'scale-0 text-[3px]'
             }`}
           >
-            Chen E. Lyn
+            Sassy Gurl
           </h1>
         </div>
 
