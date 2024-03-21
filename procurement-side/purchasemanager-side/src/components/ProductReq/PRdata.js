@@ -10,10 +10,24 @@ const PRdata = [
     State: 'California',
     Country: 'US',
     ZipCode: '8102',
-    Item: 'Paracetamol',
-    ItemDesc: 'box',
-    Qty: '5',
-    InvoiceNo: '',
+    // Item: 'Paracetamol',
+    // ItemDesc: 'box',
+    // Qty: '5',
+    // InvoiceNo: '',
+    Items: [
+      {
+        Item: 'Paracetamol',
+        ItemDesc: 'box',
+        UnitPrice: '5',
+        Qty: '5',
+      },
+      {
+        Item: 'Ibuprofen',
+        ItemDesc: 'bottle',
+        UnitPrice: '10',
+        Qty: '10',
+      },
+    ],
   },
   {
     PRNumber: '202403041058',
