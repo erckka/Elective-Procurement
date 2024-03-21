@@ -63,7 +63,7 @@ const PO = () => {
       cell: (row, index) => (
         <input
           type="text"
-          value={row.OrderCreated}
+          // value={row.OrderCreated}
           onChange={(e) => handleInvoiceChange(index, e)}
           className="h-8 px-2 border rounded-md focus:outline-none w-[7rem] focus:ring focus:ring-blue-300"
         />
@@ -113,18 +113,18 @@ const PO = () => {
           pagination
           paginationPerPage={2}
           paginationRowsPerPageOptions={[10, 15]}
-          customStyles={{
-            headRow: {
-              style: {
-                zIndex: 1,
-              },
-            },
-            rows: {
-              style: {
-                zIndex: 1,
-              },
-            },
-          }}
+          // customStyles={{
+          //   headRow: {
+          //     style: {
+          //       zIndex: 2,
+          //     },
+          //   },
+          //   rows: {
+          //     style: {
+          //       zIndex: 2,
+          //     },
+          //   },
+          // }}
         />
       </div>
     </div>
