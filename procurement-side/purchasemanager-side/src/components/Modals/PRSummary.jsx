@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PRdata from '../ProductReq/PRdata'
 import CloseBtn from '../Buttons/CloseBtn'
+import InputField from '../InputField/InputField'
 
 const PRSummary = ({ closeModal, type }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -25,6 +26,13 @@ const PRSummary = ({ closeModal, type }) => {
       totalAmount += itemTotal
     })
     return totalAmount
+  }
+
+  const handleInputChange = (index, value) => {
+    const updatedItems = [...PRdata[currentIndex].Items]
+    updatedItems[index].UnitPrice = value
+    const newTotal = totalAmount()
+    setTotal(newTotal)
   }
 
   useEffect(() => {
@@ -110,7 +118,7 @@ const PRSummary = ({ closeModal, type }) => {
                   <input type="number" className="font-light text-center" />
                 </div>
               )} */}
-              <table className="table-automb-3">
+              <table className="table-auto mb-3">
                 <thead className="">
                   <tr className="">
                     <th className="px-4 py-2">Item Name</th>
@@ -121,14 +129,27 @@ const PRSummary = ({ closeModal, type }) => {
                     )}
                   </tr>
                 </thead>
-                <tbody className="text-center">
+                <tbody className="text-center ">
                   {PRdata[currentIndex].Items.map((item, index) => (
                     <tr key={index}>
                       <td className="px-4 py-2">{item.Item}</td>
                       <td className="px-4 py-2">{item.ItemDesc}</td>
                       <td className=" px-4 py-2">{item.Qty}</td>
                       {type === 'PurchaseOrder' && (
-                        <td className="px-4 py-2">{item.UnitPrice}</td>
+                        // <td className="px-4 py-2">{item.UnitPrice}</td>
+                        <td className="">
+                          <InputField
+                            type="Unit Price"
+                            value={item.UnitPrice}
+                            onChange={(e) =>
+                              handleInputChange(
+                                index,
+                                parseFloat(e.target.value)
+                              )
+                            }
+                            className=" border border-blue-500  w-[20px]"
+                          />
+                        </td>
                       )}
                     </tr>
                   ))}
@@ -138,7 +159,7 @@ const PRSummary = ({ closeModal, type }) => {
             {type === 'PurchaseOrder' && (
               <div className="text-center mt-3 flex justify-start border-t border-black p-4">
                 <h1 className="font-semibold">Total Amount: </h1>
-                <h1 className="ml-2">{total}</h1>
+                <h1 className="ml-2">{isNaN(total) ? 0 : total}</h1>
               </div>
             )}
           </div>

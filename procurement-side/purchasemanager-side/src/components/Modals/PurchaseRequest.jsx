@@ -167,7 +167,7 @@ function PurchaseRequest({ closeModal }) {
           </div>
         )}
         {formNo === 2 && (
-          <div className=" max-h-[500px] overflow-y-scroll    ">
+          <div className=" max-h-[500px] overflow-y-scroll no-scrollbar">
             <div className="flex flex-col mb-2">
               <h1 className="self-center font-bold text-lg">Order Info</h1>
               <div className="flex items-center justify-end  mt-4">

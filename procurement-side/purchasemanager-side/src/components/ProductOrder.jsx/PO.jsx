@@ -63,7 +63,7 @@ const PO = () => {
       cell: (row, index) => (
         <input
           type="text"
-          value={row.OrderCreated}
+          // value={row.OrderCreated}
           onChange={(e) => handleInvoiceChange(index, e)}
           className="h-8 px-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
         />

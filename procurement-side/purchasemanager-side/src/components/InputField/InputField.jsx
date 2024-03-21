@@ -46,6 +46,9 @@ export default function InputField({ type, value, onChange }) {
     labelText = 'Quantity'
     htmlForValue = 'quantity'
     inputType = 'number'
+  } else if (type === 'Unit Price') {
+    htmlForValue = 'unitPrice'
+    inputType = 'number'
   }
 
   return (
@@ -57,16 +60,29 @@ export default function InputField({ type, value, onChange }) {
         {labelText}
       </label>
 
-      <div className="flex flex-col">
-        <input
-          type={inputType}
-          id={htmlForValue}
-          name={htmlForValue}
-          onChange={(e) => onChange(e)}
-          required
-          className="border px-2 text-[14px] rounded py-[0.2rem] lg:py-[0.3rem] focus:outline-brand-blue mb-2"
-        />
-      </div>
+      {type === 'Unit Price' && (
+        <div className="flex items-center">
+          <input
+            type={inputType}
+            id={htmlForValue}
+            name={htmlForValue}
+            onChange={(e) => onChange(e)}
+            className="border px-2 text-sm rounded py-1 mt-[-5px] focus:outline-none focus:border-blue-500 w-24"
+          />
+        </div>
+      )}
+      {type !== 'Unit Price' && (
+        <div className="flex flex-col">
+          <input
+            type={inputType}
+            id={htmlForValue}
+            name={htmlForValue}
+            onChange={(e) => onChange(e)}
+            required
+            className="border px-2 text-[14px] rounded py-[0.2rem] lg:py-[0.3rem] focus:outline-brand-blue mb-2"
+          />
+        </div>
+      )}
     </div>
   )
 }

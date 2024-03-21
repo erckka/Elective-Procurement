@@ -18,13 +18,13 @@ const PRdata = [
       {
         Item: 'Paracetamol',
         ItemDesc: 'box',
-        UnitPrice: '5',
+        UnitPrice: '',
         Qty: '5',
       },
       {
         Item: 'Ibuprofen',
         ItemDesc: 'bottle',
-        UnitPrice: '10',
+        UnitPrice: '',
         Qty: '10',
       },
     ],
