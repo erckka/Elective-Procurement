@@ -21,7 +21,7 @@ const PurchaseReq = () => {
 
       <div className="h-screen md:w-full flex flex-col overflow-x-auto">
         <PRheading />
-        <div className="absolute  lg:mt-24 mr-2 md:mr-2  right-0 flex items-center ">
+        <div className="absolute  mt-24  md:mt-24 lg:mt-24 mr-2 md:mr-2  right-0 flex items-center ">
           <div className=" w-1/2 px-2 ">
             <select
               id="selectOption"
