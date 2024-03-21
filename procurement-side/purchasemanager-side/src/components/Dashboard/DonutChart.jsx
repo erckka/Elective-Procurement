@@ -1,4 +1,5 @@
 import React from 'react'
+import DonutData from './DonutData'
 import {
   PieChart,
   Pie,
@@ -9,33 +10,25 @@ import {
 } from 'recharts'
 
 const DonutChart = () => {
-  const data = [
-    { name: 'Apples', value: 400 },
-    { name: 'Oranges', value: 300 },
-    { name: 'Bananas', value: 200 },
-    { name: 'Berries', value: 500 },
-  ]
-
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
 
   return (
-    <div className="h-[20rem] mt-8 md:mt-24 p-5 rounded-md border border-slate-300 flex flex-col shadow-md bg-white">
+    <div className="h-[18rem] mt-8 md:mt-24 p-5 rounded-md border border-slate-300 flex flex-col shadow-md bg-white">
       <div className="title self-center">Top Seller</div>
-      <ResponsiveContainer width={450} height={250}>
+      <ResponsiveContainer width={300} height={250}>
         <PieChart>
           <Pie
-            data={data}
-            cx="60%"
+            data={DonutData}
+            cx="50%"
             cy="50%"
-            innerRadius={30}
-            outerRadius={60}
+            innerRadius={40}
+            outerRadius={50}
             paddingAngle={2}
             dataKey="value"
-            label={({ name, percent }) =>
-              `${name} ${(percent * 100).toFixed(2)}%`
-            }
+            labelLine={true} // Enable label lines
+            label={({ percent }) => `${name} ${(percent * 100).toFixed(2)}%`}
           >
-            {data.map((entry, index) => (
+            {DonutData.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
                 fill={COLORS[index % COLORS.length]}
@@ -43,7 +36,7 @@ const DonutChart = () => {
             ))}
           </Pie>
           <Tooltip />
-          <Legend layout="vertical" align="right" verticalAlign="middle" />
+          <Legend layout="horizontal" align="auto" verticalAlign="bottom" />
         </PieChart>
       </ResponsiveContainer>
     </div>

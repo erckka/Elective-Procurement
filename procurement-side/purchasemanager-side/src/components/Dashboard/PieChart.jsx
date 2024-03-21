@@ -60,8 +60,8 @@ const PieChart = () => {
   ]
 
   return (
-    <div className="h-[20rem] mt-8 md:mt-24 p-5 rounded-md border border-slate-300 flex flex-col shadow-md bg-white">
-      <div className="mt-3 w-full flex-1">
+    <div className="h-[18rem] mt-8 md:mt-24 p-5 rounded-md border border-slate-300 flex flex-col shadow-md bg-white">
+      <div className="mt-3 w-full  items-center">
         <ResponsiveContainer width={300} height={250}>
           <RechartsPieChart>
             <Pie
@@ -69,7 +69,7 @@ const PieChart = () => {
               dataKey="value"
               nameKey="name"
               cx="50%"
-              cy="50%"
+              cy="40%"
               outerRadius={50}
               fill="#8844d9"
             />
@@ -78,9 +78,9 @@ const PieChart = () => {
               dataKey="value"
               nameKey="name"
               cx="50%"
-              cy="50%"
-              innerRadius={60}
-              outerRadius={80}
+              cy="40%"
+              innerRadius={40}
+              outerRadius={60}
               fill="#82ca9d"
               label
             />
