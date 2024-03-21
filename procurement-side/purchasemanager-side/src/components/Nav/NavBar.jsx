@@ -73,9 +73,9 @@ const NavBar = () => {
           {Menus.map((Menu, index) => (
             <li
               key={index}
-              className={`flex  rounded-md m p-2 cursor-pointer  text-gray-300 text-sm items-center gap-x-4 md:text-base hover:bg-gradient-color transition-all duration-300
+              className={`flex  rounded-md m p-2 cursor-pointer  text-gray-300 text-xs items-center gap-x-4 md:text-base hover:bg-gradient-color transition-all duration-300
             ${Menu.gap ? 'mt-12' : 'mt-2'} ${
-                index === Menus.length - 1 && 'mt-40' // Add this line
+                index === Menus.length - 1 && 'mt-8 text-red-500 ' // Add this line
               } ${index === 0 && 'hover:bg-gradient-color'} ${
                 !open && 'w-[52px]'
               }`}

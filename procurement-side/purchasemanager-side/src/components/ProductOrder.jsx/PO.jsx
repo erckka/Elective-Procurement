@@ -10,6 +10,15 @@ const PO = () => {
   const [selectedRow, setSelectedRow] = useState(null)
   const [data, setData] = useState(PRdata)
 
+  const customStyles = {
+    headRow: {
+      style: {
+        fontWeight: 'bold',
+        fontSize: '14px',
+      },
+    },
+  }
+
   const openPRSummary = (row) => {
     setSelectedRow(row)
     setIsPRSummaryModalOpen(true)
