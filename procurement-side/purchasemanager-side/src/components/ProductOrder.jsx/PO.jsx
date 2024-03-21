@@ -64,7 +64,7 @@ const PO = () => {
         <input
           type="text"
           onChange={(e) => handleInvoiceChange(index, e)}
-          className="h-8 px-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+          className="h-8 px-2 border rounded-md focus:outline-none w-[7rem] focus:ring focus:ring-blue-300"
         />
       ),
       sortable: true,
