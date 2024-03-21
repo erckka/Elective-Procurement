@@ -62,7 +62,6 @@ export default function InputField({ type, value, onChange }) {
           type={inputType}
           id={htmlForValue}
           name={htmlForValue}
-          value={value}
           onChange={(e) => onChange(e)}
           required
           className="border px-2 text-[14px] rounded py-[0.2rem] lg:py-[0.3rem] focus:outline-brand-blue mb-2"
