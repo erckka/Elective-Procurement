@@ -15,7 +15,7 @@ const NavBarMobile = () => {
   }
 
   return (
-    <div className=" fixed z-50  w-[100%] md:hidden">
+    <div className="  w-[100%] md:hidden">
       <div className="bg-dark-blue z-80 rounded-b-8 flex flex-row items-center justify-between p-6">
         <img
           src="./src/assets/logo.png"

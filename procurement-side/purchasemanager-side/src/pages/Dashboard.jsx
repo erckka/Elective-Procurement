@@ -13,7 +13,7 @@ const Dashboard = () => {
         <NavBarMobile />
       </div>
 
-      <div className="flex flex-row">
+      <div className="flex md:flex-row border border-red-500">
         {/* <PieChart /> */}
         <DonutChart />
         <DonutChart />

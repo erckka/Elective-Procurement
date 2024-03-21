@@ -24,11 +24,11 @@ const NavBar = () => {
   ]
 
   return (
-    <div className=" fixed h-screen hidden md:block  z-50 ">
+    <div className="hidden md:block h-screen z-50">
       <div
         className={` ${
           open ? 'w-72' : 'w-20 '
-        } bg-dark-blue  h-screen p-5  pt-8  duration-300 'z-100'`}
+        } bg-dark-blue  h-screen p-5  pt-8 relative duration-300 'z-100'`}
       >
         <img
           src="./src/assets/control.png"
