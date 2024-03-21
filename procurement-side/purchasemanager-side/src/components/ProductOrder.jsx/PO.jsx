@@ -113,18 +113,18 @@ const PO = () => {
           pagination
           paginationPerPage={2}
           paginationRowsPerPageOptions={[10, 15]}
-          customStyles={{
-            headRow: {
-              style: {
-                zIndex: 1,
-              },
-            },
-            rows: {
-              style: {
-                zIndex: 1,
-              },
-            },
-          }}
+          // customStyles={{
+          //   headRow: {
+          //     style: {
+          //       zIndex: 2,
+          //     },
+          //   },
+          //   rows: {
+          //     style: {
+          //       zIndex: 2,
+          //     },
+          //   },
+          // }}
         />
       </div>
     </div>
