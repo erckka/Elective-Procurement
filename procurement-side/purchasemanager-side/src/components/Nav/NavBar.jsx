@@ -3,17 +3,25 @@ import { MdShoppingBag } from 'react-icons/md'
 import { BiSolidPurchaseTag } from 'react-icons/bi'
 import { FaClipboardList } from 'react-icons/fa'
 import { HiOutlineViewBoards, HiOutlineLogout } from 'react-icons/hi'
+import { IoMdArrowDropdownCircle } from 'react-icons/io'
+
 import { NavLink } from 'react-router-dom'
 
 const NavBar = () => {
   const [open, setOpen] = useState(true)
+  const [showProductReqDropdown, setShowProductReqDropdown] = useState(false) // State to manage the visibility of the dropdown
+
   const Menus = [
     { title: 'Dashboard', icon: <HiOutlineViewBoards />, path: '/dashboard' },
     { title: 'Supplier', icon: <MdShoppingBag />, path: '/Supplier' },
     {
       title: 'Product Requisition',
       icon: <FaClipboardList />,
-      path: '/ProductReq',
+      // Submenu items for Product Requisition
+      submenu: [
+        { title: 'Product Request', path: '/ProductReq' },
+        { title: 'Product Status', path: '/ProductStatus' },
+      ],
     },
     {
       title: 'Purchase Order',
@@ -73,14 +81,17 @@ const NavBar = () => {
           {Menus.map((Menu, index) => (
             <li
               key={index}
-              className={`flex  rounded-md m p-2 cursor-pointer  text-gray-300 text-xs items-center gap-x-4 md:text-base hover:bg-gradient-color transition-all duration-300
+              className={`relative flex rounded-md m p-2 cursor-pointer  text-gray-300 text-xs items-center gap-x-4 md:text-base hover:bg-gradient-color transition-all duration-300
             ${Menu.gap ? 'mt-12' : 'mt-2'} ${
                 index === Menus.length - 1 && 'mt-8 text-red-500 ' // Add this line
               } ${index === 0 && 'hover:bg-gradient-color'} ${
                 !open && 'w-[52px]'
               }`}
             >
-              <NavLink to={Menu.path} className="flex items-center gap-x-4  ">
+              <NavLink
+                to={Menu.path}
+                className="flex items-center gap-x-4 w-full"
+              >
                 <span className={`text-white gradient-color rounded-full p-2`}>
                   {Menu.icon}
                 </span>
@@ -88,10 +99,43 @@ const NavBar = () => {
                   className={`${
                     !open && 'hidden'
                   } origin-left duration-200 text-gradient-color`}
+                  onClick={() => {
+                    // Show/hide dropdown on clicking the Product Requisition tab
+                    if (Menu.title === 'Product Requisition') {
+                      setShowProductReqDropdown(!showProductReqDropdown)
+                    }
+                  }}
                 >
                   {Menu.title}
                 </span>
+                {/* Dropdown icon */}
+                {Menu.title === 'Product Requisition' && (
+                  <span
+                    className="absolute right-0 top-0 bottom-0 flex items-center pr-2 cursor-pointer"
+                    onClick={() =>
+                      setShowProductReqDropdown(!showProductReqDropdown)
+                    }
+                  >
+                    <IoMdArrowDropdownCircle />
+                  </span>
+                )}
               </NavLink>
+              {/* Dropdown for Product Requisition */}
+              {Menu.title === 'Product Requisition' &&
+                showProductReqDropdown && (
+                  <ul className="   bg-dark-blue text-white rounded-md p-2">
+                    {Menu.submenu.map((submenuItem, submenuIndex) => (
+                      <li
+                        key={submenuIndex}
+                        className="cursor-pointer  whitespace-nowrap hover:bg-gradient-color"
+                      >
+                        <NavLink to={submenuItem.path}>
+                          {submenuItem.title}
+                        </NavLink>
+                      </li>
+                    ))}
+                  </ul>
+                )}
             </li>
           ))}
         </ul>
@@ -99,4 +143,5 @@ const NavBar = () => {
     </div>
   )
 }
+
 export default NavBar
