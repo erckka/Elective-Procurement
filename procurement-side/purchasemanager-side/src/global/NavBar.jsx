@@ -32,11 +32,11 @@ const NavBar = () => {
   ]
 
   return (
-    <div className=" fixed hidden md:block h-screen z-50">
+    <div className="hidden md:block h-screen z-50">
       <div
         className={` ${
           open ? 'w-72' : 'w-20 '
-        } bg-dark-blue  h-screen p-5   pt-8 relative duration-300 'z-100'`}
+        } bg-dark-blue  h-screen p-5  pt-8 relative duration-300 'z-100'`}
       >
         <img
           src="./src/assets/control.png"
@@ -123,7 +123,7 @@ const NavBar = () => {
               {/* Dropdown for Product Requisition */}
               {Menu.title === 'Product Requisition' &&
                 showProductReqDropdown && (
-                  <ul className="   bg-dark-blue text-white   ">
+                  <ul className="   bg-dark-blue text-white ">
                     {Menu.submenu.map((submenuItem, submenuIndex) => (
                       <li
                         key={submenuIndex}

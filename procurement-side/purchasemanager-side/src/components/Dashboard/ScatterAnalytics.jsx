@@ -13,9 +13,9 @@ import ScatterData from './ScatterData'
 
 const ScatterAnalytics = () => {
   return (
-    <div className="h-[18rem] mt-8 md:mt-24 p-5 rounded-md border border-slate-300 flex flex-col shadow-md bg-white">
+    <div className="mt-8 md:mt-4 p-5 rounded-md border border-slate-300 flex flex-col shadow-md bg-red-500">
       <ScatterChart
-        width={730}
+        width={700}
         height={250}
         margin={{
           top: 20,

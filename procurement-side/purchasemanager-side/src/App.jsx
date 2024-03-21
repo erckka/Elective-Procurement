@@ -1,4 +1,5 @@
 import React from 'react'
+import Layout from './global/Layout'
 import Supplier from './pages/Supplier'
 import './App.css'
 import Dashboard from './pages/Dashboard'
@@ -14,7 +15,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<Layout />} />
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Supplier" element={<Supplier />} />
           <Route path="/ProductReq" element={<ProductReq />} />

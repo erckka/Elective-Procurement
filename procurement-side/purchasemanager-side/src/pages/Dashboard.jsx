@@ -8,17 +8,20 @@ import ScatterAnalytics from '../components/Dashboard/ScatterAnalytics.jsx'
 
 const Dashboard = () => {
   return (
-    <div className="flex md:flex-row flex-col">
-      <NavBar />
-      <NavBarMobile />
-      <div className="h-screen md:w-full overflow-x-auto flex flex-col  md:flex-row bg-red-500 jus ">
-        <div className=" bg-black">
-          <div className="flex flex-row gap-x-4  justify-center  mt-24 md:mt-2 ">
-            <DonutChart />
-          </div>
-          <ScatterAnalytics />
-        </div>
+    <div className="flex flex-col h-screen md:flex-row">
+      <div className="md:h-screen mb-4 md:mb-0">
+        <NavBar />
+        <NavBarMobile />
       </div>
+
+      <div className="lg:grid lg:grid-cols-3 lg:gap-x-6 mt-8 flex flex-col gap-x-4 mx-12 lg:mx-24">
+        <DonutChart />
+        <DonutChart />
+        <DonutChart />
+        <ScatterAnalytics />
+      </div>
+
+      <div className="flex flex-col lg:flex-col"></div>
     </div>
   )
 }
