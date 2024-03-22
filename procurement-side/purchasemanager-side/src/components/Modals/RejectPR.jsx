@@ -25,7 +25,7 @@ const RejectPR = ({ isOpen, closeModal }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 shadow bg-[#00000080]">
-      <div className="bg-white flex justify-center shadow-md flex-col items-center w-48">
+      <div className="bg-white flex justify-center shadow-md flex-col items-center w-[15rem] p-4 rounded-md">
         <h1 className="text-red-700 font-bold text-center text-[12px]">
           You are about to reject a
         </h1>

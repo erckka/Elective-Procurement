@@ -28,7 +28,7 @@ const DeleteS = ({ isOpen, closeModal }) => {
   return (
     <div className="">
       <div className="fixed inset-0 flex items-center justify-center z-50 mt-28">
-        <div className="bg-white flex justify-center shadow-md flex-col items-center w-48 py-2">
+        <div className="bg-white flex justify-center shadow-md flex-col items-center w-[15rem] p-4">
           <h1 className="text-red-700 font-bold text-center text-[12px]">
             You are about to delete a
           </h1>

@@ -17,12 +17,12 @@ const SupplierSumm = ({ closeModal, rowData }) => {
       className="fixed inset-0 flex items-center justify-center z-50   shadow bg-[#00000080]    
     "
     >
-      <div className="bg-white flex shadow-lg flex-col items-start w-[70%] md:w-[30%] md:-mt-[7rem] lg:w-[20%] lg:-mt-[14rem] lg:ml-44">
+      <div className="bg-white flex shadow-lg flex-col items-start w-[70%] md:w-[30%] md:-mt-[7rem] lg:w-[20%] lg:-mt-[5rem] lg:ml-44 ">
         <h1 className="self-center text-[14px] font-bold py-1 mt-2">
           Supplier Info Summary
         </h1>
         <div className="border-b-[0.1rem] w-[14rem] self-center border-transparent border-gradient my-[0.3rem] mb-4"></div>
-        <div className="flex flex-col font-semibold text-[11px] text-left ml-2 px-4">
+        <div className="flex flex-col font-semibold text-[11px] text-left ml-8 px-4">
           <h1>Contact Person:</h1>
           <h1 className="font-light mb-4">{contactPerson}</h1>
           <h1>Contact Number:</h1>
@@ -44,7 +44,7 @@ const SupplierSumm = ({ closeModal, rowData }) => {
               <h1> Country:</h1>
               <h1 className="font-light mb-2">{country}</h1>
             </div>
-            <div className="flex gap-x-2">
+            <div className="flex gap-x-2 mb-6">
               <h1> Zip Code:</h1>
               <h1 className="font-light mb-2">{zipCode}</h1>
             </div>
