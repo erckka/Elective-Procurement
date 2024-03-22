@@ -12,9 +12,11 @@ const SupplierSumm = ({ closeModal, rowData }) => {
     country,
     zipCode,
   } = rowData
-
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 shadow">
+    <div
+      className="fixed inset-0 flex items-center justify-center z-50   shadow bg-[#00000080]    
+    "
+    >
       <div className="bg-white flex shadow-lg flex-col items-start w-[70%] md:w-[30%] md:-mt-[7rem] lg:w-[20%] lg:-mt-[14rem] lg:ml-44">
         <h1 className="self-center text-[14px] font-bold py-1 mt-2">
           Supplier Info Summary
