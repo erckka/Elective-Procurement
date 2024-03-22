@@ -32,7 +32,7 @@ const NavBar = () => {
   ]
 
   return (
-    <div className=" fixed hidden md:block h-screen z-50">
+    <div className="  hidden md:block h-full z-50">
       <div
         className={` ${
           open ? 'w-72' : 'w-20 '

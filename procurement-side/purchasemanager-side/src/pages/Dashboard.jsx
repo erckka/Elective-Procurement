@@ -14,11 +14,17 @@ const Dashboard = () => {
         <NavBarMobile />
       </div>
 
-      <div className="lg:grid lg:grid-cols-3 lg:gap-x-6 mt-8 flex flex-col gap-x-4 mx-12 lg:mx-24">
-        <DonutChart />
-        <DonutChart />
-        <DonutChart />
-        <ScatterAnalytics />
+      <div className="h-screen md:w-full flex  overflow-x-auto">
+        <div className="flex flex-col w-full">
+          <div className="flex flex-row gap-5 justify-center items-center">
+            <DonutChart />
+            <DonutChart />
+            <DonutChart />
+          </div>
+          <div className="w-full flex justify-center items-center mt-5">
+            <ScatterAnalytics />
+          </div>
+        </div>
       </div>
 
       <div className="flex flex-col lg:flex-col"></div>
