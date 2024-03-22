@@ -111,16 +111,34 @@ const NavBar = () => {
                 {/* Dropdown icon */}
                 {Menu.title === 'Product Requisition' && (
                   <span
-                    className="absolute right-0 top-0 bottom-0 flex items-center pr-2 cursor-pointer"
+                    className="absolute right-0 top-0 bottom-0 flex items-center pr-1 cursor-pointer"
                     onClick={() =>
                       setShowProductReqDropdown(!showProductReqDropdown)
                     }
                   >
-                    <IoMdArrowDropdownCircle />
+                    <IoMdArrowDropdownCircle className="text-lg" />
                   </span>
                 )}
               </NavLink>
-              {/* Dropdown for Product Requisition */}
+              {Menu.title === 'Product Requisition' && (
+                <div
+                  className={`absolute left-full top-0 mt-2 bg-dark-blue z-50 w-36 rounded-md p-2 border ${
+                    showProductReqDropdown ? 'block' : 'hidden'
+                  }`}
+                >
+                  {Menu.submenu &&
+                    Menu.submenu.map((subItem, subIndex) => (
+                      <NavLink
+                        key={subIndex}
+                        to={subItem.path}
+                        className="block text-white hover:text-gray-400"
+                      >
+                        {subItem.title}
+                      </NavLink>
+                    ))}
+                </div>
+              )}
+              {/* Dropdown for Product Requisition 
               {Menu.title === 'Product Requisition' &&
                 showProductReqDropdown && (
                   <ul className="   bg-dark-blue text-white   ">
@@ -135,7 +153,7 @@ const NavBar = () => {
                       </li>
                     ))}
                   </ul>
-                )}
+                )}*/}
             </li>
           ))}
         </ul>

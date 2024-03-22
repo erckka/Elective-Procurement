@@ -82,7 +82,7 @@ const ProductReq = (type) => {
   ]
 
   return (
-    <div className="mx-2 ml-6 mt-6 md:mx-6 md:ml-[6rem]">
+    <div className="mx-2 ml-6 mt-6 md:mx-6 md:ml-[6rem] z-[0]">
       {isApproveModalOpen && <ApprovePR closeModal={closeModal} />}
       {isRejectModalOpen && <RejectPR closeModal={closeModal} />}
       {isPRSummaryModalOpen && (
