@@ -84,10 +84,7 @@ function PurchaseRequest({ closeModal }) {
   }
 
   return (
-    <div
-      className="flex justify-center inset-0 fixed p-2 items-center min-h-lvh md:mt-[5px] mt-[100px]   shadow bg-[#00000080]    
-    "
-    >
+    <div className="flex justify-center inset-0 fixed p-2 items-center min-h-lvh md:mt-[5px] mt-[100px]   shadow bg-[#00000080]">
       <ToastContainer />
       <div className="card w-[370px] rounded-md shadow-md  p-5 bg-white ">
         <div className="flex justify-center items-center ">
