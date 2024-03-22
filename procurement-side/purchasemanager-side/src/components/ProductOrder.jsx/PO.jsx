@@ -73,17 +73,22 @@ const PO = () => {
     {
       name: 'Status',
       cell: (row, index) => (
-        <Select
-          options={statusOptions}
-          value={statusOptions.find((option) => option.value === row.Status)}
-          onChange={(selectedOption) =>
-            handleStatusChange(index, selectedOption)
-          }
-          menuPosition="fixed" // Fix the dropdown menu position
-        />
+        <div style={{ width: '120px' }}>
+          {' '}
+          {/* Adjust the width value as needed */}
+          <Select
+            options={statusOptions}
+            value={statusOptions.find((option) => option.value === row.Status)}
+            onChange={(selectedOption) =>
+              handleStatusChange(index, selectedOption)
+            }
+            menuPosition="fixed" // Fix the dropdown menu position
+          />
+        </div>
       ),
       sortable: true,
     },
+
     {
       name: 'Actions',
       cell: (row) => (
@@ -111,8 +116,10 @@ const PO = () => {
           columns={columns}
           data={PRdata}
           pagination
-          paginationPerPage={2}
+          paginationPerPage={8}
           paginationRowsPerPageOptions={[10, 15]}
+          customStyles={customStyles}
+
           // customStyles={{
           //   headRow: {
           //     style: {
