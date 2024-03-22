@@ -47,7 +47,7 @@ const PRSummary = ({ closeModal, type }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 shadow bg-[#00000080]">
-      <div className="bg-white flex justify-center shadow-lg flex-col z-50 items-center p-4  ">
+      <div className="bg-white flex justify-center shadow-lg flex-col z-50 items-center p-4 rounded-md ">
         <h1 className="title flex text-center  font-bold py-1 mt-2">
           {type === 'PurchaseRequest'
             ? 'Purchase Request Summary'
