@@ -46,9 +46,9 @@ const PRSummary = ({ closeModal, type }) => {
   }, [currentIndex, type])
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 shadow bg-[#00000080]">
-      <div className="bg-white flex justify-center shadow-lg flex-col z-50 items-center p-4 rounded-md ">
-        <h1 className="title flex text-center  font-bold py-1 mt-2">
+    <div className="fixed inset-0 flex items-center justify-center z-50 shadow bg-[#00000080] ">
+      <div className="bg-white flex items-center flex-col overflow-y-auto no-scrollbar max-h-[600px]  p-4">
+        <h1 className="title flex text-center  font-bold py-1 mt-2 ">
           {type === 'PurchaseRequest'
             ? 'Purchase Request Summary'
             : 'Purchase Order Summary'}
@@ -58,9 +58,29 @@ const PRSummary = ({ closeModal, type }) => {
 
         <div className="flex justify-start mt-1 text-sm">
           <div className=" text-left">
+            <div className="pt-1 px-4  grid grid-cols-2">
+              <h1 className="  font-semibold ">Order Created:</h1>
+              <h1 className="font-light ">03-24-2024</h1>
+            </div>
+            {type === 'PurchaseRequest' && (
+              <div className="border-b border-black"></div>
+            )}
+            {type === 'PurchaseOrder' && (
+              <div className="pt-1 px-4   grid grid-cols-2  ">
+                <h1 className="  font-semibold">Order Paid:</h1>
+                <h1 className="font-light ">03-24-2024</h1>
+              </div>
+            )}
+            {type === 'PurchaseOrder' && (
+              <div className="pt-1 px-4   grid grid-cols-2 border-b border-black mb-2 ">
+                <h1 className="font-semibold ">Order Received:</h1>
+                <h1 className="font-light mb-2 ">03-24-2024</h1>
+              </div>
+            )}
+            {/* Supplier Info */}
             <div className="pt-1 px-4 border-b border-black">
               <h1 className="font-semibold">Supplier Name</h1>
-              <h1 className="font-light mb-1 px-3 py-1">
+              <h1 className="font-light mb-1 py-1">
                 {PRdata[currentIndex].Supplier}
               </h1>
             </div>

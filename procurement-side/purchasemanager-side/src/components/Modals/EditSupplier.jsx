@@ -22,6 +22,9 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
       console.error('Error submitting form', err)
     }
   }
+  const handleDelete = () => {
+    setShowDeleteModal(true) // Show the DeleteS modal
+  }
 
   const handleDiscardChanges = () => {
     setFormData(initialData)
@@ -34,9 +37,13 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
   return (
     <div>
       {isOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75">
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <h1 className="text-xl font-bold mb-4">Edit Supplier</h1>
+        <div className="fixed inset-0 flex items-center justify-center z-50 shadow bg-[#00000080] ">
+          <div className="inset-0 rounded-md overflow-y-auto no-scrollbar mt-[1rem] bg-white shadow-md w-[20rem] md:w-[20rem] lg:w-[25rem] lg:p-2 lg:px-6 p-2 px-4 max-h-[600px] border border-blue-500">
+            <h1 className="text-xl text-center font-bold mb-4 mt-4">
+              Edit Supplier
+            </h1>
+            <div className="border-b-2 border-transparent border-gradient my-[0.3rem] mb-4"></div>
+
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label htmlFor="companyName" className="block font-bold mb-1">
@@ -151,19 +158,20 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
                 />
               </div>
 
-              <div className="flex justify-between">
+              <div className="flex flex-row gap-x-2  mt-4 ">
                 <button
                   type="submit"
-                  className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 mr-2"
+                  className="bg-blue-500 w-[50%] text-white py-2 px-4 rounded hover:bg-blue-700 mr-2"
+                  // onClick={handleSubmit}
                 >
-                  Save Changes
+                  Approve
                 </button>
                 <button
                   type="button"
-                  onClick={handleDiscardChanges}
-                  className="bg-gray-300 text-gray-800 py-2 px-4 rounded hover:bg-gray-400"
+                  onClick={handleDelete}
+                  className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 w-[50%]"
                 >
-                  Discard
+                  Delete
                 </button>
               </div>
             </form>
