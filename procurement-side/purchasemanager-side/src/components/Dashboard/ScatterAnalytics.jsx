@@ -13,7 +13,7 @@ import ScatterData from './ScatterData'
 
 const ScatterAnalytics = () => {
   return (
-    <div className="mt-8 md:mt-4 p-5 rounded-md border border-slate-300 flex flex-col shadow-md bg-red-500">
+    <div className="mt-8 md:mt-4 p-5 rounded-md border border-slate-300 flex flex-col shadow-md bg-white">
       <ScatterChart
         width={700}
         height={250}
@@ -36,8 +36,8 @@ const ScatterAnalytics = () => {
         />
         <Tooltip cursor={{ strokeDasharray: '3 3' }} />
         <Legend />
-        <Scatter name="A school" data={ScatterData[0]} fill="#8884d8" />
-        <Scatter name="B school" data={ScatterData[1]} fill="#82ca9d" />
+        <Scatter name="P&G" data={ScatterData[0]} fill="#8884d8" />
+        <Scatter name="Unilab" data={ScatterData[1]} fill="#82ca9d" />
       </ScatterChart>
     </div>
   )

@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import DeleteSupplier from './DeleteS'
 
 const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
   const [formData, setFormData] = useState(initialData)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -23,7 +25,7 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
     }
   }
   const handleDelete = () => {
-    setShowDeleteModal(true) // Show the DeleteS modal
+    setIsDeleteModalOpen(true) // Show the DeleteS modal
   }
 
   const handleDiscardChanges = () => {
@@ -177,6 +179,17 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
             </form>
           </div>
         </div>
+      )}
+      {isDeleteModalOpen && (
+        <DeleteSupplier
+          isOpen={isDeleteModalOpen}
+          closeModal={() => setIsDeleteModalOpen(false)}
+          onDelete={() => {
+            // Handle delete logic here
+            // Once delete is successful, you can close the modal
+            setIsDeleteModalOpen(false)
+          }}
+        />
       )}
     </div>
   )

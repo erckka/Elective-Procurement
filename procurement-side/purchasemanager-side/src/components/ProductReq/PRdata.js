@@ -23,67 +23,22 @@ const PRdata = [
       {
         Item: 'Ibuprofen',
         ItemDesc: 'bottle',
-        Qty: '10',
+        Qty: '3',
       },
       {
         Item: 'Ibuprofen',
         ItemDesc: 'bottle',
-        Qty: '10',
+        Qty: '1',
       },
       {
         Item: 'Ibuprofen',
         ItemDesc: 'bottle',
-        Qty: '10',
+        Qty: '4',
       },
       {
         Item: 'Ibuprofen',
         ItemDesc: 'bottle',
-        Qty: '10',
-      },
-      {
-        Item: 'Ibuprofen',
-        ItemDesc: 'bottle',
-        Qty: '10',
-      },
-      {
-        Item: 'Ibuprofen',
-        ItemDesc: 'bottle',
-        Qty: '10',
-      },
-      {
-        Item: 'Ibuprofen',
-        ItemDesc: 'bottle',
-        Qty: '10',
-      },
-      {
-        Item: 'Ibuprofen',
-        ItemDesc: 'bottle',
-        Qty: '10',
-      },
-      {
-        Item: 'Ibuprofen',
-        ItemDesc: 'bottle',
-        Qty: '10',
-      },
-      {
-        Item: 'Ibuprofen',
-        ItemDesc: 'bottle',
-        Qty: '10',
-      },
-      {
-        Item: 'Ibuprofen',
-        ItemDesc: 'bottle',
-        Qty: '10',
-      },
-      {
-        Item: 'Ibuprofen',
-        ItemDesc: 'bottle',
-        Qty: '10',
-      },
-      {
-        Item: 'Ibuprofen',
-        ItemDesc: 'bottle',
-        Qty: '10',
+        Qty: '2',
       },
     ],
   },

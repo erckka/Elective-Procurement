@@ -2,6 +2,8 @@ import { RiFileAddFill } from 'react-icons/ri'
 import React, { useState } from 'react'
 import InputField from '../InputField/InputField'
 import CloseBtn from '../Buttons/CloseBtn'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const AddModal = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -34,6 +36,26 @@ const AddModal = () => {
     closeModal()
   }
 
+  const finalSubmit = () => {
+    if (
+      formData.companyName &&
+      formData.contactPerson &&
+      formData.companyEmail &&
+      formData.address &&
+      formData.city &&
+      formData.state &&
+      formData.zipCode &&
+      formData.country
+    ) {
+      toast.success('Form submitted successfully')
+      setTimeout(() => {
+        closeModal()
+      }, 5000)
+    } else {
+      toast.error('Please fill up all input fields')
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     // Logic for form submission
@@ -52,6 +74,8 @@ const AddModal = () => {
       </button>
       {isOpen && (
         <div className="flex justify-center overflow-y-auto inset-2 fixed p-2 items-center md:mt-[-4rem] mt-[4rem] z-50 shadow bg-[#00000080]">
+          <ToastContainer />
+
           <div className="inset-0" onClick={closeModal}></div>
           <div className="rounded-lg mt-[8rem] bg-white shadow-md w-[20rem] md:w-[20rem] lg:w-[25rem] lg:p-2 lg:px-6 p-2 px-4">
             <div className="text-center">
@@ -61,7 +85,7 @@ const AddModal = () => {
             <h2 className="text-[14px] font-bold mb-2">Supplier Info</h2>
             <form onSubmit={handleSubmit}>
               <div className="supplier-credentials">
-                <InputField type="SupplierName" />
+                <InputField type="SupplierNameField" />
                 <InputField type="ContactPerson" />
                 <InputField type="CompanyEmail" />
                 <InputField type="Address" />

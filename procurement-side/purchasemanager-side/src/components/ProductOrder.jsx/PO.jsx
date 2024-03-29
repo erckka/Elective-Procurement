@@ -10,6 +10,10 @@ const PO = () => {
   const [selectedRow, setSelectedRow] = useState(null)
   const [data, setData] = useState(PRdata)
 
+  useEffect(() => {
+    console.log('Data:', data) // Log whenever data changes
+  }, [data])
+
   const customStyles = {
     headRow: {
       style: {
@@ -62,7 +66,7 @@ const PO = () => {
       name: 'Invoice No.',
       cell: (row, index) => (
         <input
-          type="text"
+          type="number"
           // value={row.OrderCreated}
           onChange={(e) => handleInvoiceChange(index, e)}
           className="h-8 px-2 border rounded-md focus:outline-none w-[7rem] focus:ring focus:ring-blue-300"

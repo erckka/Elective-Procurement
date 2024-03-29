@@ -36,7 +36,7 @@ const DonutChart = () => {
             ))}
           </Pie>
           <Tooltip />
-          <Legend layout="vertical" align="auto" verticalAlign="bottom" />
+          <Legend layout="horizontal" align="auto" verticalAlign="bottom" />
         </PieChart>
       </ResponsiveContainer>
     </div>

@@ -4,6 +4,8 @@ import 'react-toastify/dist/ReactToastify.css'
 import InputField from '../InputField/InputField'
 import { IoAddCircle } from 'react-icons/io5'
 import CloseBtn from '../Buttons/CloseBtn'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 function PurchaseRequest({ closeModal }) {
   const formArray = [1, 2]
@@ -15,6 +17,7 @@ function PurchaseRequest({ closeModal }) {
   const addNewItemInfo = () => {
     setItemInfoCount(itemInfoCount + 1)
   }
+
   const handleMouseEnter = () => {
     setIsHovered(true)
   }
@@ -23,26 +26,36 @@ function PurchaseRequest({ closeModal }) {
     setIsHovered(false)
     setTimeout(() => setShowPopup(false), 300) // Delay hiding the popup
   }
+  const [selectedDate, setSelectedDate] = useState(null)
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date)
+    // Update the state with the selected date
+    setState((prevState) => ({
+      ...prevState,
+      targetDeliveryDate: date,
+    }))
+  }
 
   const [state, setState] = useState({
     companyName: '',
-    buyerName: '',
-    address: '',
-    city: '',
-    state: '',
-    zipCode: '',
-    country: '',
+    targetDeliveryDate: null, // Initialize with null instead of an empty string
+
     item: '',
     quantity: '',
     itemDescription: '',
   })
 
   const inputHandle = (e) => {
-    console.log('Input changed:', e.target.name, e.target.value)
-    setState({
-      ...state,
-      [e.target.name]: e.target.value,
-    })
+    if (e.target && e.target.name && e.target.value) {
+      console.log('Input changed:', e.target.name, e.target.value)
+      setState({
+        ...state,
+        [e.target.name]: e.target.value,
+      })
+    } else {
+      console.error('Invalid event object or properties.') // Log error if any of the properties are undefined
+    }
   }
 
   const next = () => {
@@ -51,12 +64,12 @@ function PurchaseRequest({ closeModal }) {
     if (
       formNo === 1 &&
       state.companyName &&
-      state.buyerName &&
-      state.address &&
-      state.city &&
-      state.state &&
-      state.zipCode &&
-      state.country
+      state.targetDeliveryDate
+      // state.address &&
+      // state.city &&
+      // state.state &&
+      // state.zipCode &&
+      // state.country
     ) {
       setFormNo(formNo + 1)
     } else if (
@@ -78,13 +91,18 @@ function PurchaseRequest({ closeModal }) {
   const finalSubmit = () => {
     if (state.item && state.quantity && state.itemDescription) {
       toast.success('Form submitted successfully')
+
+      // Set a timeout to close the modal after 3 seconds (adjust as needed)
+      setTimeout(() => {
+        closeModal() // Close the modal
+      }, 5000)
     } else {
       toast.error('Please fill up all input fields')
     }
   }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 shadow bg-[#00000080] ">
+    <div className="fixed inset-0 flex items-center justify-center z-50 shadow bg-[#00000080] p-2 ">
       <ToastContainer />
       <div className="card w-[370px] rounded-md shadow-md  p-5 bg-white ">
         <div className="flex justify-center items-center ">
@@ -101,6 +119,7 @@ function PurchaseRequest({ closeModal }) {
               >
                 {v}
               </div>
+
               {i !== formArray.length - 1 && (
                 <div
                   key={`divider_${i}`}
@@ -116,13 +135,32 @@ function PurchaseRequest({ closeModal }) {
         </div>
         {formNo === 1 && (
           <div>
-            <h1>Supplier Info</h1>
+            <h1 className=" text-[18px] font-bold flex justify-center mb-10">
+              Purchase Request Form
+            </h1>
             <InputField
-              type="SupplierName"
+              type="SupplierNameSelect"
               value={state.companyName}
-              onChange={inputHandle}
+              onChange={(e) =>
+                inputHandle({
+                  target: { name: 'companyName', value: e.target.value },
+                })
+              }
             />
-            <h1>Customer Info</h1>
+            <div className="flex flex-col">
+              <h1 className="block text-[12px] font-bold my-[0.4rem] lg:mb-[0.2rem] lg:text-base">
+                Target Delivery Date:
+              </h1>
+              <DatePicker
+                selected={selectedDate}
+                onChange={handleDateChange}
+                dateFormat="MM-dd-yyyy"
+                minDate={new Date()}
+                placeholderText="Select a date"
+                className="border border-gray-400   flex justify-center items-center rounded py-1 w-full"
+              />
+            </div>
+            {/* <h1>Customer Info</h1>
             <InputField
               type="Buyer"
               value={state.buyerName}
@@ -154,7 +192,7 @@ function PurchaseRequest({ closeModal }) {
                 value={state.country}
                 onChange={inputHandle}
               />
-            </div>
+            </div> */}
             <div className="flex flex-row gap-x-2 py-2 w-[100%]">
               <CloseBtn closeModal={closeModal} type="close" />
               <button

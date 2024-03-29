@@ -1,14 +1,42 @@
 import React from 'react'
-
+import SupplierInfo from '../SupplierData/SupplierInfo'
 export default function InputField({ type, value, onChange }) {
   let labelText = ''
   let htmlForValue = ''
   let inputType = 'text' // Default type is text
 
-  if (type === 'SupplierName') {
+  if (type === 'SupplierNameSelect') {
     labelText = 'Supplier Name'
     htmlForValue = 'companyName'
+    // Create the dropdown list for supplier names
+    return (
+      <div className="">
+        <label
+          htmlFor={htmlForValue}
+          className="block text-[12px] font-bold my-[0.4rem] lg:mb-[0.2rem] lg:text-base"
+        >
+          {labelText}
+        </label>
+        <select
+          id={htmlForValue}
+          name={htmlForValue} // This line is likely causing the error
+          onChange={onChange} // Pass the selected value directly
+          value={value} // Set the selected value
+          className="border px-2 text-sm rounded py-1 mt-[-5px] focus:outline-none focus:border-blue-500 w-[100%] "
+        >
+          <option value="">Select Supplier</option>
+          {SupplierInfo.map((supplier) => (
+            <option key={supplier.id} value={supplier.companyName}>
+              {supplier.companyName}
+            </option>
+          ))}
+        </select>
+      </div>
+    )
   } else if (type === 'ContactPerson') {
+    labelText = 'Contact Person'
+    htmlForValue = 'contactPerson'
+  } else if (type === 'SupplierNameField') {
     labelText = 'Contact Person'
     htmlForValue = 'contactPerson'
   } else if (type === 'Buyer') {
@@ -67,7 +95,7 @@ export default function InputField({ type, value, onChange }) {
             id={htmlForValue}
             name={htmlForValue}
             onChange={(e) => onChange(e)}
-            className="border px-2 text-sm rounded py-1 mt-[-5px] focus:outline-none focus:border-blue-500 w-24"
+            className="border px-2 text-sm rounded  py-1 mt-[-5px] focus:outline-none focus:border-blue-500 w-24"
           />
         </div>
       )}

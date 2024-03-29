@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import PRdata from '../ProductReq/PRdata'
 import CloseBtn from '../Buttons/CloseBtn'
 import InputField from '../InputField/InputField'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 const PRSummary = ({ closeModal, type }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -10,6 +12,12 @@ const PRSummary = ({ closeModal, type }) => {
 
   const openModal = () => {
     setIsOpen(true)
+  }
+  const [selectedDate, setSelectedDate] = useState(null)
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date)
+    console.log('Selected Date:', date) // Add this line
   }
 
   const nextEntry = () => {
@@ -46,8 +54,8 @@ const PRSummary = ({ closeModal, type }) => {
   }, [currentIndex, type])
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 shadow bg-[#00000080] ">
-      <div className="bg-white flex items-center flex-col overflow-y-auto no-scrollbar max-h-[600px]  p-4">
+    <div className="fixed inset-0 flex items-center justify-center z-50 shadow bg-[#00000080] p-2 ">
+      <div className="bg-white flex items-center flex-col overflow-y-auto no-scrollbar max-h-[600px]  p-4 rounded-md">
         <h1 className="title flex text-center  font-bold py-1 mt-2 ">
           {type === 'PurchaseRequest'
             ? 'Purchase Request Summary'
@@ -58,17 +66,29 @@ const PRSummary = ({ closeModal, type }) => {
 
         <div className="flex justify-start mt-1 text-sm">
           <div className=" text-left">
-            <div className="pt-1 px-4  grid grid-cols-2">
-              <h1 className="  font-semibold ">Order Created:</h1>
-              <h1 className="font-light ">03-24-2024</h1>
-            </div>
-            {type === 'PurchaseRequest' && (
-              <div className="border-b border-black"></div>
+            {type === 'PurchaseOrder' && (
+              <div className="pt-1 px-4  grid grid-cols-2">
+                <h1 className="  font-semibold ">Order Created:</h1>
+                <h1 className="font-light ">03-24-2024</h1>
+              </div>
+            )}
+            {type === 'PurchaseOrder' && (
+              <div className="pt-1 px-4 grid grid-cols-2 ">
+                <h1 className="font-semibold">Target Delivery Date:</h1>
+                <h1 className="font-light ">03-24-2024</h1>
+              </div>
             )}
             {type === 'PurchaseOrder' && (
               <div className="pt-1 px-4   grid grid-cols-2  ">
-                <h1 className="  font-semibold">Order Paid:</h1>
-                <h1 className="font-light ">03-24-2024</h1>
+                <h1 className="font-semibold ">Order Paid:</h1>
+                <DatePicker
+                  selected={selectedDate}
+                  onChange={handleDateChange}
+                  dateFormat="dd-MM-yyyy"
+                  minDate={new Date()}
+                  placeholderText="Select a date"
+                  className="  w-24 flex justify-center items-center rounded py-1"
+                />{' '}
               </div>
             )}
             {type === 'PurchaseOrder' && (
@@ -84,7 +104,7 @@ const PRSummary = ({ closeModal, type }) => {
                 {PRdata[currentIndex].Supplier}
               </h1>
             </div>
-            <div className="mb-3 p-3 px-4 border-b border-black">
+            {/* <div className="mb-3 p-3 px-4 border-b border-black">
               <h1 className="font-semibold">Buyer Info</h1>
               <div className="grid grid-cols-2 gap-y-1 px-3 py-1">
                 <h1 className>Street:</h1>
@@ -98,51 +118,8 @@ const PRSummary = ({ closeModal, type }) => {
                 <h1 className>Zip Code:</h1>
                 <h1 className="">{PRdata[currentIndex].ZipCode}</h1>
               </div>
-            </div>
-            {/* <h1>Supplier Name</h1>
-            <h1 className="font-light mb-4">{PRdata[currentIndex].Supplier}</h1>
-            <h1 className="my-2">Buyer Info</h1>
-            <div className="grid grid-cols-2 grid-rows-6">
-              <h1 className>Street:</h1>
-              <h1 className="font-light mb-2">{PRdata[currentIndex].Street}</h1>
-              <h1 className>City:</h1>
-              <h1 className="font-light mb-2">{PRdata[currentIndex].City}</h1>
-              <h1 className>Country:</h1>
-              <h1 className="font-light mb-2">
-                {PRdata[currentIndex].Country}
-              </h1>
-              <h1 className>State:</h1>
-              <h1 className="font-light mb-2">{PRdata[currentIndex].State}</h1>
-              <h1 className>Zip Code:</h1>
-              <h1 className="font-light mb-2">
-                {PRdata[currentIndex].ZipCode}
-              </h1>
             </div> */}
             <div className="">
-              {/* <div>
-                <h1 className="mb-2">Item Name</h1>
-                <h1 className="font-light text-center">
-                  {PRdata[currentIndex].Item}
-                </h1>
-              </div>
-              <div>
-                <h1 className="mb-2">Item Desc.</h1>
-                <h1 className="font-light text-center">
-                  {PRdata[currentIndex].ItemDesc}
-                </h1>
-              </div>
-              <div>
-                <h1 className="mb-2">Quantity:</h1>
-                <h1 className="font-light text-center">
-                  {PRdata[currentIndex].Qty}
-                </h1>
-              </div>
-              {type === 'PurchaseOrder' && (
-                <div>
-                  <h1 className="mb-2">Unit Price:</h1>
-                  <input type="number" className="font-light text-center" />
-                </div>
-              )} */}
               <table className="table-auto mb-3">
                 <thead className="">
                   <tr className="">
@@ -166,13 +143,14 @@ const PRSummary = ({ closeModal, type }) => {
                           <InputField
                             type="Unit Price"
                             value={item.UnitPrice}
+                            placeholder="Enter unit price here" // Updated placeholder text
                             onChange={(e) =>
                               handleInputChange(
                                 index,
                                 parseFloat(e.target.value)
                               )
                             }
-                            className=" border border-blue-500  w-[20px]"
+                            className="border border-blue-500 w-[20px]" // Corrected classname typo
                           />
                         </td>
                       )}

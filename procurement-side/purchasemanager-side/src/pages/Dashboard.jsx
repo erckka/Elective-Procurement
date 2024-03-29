@@ -5,6 +5,7 @@ import PieChart from '../components/Dashboard/PieChart'
 import CustomBarChart from '../components/Dashboard/CustomBarChart.jsx'
 import DonutChart from '../components/Dashboard/DonutChart.jsx'
 import ScatterAnalytics from '../components/Dashboard/ScatterAnalytics.jsx'
+import DateComponent from '../components/Dashboard/DateComponent.jsx'
 
 const Dashboard = () => {
   return (
@@ -16,13 +17,14 @@ const Dashboard = () => {
 
       <div className="h-screen md:w-full flex  overflow-x-auto">
         <div className="flex flex-col w-full">
+          <DateComponent />
           <div className="flex flex-row gap-5 justify-center items-center">
             <DonutChart />
             <DonutChart />
             <DonutChart />
           </div>
-          <div className="w-full flex justify-center items-center mt-5">
-            <ScatterAnalytics />
+          <div className="flex flex-row gap-5 ml-24 mt-5 items-center">
+            {/* <ScatterAnalytics /> */}
           </div>
         </div>
       </div>
