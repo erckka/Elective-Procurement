@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { CiEdit } from 'react-icons/ci'
 import { PiDotsThreeDuotone } from 'react-icons/pi'
 import { SiGoogleforms } from 'react-icons/si'
@@ -7,14 +7,38 @@ import { SupplierInfo as initialSupplierInfo } from '../SupplierData/SupplierInf
 import EditModal from '../Modals/EditSupplier'
 import SupplierSumm from '../Modals/SupplierSumm'
 import PurchaseReqModal from '../Modals/PurchaseRequest' // Renamed the import
+import axios from 'axios'
+
 const Row_supplier = () => {
   const [editModalOpen, setEditModalOpen] = useState(false)
   const [selectedSupplier, setSelectedSupplier] = useState(null)
   const [SupplierInfo, setSupplierInfo] = useState(initialSupplierInfo)
   const [SupplierSummary, setSupplierSummary] = useState(false)
   const [PurchaseReqOpen, setPurchaseReqOpen] = useState(false) // Renamed the state variable
+  const [data, setData] = useState([])
 
   const [selectedRow, setSelectedRow] = useState(null)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/api/data')
+        // Map the response data to extract only required fields
+        const mappedData = response.data.map((supplier) => ({
+          suppliername: supplier.suppliername,
+          contactphone: supplier.contactphone,
+          suppliercontact: supplier.suppliercontact,
+          companyemail: supplier.companyemail,
+          addressline: supplier.addressline,
+        }))
+        setData(mappedData)
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+
+    fetchData()
+  }, [])
 
   const openEditModal = (supplier) => {
     setSelectedSupplier(supplier)
@@ -54,19 +78,19 @@ const Row_supplier = () => {
   const columns = [
     {
       name: 'Supplier Name',
-      selector: (row) => row.companyName,
+      selector: (row) => row.suppliername,
       sortable: true,
     },
     {
       name: 'Contact Number',
-      selector: (row) => row.contactNumber,
+      selector: (row) => row.contactphone,
       sortable: true,
     },
     {
       name: 'Contact Person',
-      selector: (row) => row.contactPerson,
+      selector: (row) => row.suppliercontact,
       sortable: true,
-      hide: 'md',
+      // hide: 'md',
     },
     {
       name: 'Actions',
@@ -88,13 +112,13 @@ const Row_supplier = () => {
       ),
     },
   ]
-  console.log('SupplierInfo:', SupplierInfo) // Check SupplierInfo array
+  // console.log('SupplierInfo:', SupplierInfo) // Check SupplierInfo array
 
   return (
     <div className="flex flex-col mx-4 mt-10  md:mx-6 md:ml-[6rem] lg:mx-28">
       <DataTable
         columns={columns}
-        data={SupplierInfo}
+        data={data}
         dense
         selectableRows={false}
         selectableRowsVisible={false}

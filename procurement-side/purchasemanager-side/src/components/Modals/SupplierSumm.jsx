@@ -3,9 +3,9 @@ import CloseBtn from '../Buttons/CloseBtn'
 
 const SupplierSumm = ({ closeModal, rowData }) => {
   const {
-    contactPerson,
-    contactNumber,
-    companyEmail,
+    suppliername,
+    contactphone,
+    companyemail,
     address,
     city,
     state,
@@ -13,22 +13,19 @@ const SupplierSumm = ({ closeModal, rowData }) => {
     zipCode,
   } = rowData
   return (
-    <div
-      className="fixed inset-0 flex items-center justify-center z-50   shadow bg-[#00000080]    p-4
-    "
-    >
-      <div className="bg-white flex shadow-lg flex-col items-start w-[370px] lg:-mt-[5rem] lg:ml-44 rounded-md ">
+    <div className="fixed inset-0 flex items-center justify-center z-50   shadow bg-[#00000080] p-4">
+      <div className="bg-white flex shadow-lg flex-col items-start w-[370px]  rounded-md ">
         <h1 className="self-center text-[14px] font-bold py-1 mt-2">
           Supplier Info Summary
         </h1>
         <div className="border-b-[0.1rem] w-[14rem] self-center border-transparent border-gradient my-[0.3rem] mb-4"></div>
         <div className="flex flex-col font-semibold  text-left ml-8 px-4">
           <h1 className="fonr-semibold">Contact Person:</h1>
-          <h1 className="font-light mb-4">{contactPerson}</h1>
+          <h1 className="font-light mb-4">{suppliername}</h1>
           <h1>Contact Number:</h1>
-          <h1 className="font-light mb-4">{contactNumber}</h1>
+          <h1 className="font-light mb-4">{contactphone}</h1>
           <h1>Email Address:</h1>
-          <h1 className="font-light mb-2">{companyEmail}</h1>
+          <h1 className="font-light mb-2">{companyemail}</h1>
           <h1> Street Address:</h1>
           <h1 className="font-light mb-2">{address}</h1>
           <div className="flex flex-col">

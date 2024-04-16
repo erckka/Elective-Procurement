@@ -65,7 +65,7 @@ const AddModal = () => {
     <div className="">
       <button
         onClick={() => setIsOpen(true)}
-        className="bg-brand-purple md:ml-[6rem] text-xs mt-4 w-[9rem] mx-4 p-2 flex items-center justify-center rounded-md shadow-md text-white cursor-pointer"
+        className="bg-brand-purple text-xs mt-4 w-[9rem] mx-4 p-2 flex items-center justify-center rounded-md shadow-md text-white cursor-pointer"
       >
         <span className="text-base mr-2">
           <RiFileAddFill />
@@ -73,11 +73,11 @@ const AddModal = () => {
         Add Supplier
       </button>
       {isOpen && (
-        <div className="flex justify-center overflow-y-auto inset-2 fixed p-2 items-center md:mt-[-4rem] mt-[4rem] z-50 shadow bg-[#00000080]">
+        <div className="flex justify-center overflow-y-auto inset-0 fixed p-2 items-center  z-50 shadow bg-[#00000080]">
           <ToastContainer />
 
           <div className="inset-0" onClick={closeModal}></div>
-          <div className="rounded-lg mt-[8rem] bg-white shadow-md w-[20rem] md:w-[20rem] lg:w-[25rem] lg:p-2 lg:px-6 p-2 px-4">
+          <div className="rounded-lg  bg-white shadow-md w-[20rem] md:w-[20rem] lg:w-[25rem] lg:p-2 lg:px-6 p-2 px-4">
             <div className="text-center">
               <h1 className="text-base font-bold mb-2">Supplier </h1>
               <div className="border-b-2 border-transparent border-gradient my-[0.3rem] mb-4"></div>

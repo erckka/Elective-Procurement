@@ -55,7 +55,7 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
                   type="text"
                   id="companyName"
                   name="companyName"
-                  value={formData.companyName}
+                  value={formData.suppliername}
                   onChange={handleChange}
                   className="border w-full py-2 px-3 rounded focus:outline-none focus:border-blue-400"
                   required
@@ -69,7 +69,7 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
                   type="text"
                   id="contactPerson"
                   name="contactPerson"
-                  value={formData.contactPerson}
+                  value={formData.suppliercontact}
                   onChange={handleChange}
                   className="border w-full py-2 px-3 rounded focus:outline-none focus:border-blue-400"
                   required
@@ -83,7 +83,7 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
                   type="text"
                   id="contactNumber"
                   name="contactNumber"
-                  value={formData.contactNumber}
+                  value={formData.contactphone}
                   onChange={handleChange}
                   className="border w-full py-2 px-3 rounded focus:outline-none focus:border-blue-400"
                   required
@@ -97,7 +97,7 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
                   type="text"
                   id="companyEmail"
                   name="companyEmail"
-                  value={formData.companyEmail}
+                  value={formData.companyemail}
                   onChange={handleChange}
                   className="border w-full py-2 px-3 rounded focus:outline-none focus:border-blue-400"
                   required
@@ -111,7 +111,7 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
                   type="text"
                   id="address"
                   name="address"
-                  value={formData.address}
+                  value={formData.addressline}
                   onChange={handleChange}
                   className="border w-full py-2 px-3 rounded focus:outline-none focus:border-blue-400"
                   required
