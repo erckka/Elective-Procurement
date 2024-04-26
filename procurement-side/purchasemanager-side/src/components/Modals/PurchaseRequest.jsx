@@ -63,7 +63,7 @@ function PurchaseRequest({ closeModal }) {
 
     if (
       formNo === 1 &&
-      state.companyName &&
+      state.supplierName &&
       state.targetDeliveryDate
       // state.address &&
       // state.city &&
@@ -138,15 +138,16 @@ function PurchaseRequest({ closeModal }) {
             <h1 className=" text-[18px] font-bold flex justify-center mb-10">
               Purchase Request Form
             </h1>
+            <h1 className="block text-[12px] font-bold my-[0.4rem] lg:mb-[0.2rem] lg:text-base">
+              Supplier{' '}
+            </h1>
             <InputField
-              type="SupplierNameSelect"
-              value={state.companyName}
-              onChange={(e) =>
-                inputHandle({
-                  target: { name: 'companyName', value: e.target.value },
-                })
-              }
+              type="SupplierName"
+              value={state.supplierName}
+              onChange={inputHandle}
+              placeholder="Enter Supplier Name" // Placeholder text here
             />
+
             <div className="flex flex-col">
               <h1 className="block text-[12px] font-bold my-[0.4rem] lg:mb-[0.2rem] lg:text-base">
                 Target Delivery Date:

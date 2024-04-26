@@ -2,9 +2,9 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import pgPromise from 'pg-promise'
 import cors from 'cors'
-import fs from 'fs'
-import csvParser from 'csv-parser'
-import path from 'path'
+// import fs from 'fs'
+// import csvParser from 'csv-parser'
+// import path from 'path'
 
 const app = express()
 const pgp = pgPromise()
@@ -14,7 +14,8 @@ const db = pgp({
   host: 'localhost',
   user: 'postgres',
   port: 5432,
-  password: 'password123',
+  //password: 'password123',
+  password: 'database',
   database: 'postgres',
 })
 
