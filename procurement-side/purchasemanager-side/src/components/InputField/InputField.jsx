@@ -35,22 +35,22 @@ export default function InputField({ type, value, onChange }) {
     )
   } else if (type === 'ContactPerson') {
     labelText = 'Contact Person'
-    htmlForValue = 'contactPerson'
+    htmlForValue = 'suppliercontact'
   } else if (type === 'SupplierNameField') {
-    labelText = 'Contact Person'
-    htmlForValue = 'contactPerson'
+    labelText = 'Supplier Name'
+    htmlForValue = 'suppliername'
   } else if (type === 'Buyer') {
     labelText = 'Buyers Name'
     htmlForValue = 'buyerName'
   } else if (type === 'ContactNumber') {
     labelText = 'Contact Number'
-    htmlForValue = 'contactNumber'
+    htmlForValue = 'contactphone'
   } else if (type === 'CompanyEmail') {
     labelText = 'Company Email'
-    htmlForValue = 'companyEmail'
+    htmlForValue = 'companyemail'
   } else if (type === 'Address') {
     labelText = 'Address'
-    htmlForValue = 'address'
+    htmlForValue = 'street'
   } else if (type === 'City') {
     labelText = 'City'
     htmlForValue = 'city'
@@ -59,7 +59,7 @@ export default function InputField({ type, value, onChange }) {
     htmlForValue = 'state'
   } else if (type === 'ZipCode') {
     labelText = 'Zip Code'
-    htmlForValue = 'zipCode'
+    htmlForValue = 'zipcode'
     inputType = 'number' // Set type to 'number' for quantity
   } else if (type === 'Country') {
     labelText = 'Country'
@@ -105,7 +105,9 @@ export default function InputField({ type, value, onChange }) {
             type={inputType}
             id={htmlForValue}
             name={htmlForValue}
-            onChange={(e) => onChange(e)}
+            // onChange={(e) => onChange(e)}
+            onChange={onChange}
+            value={value}
             required
             className="border px-2 text-[14px] rounded py-[0.2rem] lg:py-[0.3rem] focus:outline-brand-blue mb-2"
           />

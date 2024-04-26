@@ -4,61 +4,68 @@ import InputField from '../InputField/InputField'
 import CloseBtn from '../Buttons/CloseBtn'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import axios from 'axios'
 
 const AddModal = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [formData, setFormData] = useState({
-    companyName: '',
-    contactPerson: '',
-    contactNumber: '',
-    companyEmail: '',
-    address: '',
+    suppliername: '',
+    suppliercontact: '',
+    contactphone: '',
+    companyemail: '',
+    street: '',
     city: '',
     state: '',
-    zipCode: '',
+    zipcode: '',
     country: '',
   })
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData({
-      ...formData,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
-    })
+    }))
   }
   const closeModal = () => {
     setIsOpen(false)
   }
 
-  const handleSaveChanges = () => {
-    // Logic to save changes (e.g., send data to server)
-    console.log('Changes saved:', formData)
-    closeModal()
-  }
+  // const handleSaveChanges = () => {
+  //   // Logic to save changes (e.g., send data to server)
+  //   console.log('Changes saved:', formData)
+  //   closeModal()
+  // }
 
-  const finalSubmit = () => {
-    if (
-      formData.companyName &&
-      formData.contactPerson &&
-      formData.companyEmail &&
-      formData.address &&
-      formData.city &&
-      formData.state &&
-      formData.zipCode &&
-      formData.country
-    ) {
-      toast.success('Form submitted successfully')
-      setTimeout(() => {
-        closeModal()
-      }, 5000)
-    } else {
-      toast.error('Please fill up all input fields')
-    }
-  }
+  // const finalSubmit = () => {
+  //   if (
+  //     formData.companyName &&
+  //     formData.contactPerson &&
+  //     formData.companyEmail &&
+  //     formData.address &&
+  //     formData.city &&
+  //     formData.state &&
+  //     formData.zipCode &&
+  //     formData.country
+  //   ) {
+  //     toast.success('Form submitted successfully')
+  //     setTimeout(() => {
+  //       closeModal()
+  //     }, 5000)
+  //   } else {
+  //     toast.error('Please fill up all input fields')
+  //   }
+  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // Logic for form submission
+    try {
+      console.log(formData)
+      await axios.post('http://localhost:3001/api/addSupplier', formData)
+      window.location.reload()
+    } catch (error) {
+      console.error('Error submitting form:', error)
+    }
   }
 
   return (
@@ -85,15 +92,52 @@ const AddModal = () => {
             <h2 className="text-[14px] font-bold mb-2">Supplier Info</h2>
             <form onSubmit={handleSubmit}>
               <div className="supplier-credentials">
-                <InputField type="SupplierNameField" />
-                <InputField type="ContactPerson" />
-                <InputField type="CompanyEmail" />
-                <InputField type="Address" />
+                <InputField
+                  type="SupplierNameField"
+                  onChange={handleChange}
+                  value={formData.suppliername}
+                />
+                <InputField
+                  type="ContactPerson"
+                  onChange={handleChange}
+                  value={formData.suppliercontact}
+                />
+                <InputField
+                  type="ContactNumber"
+                  onChange={handleChange}
+                  value={formData.contactphone}
+                />
+                <InputField
+                  type="CompanyEmail"
+                  onChange={handleChange}
+                  value={formData.companyemail}
+                />
+                <InputField
+                  type="Address"
+                  onChange={handleChange}
+                  value={formData.street}
+                />
                 <div className="grid grid-cols-2 w-[100%]  gap-x-4">
-                  <InputField type="City" />
-                  <InputField type="State" />
-                  <InputField type="ZipCode" />
-                  <InputField type="Country" />
+                  <InputField
+                    type="City"
+                    onChange={handleChange}
+                    value={formData.city}
+                  />
+                  <InputField
+                    type="State"
+                    onChange={handleChange}
+                    value={formData.state}
+                  />
+                  <InputField
+                    type="ZipCode"
+                    onChange={handleChange}
+                    value={formData.zipcode}
+                  />
+                  <InputField
+                    type="Country"
+                    onChange={handleChange}
+                    value={formData.country}
+                  />
                 </div>
               </div>
               <div className="flex flex-row gap-x-2  mt-4 ">

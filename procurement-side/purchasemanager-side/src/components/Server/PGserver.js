@@ -121,6 +121,49 @@ db.connect()
       }
     })
 
+    app.post('/api/addSupplier', async (req, res) => {
+      try {
+        const {
+          suppliername,
+          contactphone,
+          suppliercontact,
+          companyemail,
+          street,
+          city,
+          state,
+          zipcode,
+          country,
+        } = req.body
+
+        // Get the current date
+        const currentDate = new Date()
+
+        // Example query to insert data into the 'items' table
+        const insertQuery = `
+        INSERT INTO supplier 
+        (suppliername, contactphone, suppliercontact, companyemail, street, city, state, zipcode, country)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+      `
+
+        await db.none(insertQuery, [
+          suppliername,
+          contactphone,
+          suppliercontact,
+          companyemail,
+          street,
+          city,
+          state,
+          zipcode,
+          country,
+        ])
+
+        res.status(201).json({ message: 'Item inserted successfully' })
+      } catch (error) {
+        console.error('Error inserting item:', error)
+        res.status(500).json({ error: 'Internal Server Error' })
+      }
+    })
+
     // Define API route to update data (edit)
     // app.post('/api/updateItem', async (req, res) => {
     //   try {
