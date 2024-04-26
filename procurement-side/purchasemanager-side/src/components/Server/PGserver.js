@@ -47,6 +47,80 @@ db.connect()
       }
     })
 
+    app.post('/api/updateSupplier', async (req, res) => {
+      try {
+        const {
+          supplierid,
+          suppliername,
+          contactphone,
+          suppliercontact,
+          companyemail,
+          street,
+          city,
+          state,
+          zipcode,
+          country,
+        } = req.body
+
+        // Get the original supplier from the database
+        const originalSupplier = await db.oneOrNone(
+          'SELECT * FROM supplier WHERE supplierid = $1',
+          supplierid
+        )
+
+        // Update only if any of the fields have changed
+        const shouldUpdate =
+          originalSupplier.suppliername !== suppliername ||
+          originalSupplier.contactphone !== contactphone ||
+          originalSupplier.suppliercontact !== suppliercontact ||
+          originalSupplier.companyemail !== companyemail ||
+          originalSupplier.street !== street ||
+          originalSupplier.city !== city ||
+          originalSupplier.state !== state ||
+          originalSupplier.zipcode !== zipcode ||
+          originalSupplier.country !== country
+
+        if (!shouldUpdate) {
+          return res.status(200).json({ message: 'Supplier data unchanged' })
+        }
+
+        // Prepare the update query
+        const updateQuery = `
+          UPDATE supplier
+          SET 
+            suppliername = $2,
+            contactphone = $3,
+            suppliercontact = $4,
+            companyemail = $5,
+            street = $6,
+            city = $7,
+            state = $8,
+            zipcode = $9,
+            country = $10
+          WHERE supplierid = $1
+        `
+
+        // Execute the update query
+        await db.none(updateQuery, [
+          supplierid,
+          suppliername,
+          contactphone,
+          suppliercontact,
+          companyemail,
+          street,
+          city,
+          state,
+          zipcode,
+          country,
+        ])
+
+        res.status(200).json({ message: 'Supplier updated successfully' })
+      } catch (error) {
+        console.error('Error updating supplier:', error)
+        res.status(500).json({ error: 'Internal Server Error' })
+      }
+    })
+
     // Define API route to update data (edit)
     // app.post('/api/updateItem', async (req, res) => {
     //   try {

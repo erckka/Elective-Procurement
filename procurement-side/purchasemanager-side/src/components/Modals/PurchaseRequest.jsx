@@ -157,7 +157,7 @@ function PurchaseRequest({ closeModal }) {
                 dateFormat="MM-dd-yyyy"
                 minDate={new Date()}
                 placeholderText="Select a date"
-                className="border border-gray-400   flex justify-center items-center rounded py-1 w-full"
+                className="border border-gray-400   flex justify-center items-center rounded py-1 pl-2 w-full"
               />
             </div>
             {/* <h1>Customer Info</h1>

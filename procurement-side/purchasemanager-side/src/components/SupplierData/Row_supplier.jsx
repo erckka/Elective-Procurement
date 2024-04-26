@@ -25,11 +25,16 @@ const Row_supplier = () => {
         const response = await axios.get('http://localhost:3001/api/data')
         // Map the response data to extract only required fields
         const mappedData = response.data.map((supplier) => ({
+          supplierid: supplier.supplierid,
           suppliername: supplier.suppliername,
           contactphone: supplier.contactphone,
           suppliercontact: supplier.suppliercontact,
           companyemail: supplier.companyemail,
-          addressline: supplier.addressline,
+          street: supplier.street,
+          city: supplier.city,
+          state: supplier.state,
+          zipcode: supplier.zipcode,
+          country: supplier.country,
         }))
         setData(mappedData)
       } catch (error) {

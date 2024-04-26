@@ -14,14 +14,20 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
     })
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const handleSubmit = async () => {
     try {
-      console.log('Form data submitted:', formData)
-      onSave(formData) // Assuming onSave callback is provided correctly
+      // Make an HTTP POST request to your Express backend with the updated data
+      const response = await axios.post(
+        'http://localhost:3001/api/updateSupplier',
+        formData
+      )
+      console.log(response.data) // Log the response from the backend
+      onSave(formData)
       closeModal()
-    } catch (err) {
-      console.error('Error submitting form', err)
+      window.location.reload()
+    } catch (error) {
+      console.error('Error saving changes:', error)
+      // Handle error if save operation fails
     }
   }
   const handleDelete = () => {
@@ -48,13 +54,13 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
 
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
-                <label htmlFor="companyName" className="block font-bold mb-1">
+                <label htmlFor="suppliername" className="block font-bold mb-1">
                   Supplier Name
                 </label>
                 <input
                   type="text"
-                  id="companyName"
-                  name="companyName"
+                  id="suppliername"
+                  name="suppliername"
                   value={formData.suppliername}
                   onChange={handleChange}
                   className="border w-full py-2 px-3 rounded focus:outline-none focus:border-blue-400"
@@ -62,13 +68,16 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="contactPerson" className="block font-bold mb-1">
+                <label
+                  htmlFor="suppliercontact"
+                  className="block font-bold mb-1"
+                >
                   Contact Person
                 </label>
                 <input
                   type="text"
-                  id="contactPerson"
-                  name="contactPerson"
+                  id="suppliercontact"
+                  name="suppliercontact"
                   value={formData.suppliercontact}
                   onChange={handleChange}
                   className="border w-full py-2 px-3 rounded focus:outline-none focus:border-blue-400"
@@ -76,13 +85,13 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="contactNumber" className="block font-bold mb-1">
+                <label htmlFor="contactphone" className="block font-bold mb-1">
                   Contact Number
                 </label>
                 <input
                   type="text"
-                  id="contactNumber"
-                  name="contactNumber"
+                  id="contactphone"
+                  name="contactphone"
                   value={formData.contactphone}
                   onChange={handleChange}
                   className="border w-full py-2 px-3 rounded focus:outline-none focus:border-blue-400"
@@ -90,13 +99,13 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="companyEmail" className="block font-bold mb-1">
+                <label htmlFor="companyemail" className="block font-bold mb-1">
                   Company Email
                 </label>
                 <input
                   type="text"
-                  id="companyEmail"
-                  name="companyEmail"
+                  id="companyemail"
+                  name="companyemail"
                   value={formData.companyemail}
                   onChange={handleChange}
                   className="border w-full py-2 px-3 rounded focus:outline-none focus:border-blue-400"
@@ -104,14 +113,14 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="address" className="block font-bold mb-1">
+                <label htmlFor="street" className="block font-bold mb-1">
                   Address
                 </label>
                 <input
                   type="text"
-                  id="address"
-                  name="address"
-                  value={formData.addressline}
+                  id="street"
+                  name="street"
+                  value={formData.street}
                   onChange={handleChange}
                   className="border w-full py-2 px-3 rounded focus:outline-none focus:border-blue-400"
                   required
@@ -132,14 +141,14 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="zipCode" className="block font-bold mb-1">
+                <label htmlFor="zipcode" className="block font-bold mb-1">
                   Zip Code
                 </label>
                 <input
                   type="text"
-                  id="zipCode"
-                  name="zipCode"
-                  value={formData.zipCode}
+                  id="zipcode"
+                  name="zipcode"
+                  value={formData.zipcode}
                   onChange={handleChange}
                   className="border w-full py-2 px-3 rounded focus:outline-none focus:border-blue-400"
                   required
