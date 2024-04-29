@@ -6,17 +6,24 @@ import { IoAddCircle } from 'react-icons/io5'
 import CloseBtn from '../Buttons/CloseBtn'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import axios from 'axios'
 
 function PurchaseRequest({ closeModal, rowData }) {
   const formArray = [1, 2]
   const [formNo, setFormNo] = useState(formArray[0])
-  const [itemInfoCount, setItemInfoCount] = useState(1)
+  const [itemInfoCount, setItemInfoCount] = useState([
+    { item: '', quantity: '', itemDescription: '' },
+  ])
   const [isHovered, setIsHovered] = useState(false)
   const [showPopup, setShowPopup] = useState(false)
   const { suppliername } = rowData
+  const [id, setId] = useState('')
 
   const addNewItemInfo = () => {
-    setItemInfoCount(itemInfoCount + 1)
+    setItemInfoCount([
+      ...itemInfoCount,
+      { item: '', quantity: '', itemDescription: '' },
+    ])
   }
 
   const handleMouseEnter = () => {
@@ -31,10 +38,34 @@ function PurchaseRequest({ closeModal, rowData }) {
 
   const handleDateChange = (date) => {
     setSelectedDate(date)
-    // Update the state with the selected date
+
+    // Extract year, month, and day from the selected date
+    const yearTarget = date.getFullYear().toString()
+    const monthTarget = (date.getMonth() + 1).toString().padStart(2, '0')
+    const dayTarget = date.getDate().toString().padStart(2, '0')
+
+    // Combine year, month, and day into targetDelivery string
+    const targetDelivery = `${yearTarget}/${monthTarget}/${dayTarget}`
+
+    // Create a new Date object to get the current date and time
+    const currentDate = new Date()
+
+    // Extract individual components of the current date and time
+    const year = currentDate.getFullYear().toString()
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0')
+    const day = currentDate.getDate().toString().padStart(2, '0')
+    const hours = currentDate.getHours().toString().padStart(2, '0')
+    const minutes = currentDate.getMinutes().toString().padStart(2, '0')
+    const seconds = currentDate.getSeconds().toString().padStart(2, '0')
+
+    // Generate the ID
+    const id = `${year}${month}${day}${hours}${minutes}${seconds}`
+
+    // Update the state with the current date and time and the target delivery date
     setState((prevState) => ({
       ...prevState,
-      targetDeliveryDate: date,
+      targetDeliveryDate: targetDelivery,
+      id: id,
     }))
   }
 
@@ -42,10 +73,16 @@ function PurchaseRequest({ closeModal, rowData }) {
     suppliername,
     targetDeliveryDate: null, // Initialize with null instead of an empty string
 
-    item: '',
-    quantity: '',
-    itemDescription: '',
+    // item: '',
+    // quantity: '',
+    // itemDescription: '',
   })
+
+  const handleItemChange = (index, field, value) => {
+    const updatedItemInfo = [...itemInfoCount]
+    updatedItemInfo[index][field] = value
+    setItemInfoCount(updatedItemInfo)
+  }
 
   const inputHandle = (e) => {
     if (e.target && e.target.name && e.target.value) {
@@ -90,7 +127,27 @@ function PurchaseRequest({ closeModal, rowData }) {
   }
 
   const finalSubmit = () => {
-    if (state.item && state.quantity && state.itemDescription) {
+    const allItemsFilled = itemInfoCount.every(
+      (item) => item.item && item.quantity && item.itemDescription
+    )
+
+    if (allItemsFilled) {
+      console.log(state)
+      console.log(itemInfoCount)
+      const combinedData = {
+        id: state.id,
+        suppliername: state.suppliername,
+        targetDeliveryDate: state.targetDeliveryDate,
+        items: itemInfoCount,
+      }
+      console.log(combinedData)
+      try {
+        axios.post('http://localhost:3001/api/addPR', combinedData)
+        window.location.reload()
+      } catch (error) {
+        console.error('Error submitting form:', error)
+      }
+
       toast.success('Form submitted successfully')
 
       // Set a timeout to close the modal after 3 seconds (adjust as needed)
@@ -163,39 +220,6 @@ function PurchaseRequest({ closeModal, rowData }) {
                 className="border border-gray-400   flex justify-center items-center rounded py-1 pl-2 w-full"
               />
             </div>
-            {/* <h1>Customer Info</h1>
-            <InputField
-              type="Buyer"
-              value={state.buyerName}
-              onChange={inputHandle}
-            />
-            <InputField
-              type="Address"
-              value={state.address}
-              onChange={inputHandle}
-            />
-            <div className="grid grid-cols-2 w-[100%] gap-x-4">
-              <InputField
-                type="City"
-                value={state.city}
-                onChange={inputHandle}
-              />
-              <InputField
-                type="State"
-                value={state.state}
-                onChange={inputHandle}
-              />
-              <InputField
-                type="ZipCode"
-                value={state.zipCode}
-                onChange={inputHandle}
-              />
-              <InputField
-                type="Country"
-                value={state.country}
-                onChange={inputHandle}
-              />
-            </div> */}
             <div className="flex flex-row gap-x-2 py-2 w-[100%]">
               <CloseBtn closeModal={closeModal} type="close" />
               <button
@@ -229,27 +253,37 @@ function PurchaseRequest({ closeModal, rowData }) {
                 </div>
               </div>
 
-              {[...Array(itemInfoCount)].map((_, index) => (
+              {itemInfoCount.map((item, index) => (
                 <div key={index} className="flex flex-col mb-2">
                   <InputField
                     type="Item"
-                    value={state.item}
-                    onChange={inputHandle}
+                    value={item.item}
+                    onChange={(e) =>
+                      handleItemChange(index, 'item', e.target.value)
+                    }
                   />
                   <div className="grid grid-cols-3 w-[100%] gap-x-4">
                     <div className="">
                       <InputField
                         type="Quantity"
-                        value={state.quantity}
-                        onChange={inputHandle}
+                        value={item.quantity}
+                        onChange={(e) =>
+                          handleItemChange(index, 'quantity', e.target.value)
+                        }
                         className=" border border-blue-500"
                       />
                     </div>
                     <div className="col-span-2 ">
                       <InputField
                         type="ItemDescription"
-                        value={state.itemDescription}
-                        onChange={inputHandle}
+                        value={item.itemDescription}
+                        onChange={(e) =>
+                          handleItemChange(
+                            index,
+                            'itemDescription',
+                            e.target.value
+                          )
+                        }
                       />
                     </div>
                   </div>

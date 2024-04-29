@@ -5,9 +5,7 @@ import './App.css'
 import Dashboard from './pages/Dashboard'
 import ProductReq from './pages/ProductReq'
 import ProductStatus from './pages/ProductStatus'
-
 import PurchaseOrder from './pages/PurchaseOrder'
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 function App() {

@@ -4,11 +4,46 @@ import CloseBtn from '../Buttons/CloseBtn'
 import InputField from '../InputField/InputField'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import axios from 'axios'
 
-const PRSummary = ({ closeModal, type }) => {
+const PRSummary = ({ closeModal, type, row, items }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [total, setTotal] = useState(0)
+  const [data, setData] = useState([])
+
+  console.log(row)
+
+  const {
+    purchaseno,
+    suppliername,
+    targetdeliverydate,
+    ordercreated,
+    itemname,
+    itemdesc,
+    quantity,
+    status,
+  } = row
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/api/items/${purchaseno}`
+        )
+        if (Array.isArray(response.data)) {
+          setData(response.data)
+          console.log(data)
+        } else {
+          console.log('Invalid response data format')
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+
+    fetchData()
+  }, [purchaseno])
 
   const openModal = () => {
     setIsOpen(true)
@@ -100,25 +135,8 @@ const PRSummary = ({ closeModal, type }) => {
             {/* Supplier Info */}
             <div className="pt-1 px-4 border-b border-black">
               <h1 className="font-semibold">Supplier Name</h1>
-              <h1 className="font-light mb-1 py-1">
-                {PRdata[currentIndex].Supplier}
-              </h1>
+              <h1 className="font-light mb-1 py-1">{suppliername}</h1>
             </div>
-            {/* <div className="mb-3 p-3 px-4 border-b border-black">
-              <h1 className="font-semibold">Buyer Info</h1>
-              <div className="grid grid-cols-2 gap-y-1 px-3 py-1">
-                <h1 className>Street:</h1>
-                <h1 className="">{PRdata[currentIndex].Street}</h1>
-                <h1 className>City:</h1>
-                <h1 className="">{PRdata[currentIndex].City}</h1>
-                <h1 className>Country:</h1>
-                <h1 className="">{PRdata[currentIndex].Country}</h1>
-                <h1 className>State:</h1>
-                <h1 className="">{PRdata[currentIndex].State}</h1>
-                <h1 className>Zip Code:</h1>
-                <h1 className="">{PRdata[currentIndex].ZipCode}</h1>
-              </div>
-            </div> */}
             <div className="">
               <table className="table-auto mb-3">
                 <thead className="">
@@ -132,17 +150,17 @@ const PRSummary = ({ closeModal, type }) => {
                   </tr>
                 </thead>
                 <tbody className="text-center ">
-                  {PRdata[currentIndex].Items.map((item, index) => (
+                  {data.map((data, index) => (
                     <tr key={index}>
-                      <td className="px-4 py-2">{item.Item}</td>
-                      <td className="px-4 py-2">{item.ItemDesc}</td>
-                      <td className=" px-4 py-2">{item.Qty}</td>
+                      <td className="px-4 py-2">{data.itemname}</td>
+                      <td className="px-4 py-2">{data.itemdesc}</td>
+                      <td className=" px-4 py-2">{data.quantity}</td>
                       {type === 'PurchaseOrder' && (
                         // <td className="px-4 py-2">{item.UnitPrice}</td>
                         <td className="">
                           <InputField
                             type="Unit Price"
-                            value={item.UnitPrice}
+                            value={UnitPrice}
                             placeholder="Enter unit price here" // Updated placeholder text
                             onChange={(e) =>
                               handleInputChange(

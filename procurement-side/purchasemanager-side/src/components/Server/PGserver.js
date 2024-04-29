@@ -165,6 +165,69 @@ db.connect()
       }
     })
 
+    app.post('/api/addPR', async (req, res) => {
+      try {
+        const { id, suppliername, targetDeliveryDate, items } = req.body
+
+        // Get the current date
+        const currentDate = new Date()
+
+        // Example query to insert data into the 'items' table
+        const insertQuery = `
+        INSERT INTO purchaserequest 
+        (purchaseno, suppliername, targetdeliverydate, ordercreated, itemname, itemdesc, quantity, status)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      `
+
+        // Iterate over items and insert each item into the database
+        for (const item of items) {
+          await db.none(insertQuery, [
+            id,
+            suppliername,
+            targetDeliveryDate,
+            currentDate,
+            item.item,
+            item.itemDescription,
+            item.quantity,
+            'Pending', // Assuming 'Status' is set to 'Pending' by default
+          ])
+        }
+
+        res.status(201).json({ message: 'Inserted successfully' })
+      } catch (error) {
+        console.error('Error inserting item:', error)
+        res.status(500).json({ error: 'Internal Server Error' })
+      }
+    })
+
+    app.get('/api/dataPR', async (req, res) => {
+      try {
+        // Example query to fetch data from a PostgreSQL table
+        const data = await db.any(
+          'SELECT DISTINCT ON (purchaseno) * FROM purchaserequest'
+        )
+        res.json(data)
+      } catch (error) {
+        console.error('Error fetching data:', error)
+        res.status(500).json({ error: 'Internal Server Error' })
+      }
+    })
+
+    app.get('/api/items/:purchaseno', async (req, res) => {
+      try {
+        const { purchaseno } = req.params
+        // Example query to fetch item data associated with a specific purchaseno
+        const itemsData = await db.any(
+          'SELECT * FROM purchaserequest WHERE purchaseno = $1',
+          [purchaseno]
+        )
+        res.json(itemsData)
+      } catch (error) {
+        console.error(`Error fetching item data for purchaseno`, error)
+        res.status(500).json({ error: 'Internal Server Error' })
+      }
+    })
+
     // Start the Express server
     const PORT = process.env.PORT || 3001
     app.listen(PORT, () => {
