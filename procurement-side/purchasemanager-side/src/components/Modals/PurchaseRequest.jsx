@@ -7,12 +7,13 @@ import CloseBtn from '../Buttons/CloseBtn'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-function PurchaseRequest({ closeModal }) {
+function PurchaseRequest({ closeModal, rowData }) {
   const formArray = [1, 2]
   const [formNo, setFormNo] = useState(formArray[0])
   const [itemInfoCount, setItemInfoCount] = useState(1)
   const [isHovered, setIsHovered] = useState(false)
   const [showPopup, setShowPopup] = useState(false)
+  const { suppliername } = rowData
 
   const addNewItemInfo = () => {
     setItemInfoCount(itemInfoCount + 1)
@@ -38,7 +39,7 @@ function PurchaseRequest({ closeModal }) {
   }
 
   const [state, setState] = useState({
-    companyName: '',
+    suppliername,
     targetDeliveryDate: null, // Initialize with null instead of an empty string
 
     item: '',
@@ -63,7 +64,7 @@ function PurchaseRequest({ closeModal }) {
 
     if (
       formNo === 1 &&
-      state.supplierName &&
+      state.suppliername &&
       state.targetDeliveryDate
       // state.address &&
       // state.city &&
@@ -143,9 +144,10 @@ function PurchaseRequest({ closeModal }) {
             </h1>
             <InputField
               type="SupplierName"
-              value={state.supplierName}
+              value={suppliername}
               onChange={inputHandle}
               placeholder="Enter Supplier Name" // Placeholder text here
+              disabled="disabled"
             />
 
             <div className="flex flex-col">

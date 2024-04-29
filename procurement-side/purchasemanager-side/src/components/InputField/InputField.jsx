@@ -1,6 +1,6 @@
 import React from 'react'
 import SupplierInfo from '../SupplierData/SupplierInfo'
-export default function InputField({ type, value, onChange }) {
+export default function InputField({ type, value, onChange, disabled }) {
   let labelText = ''
   let htmlForValue = ''
   let inputType = 'text' // Default type is text
@@ -108,6 +108,7 @@ export default function InputField({ type, value, onChange }) {
             // onChange={(e) => onChange(e)}
             onChange={onChange}
             value={value}
+            disabled={disabled}
             required
             className="border px-2 text-[14px] rounded py-[0.2rem] lg:py-[0.3rem] focus:outline-brand-blue mb-2"
           />
