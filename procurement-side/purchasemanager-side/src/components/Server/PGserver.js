@@ -275,6 +275,19 @@ db.connect()
       }
     })
 
+    app.get('/api/dataProductStatus', async (req, res) => {
+      try {
+        // Example query to fetch data from a PostgreSQL table
+        const data = await db.any(
+          'SELECT DISTINCT ON (purchaseno) * FROM purchaserequest'
+        )
+        res.json(data)
+      } catch (error) {
+        console.error('Error fetching data:', error)
+        res.status(500).json({ error: 'Internal Server Error' })
+      }
+    })
+
     // Start the Express server
     const PORT = process.env.PORT || 3001
     app.listen(PORT, () => {

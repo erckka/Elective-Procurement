@@ -1,15 +1,53 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import DataTable from 'react-data-table-component'
 import PRData from './PRdata'
 import { MdEmail } from 'react-icons/md'
 import { PiDotsThreeDuotone } from 'react-icons/pi'
 import EmailModal from '../Modals/Email'
 import PRSummary from '../Modals/PRSummary'
+import axios from 'axios'
 
 const PRStatus = () => {
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false)
   const [isPRSummaryModalOpen, setIsPRSummaryModalOpen] = useState(false)
   const [selectedRow, setSelectedRow] = useState(null)
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          'http://localhost:3001/api/dataProductStatus'
+        )
+        // Map the response data to extract only required fields
+        const mappedData = response.data.map((data) => ({
+          purchaseno: data.purchaseno,
+          suppliername: data.suppliername,
+          targetdeliverydate: data.targetdeliverydate,
+          ordercreated: formatDate(data.ordercreated),
+          itemname: data.itemname,
+          itemdesc: data.itemdesc,
+          quantity: data.quantity,
+          status: data.status,
+        }))
+        setData(mappedData)
+        console.log(mappedData)
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+
+    fetchData()
+  }, [])
+
+  // Function to format date as MM-DD-YYYY
+  const formatDate = (dateString) => {
+    const date = new Date(dateString)
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const day = date.getDate().toString().padStart(2, '0')
+    const year = date.getFullYear()
+    return `${month}-${day}-${year}`
+  }
 
   const openEmailModal = (row) => {
     setSelectedRow(row)
@@ -36,38 +74,38 @@ const PRStatus = () => {
   const columns = [
     {
       name: 'Purchase No.',
-      selector: (row) => row.PRNumber,
+      selector: (row) => row.purchaseno,
       sortable: true,
     },
     {
       name: 'Supplier',
-      selector: (row) => row.Supplier,
+      selector: (row) => row.suppliername,
       sortable: true,
       hide: 'sm',
     },
     {
       name: 'Order Created',
-      selector: (row) => row.OrderCreated,
+      selector: (row) => row.ordercreated,
       sortable: true,
       hide: 'sm',
     },
     {
       name: 'Status',
-      selector: (row) => row.Status,
+      selector: (row) => row.status,
       sortable: true,
       cell: (row) => (
         <div
           className={`font-bold text-[12px] status-indicator ${
-            row.Status.toLowerCase() === 'pending'
+            row.status.toLowerCase() === 'pending'
               ? 'text-orange-400'
-              : row.Status.toLowerCase() === 'approved'
+              : row.status.toLowerCase() === 'approved'
               ? 'text-green-700'
-              : row.Status.toLowerCase() === 'rejected'
+              : row.status.toLowerCase() === 'rejected'
               ? 'text-red-700'
               : ''
           }`}
         >
-          {row.Status}
+          {row.status}
         </div>
       ),
     },
@@ -82,22 +120,22 @@ const PRStatus = () => {
           />
           <MdEmail
             className={`bg-blue-700 text-white text-[18px] rounded-sm shadow-sm w-auto h-6 lg:h-6 p-[0.2rem] cursor-pointer ${
-              row.Status.toLowerCase() === 'rejected' ||
-              row.Status.toLowerCase() === 'pending'
+              row.status.toLowerCase() === 'rejected' ||
+              row.status.toLowerCase() === 'pending'
                 ? 'opacity-50 cursor-not-allowed'
                 : ''
             }`}
             onClick={() => {
               if (
-                row.Status.toLowerCase() !== 'rejected' &&
-                row.Status.toLowerCase() !== 'pending'
+                row.status.toLowerCase() !== 'rejected' &&
+                row.status.toLowerCase() !== 'pending'
               ) {
                 openEmailModal(row)
               }
             }}
             disabled={
-              row.Status.toLowerCase() === 'rejected' ||
-              row.Status.toLowerCase() === 'pending'
+              row.status.toLowerCase() === 'rejected' ||
+              row.status.toLowerCase() === 'pending'
             }
           />
         </div>
@@ -109,7 +147,11 @@ const PRStatus = () => {
     <div className="mx-2 ml-6 mt-6 md:mx-6 md:ml-[6rem] lg:mx-36 ">
       {isEmailModalOpen && <EmailModal closeModal={closeModal} />}
       {isPRSummaryModalOpen && (
-        <PRSummary closeModal={closeModal} type="PurchaseRequest" />
+        <PRSummary
+          closeModal={closeModal}
+          type="PurchaseRequest"
+          row={selectedRow}
+        />
       )}
 
       <div className="flex justify-center text-center whitespace-nowrap mt-12 my-4 font-bold mb-8">
@@ -117,7 +159,7 @@ const PRStatus = () => {
       </div>
       <DataTable
         columns={columns}
-        data={PRData}
+        data={data}
         pagination
         paginationPerPage={10}
         paginationRowsPerPageOptions={[10, 15]}
