@@ -14,8 +14,8 @@ const db = pgp({
   host: 'localhost',
   user: 'postgres',
   port: 5432,
-  password: 'password123',
-  // password: 'database',
+  // password: 'password123',
+  password: 'database',
   database: 'postgres',
 })
 
@@ -285,6 +285,31 @@ db.connect()
       } catch (error) {
         console.error('Error fetching data:', error)
         res.status(500).json({ error: 'Internal Server Error' })
+      }
+    })
+
+    var nodemailer = require('nodemailer')
+
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'trifecta1611@gmail.com',
+        pass: 'faorozfyegilspme ',
+      },
+    })
+
+    var mailOptions = {
+      from: 'trifecta1611@gmail.com',
+      to: 'myfriend@yahoo.com',
+      subject: 'Purchase Request',
+      text: 'This is Trifecta',
+    }
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error)
+      } else {
+        console.log('Email sent: ' + info.response)
       }
     })
 
