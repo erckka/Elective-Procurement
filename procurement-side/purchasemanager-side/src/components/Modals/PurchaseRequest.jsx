@@ -16,7 +16,7 @@ function PurchaseRequest({ closeModal, rowData }) {
   ])
   const [isHovered, setIsHovered] = useState(false)
   const [showPopup, setShowPopup] = useState(false)
-  const { suppliername } = rowData
+  const { suppliername, companyemail } = rowData
   const [id, setId] = useState('')
 
   const addNewItemInfo = () => {
@@ -71,6 +71,7 @@ function PurchaseRequest({ closeModal, rowData }) {
 
   const [state, setState] = useState({
     suppliername,
+    companyemail,
     targetDeliveryDate: null, // Initialize with null instead of an empty string
 
     // item: '',
@@ -137,6 +138,7 @@ function PurchaseRequest({ closeModal, rowData }) {
       const combinedData = {
         id: state.id,
         suppliername: state.suppliername,
+        companyemail: state.companyemail,
         targetDeliveryDate: state.targetDeliveryDate,
         items: itemInfoCount,
       }
