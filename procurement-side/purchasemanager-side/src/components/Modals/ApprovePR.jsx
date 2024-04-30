@@ -46,6 +46,7 @@ const ApprovePR = ({ closeModal, row }) => {
         purchaseno,
       })
       setIsApproved(true)
+      window.location.reload()
       closeModal()
     } catch (error) {
       console.error('Error updating status:', error)

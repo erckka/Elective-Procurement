@@ -41,6 +41,7 @@ const RejectPR = ({ isOpen, closeModal, row }) => {
         purchaseno,
       })
       setIsRejected(true)
+      window.location.reload()
       closeModal()
     } catch (error) {
       console.error('Error updating status:', error)
