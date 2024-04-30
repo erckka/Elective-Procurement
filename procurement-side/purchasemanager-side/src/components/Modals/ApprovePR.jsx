@@ -1,10 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import { FaCheck } from 'react-icons/fa'
 import CloseBtn from '../Buttons/CloseBtn'
+import axios from 'axios'
 
 const ApprovePR = ({ closeModal, row }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [isApproved, setIsApproved] = useState(false)
+
+  const {
+    purchaseno,
+    suppliername,
+    targetdeliverydate,
+    ordercreated,
+    itemname,
+    itemdesc,
+    quantity,
+    status,
+  } = row
 
   const openModal = () => {
     setIsOpen(true)
@@ -24,8 +36,20 @@ const ApprovePR = ({ closeModal, row }) => {
     }
   }, [isApproved, closeModal])
 
-  const handleApproveClick = () => {
-    setIsApproved(true)
+  // const handleApproveClick = () => {
+  //   setIsApproved(true)
+  // }
+
+  const handleApproveClick = async () => {
+    try {
+      await axios.post('http://localhost:3001/api/approvedStatus', {
+        purchaseno,
+      })
+      setIsApproved(true)
+      closeModal()
+    } catch (error) {
+      console.error('Error updating status:', error)
+    }
   }
 
   return (

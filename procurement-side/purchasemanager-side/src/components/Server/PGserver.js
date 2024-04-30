@@ -204,7 +204,8 @@ db.connect()
       try {
         // Example query to fetch data from a PostgreSQL table
         const data = await db.any(
-          'SELECT DISTINCT ON (purchaseno) * FROM purchaserequest'
+          'SELECT DISTINCT ON (purchaseno) * FROM purchaserequest WHERE status = $1',
+          ['Pending']
         )
         res.json(data)
       } catch (error) {
@@ -224,6 +225,52 @@ db.connect()
         res.json(itemsData)
       } catch (error) {
         console.error(`Error fetching item data for purchaseno`, error)
+        res.status(500).json({ error: 'Internal Server Error' })
+      }
+    })
+
+    app.post('/api/approvedStatus', async (req, res) => {
+      try {
+        const { purchaseno } = req.body
+
+        // Prepare the update query to set the status to 'Approved'
+        const updateQuery = `
+          UPDATE purchaserequest
+          SET status = 'Approved'
+          WHERE purchaseno = $1
+        `
+
+        // Execute the update query
+        await db.none(updateQuery, [purchaseno])
+
+        res
+          .status(200)
+          .json({ message: 'Status updated to Approved successfully' })
+      } catch (error) {
+        console.error('Error updating status:', error)
+        res.status(500).json({ error: 'Internal Server Error' })
+      }
+    })
+
+    app.post('/api/rejectedStatus', async (req, res) => {
+      try {
+        const { purchaseno } = req.body
+
+        // Prepare the update query to set the status to 'Approved'
+        const updateQuery = `
+          UPDATE purchaserequest
+          SET status = 'Rejected'
+          WHERE purchaseno = $1
+        `
+
+        // Execute the update query
+        await db.none(updateQuery, [purchaseno])
+
+        res
+          .status(200)
+          .json({ message: 'Status updated to Rejected successfully' })
+      } catch (error) {
+        console.error('Error updating status:', error)
         res.status(500).json({ error: 'Internal Server Error' })
       }
     })

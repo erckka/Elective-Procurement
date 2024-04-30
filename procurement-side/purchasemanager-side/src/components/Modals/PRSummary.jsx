@@ -12,8 +12,6 @@ const PRSummary = ({ closeModal, type, row, items }) => {
   const [total, setTotal] = useState(0)
   const [data, setData] = useState([])
 
-  console.log(row)
-
   const {
     purchaseno,
     suppliername,

@@ -1,9 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { FaTimes } from 'react-icons/fa'
 import CloseBtn from '../Buttons/CloseBtn'
+import axios from 'axios'
 
-const RejectPR = ({ isOpen, closeModal }) => {
+const RejectPR = ({ isOpen, closeModal, row }) => {
   const [isRejected, setIsRejected] = useState(false)
+
+  const {
+    purchaseno,
+    suppliername,
+    targetdeliverydate,
+    ordercreated,
+    itemname,
+    itemdesc,
+    quantity,
+    status,
+  } = row
 
   useEffect(() => {
     if (isRejected) {
@@ -19,8 +31,20 @@ const RejectPR = ({ isOpen, closeModal }) => {
     }
   }, [isRejected, closeModal])
 
-  const handleApproveClick = () => {
-    setIsRejected(true)
+  // const handleApproveClick = () => {
+  //   setIsRejected(true)
+  // }
+
+  const handleRejectClick = async () => {
+    try {
+      await axios.post('http://localhost:3001/api/rejectedStatus', {
+        purchaseno,
+      })
+      setIsRejected(true)
+      closeModal()
+    } catch (error) {
+      console.error('Error updating status:', error)
+    }
   }
 
   return (
@@ -39,7 +63,7 @@ const RejectPR = ({ isOpen, closeModal }) => {
         <div className="flex flex-row gap-x-2 py-2">
           <button
             className="bg-yellow-500 w-[5rem] font-bold py-[0.2rem] text-sm rounded "
-            onClick={handleApproveClick}
+            onClick={handleRejectClick}
           >
             Reject
           </button>
