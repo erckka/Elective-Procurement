@@ -167,7 +167,8 @@ db.connect()
 
     app.post('/api/addPR', async (req, res) => {
       try {
-        const { id, suppliername, targetDeliveryDate, items } = req.body
+        const { id, suppliername, companyemail, targetDeliveryDate, items } =
+          req.body
 
         // Get the current date
         const currentDate = new Date()
@@ -175,8 +176,8 @@ db.connect()
         // Example query to insert data into the 'items' table
         const insertQuery = `
         INSERT INTO purchaserequest 
-        (purchaseno, suppliername, targetdeliverydate, ordercreated, itemname, itemdesc, quantity, status)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+        (purchaseno, suppliername, targetdeliverydate, ordercreated, itemname, itemdesc, quantity, status, companyemail)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
       `
 
         // Iterate over items and insert each item into the database
@@ -189,7 +190,8 @@ db.connect()
             item.item,
             item.itemDescription,
             item.quantity,
-            'Pending', // Assuming 'Status' is set to 'Pending' by default
+            'Pending',
+            companyemail,
           ])
         }
 
