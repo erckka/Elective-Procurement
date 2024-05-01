@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { MdEmail } from 'react-icons/md'
 import axios from 'axios'
 
-const Email = ({ closeModal, purchaseNo }) => {
+const Email = ({ closeModal, row }) => {
   const [isLoading, setIsLoading] = React.useState(false)
   const [error, setError] = React.useState(null)
+
+  console.log(row)
 
   const sendEmail = async () => {
     try {
@@ -13,7 +15,10 @@ const Email = ({ closeModal, purchaseNo }) => {
       // Call the API to send the email
       const response = await axios.post(
         'http://localhost:3001/api/sendEmail',
-        {},
+        {
+          purchaseno: row.purchaseno,
+          suppliername: row.suppliername,
+        },
         {
           headers: {
             'Content-Type': 'application/json',

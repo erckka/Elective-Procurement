@@ -15,8 +15,8 @@ const db = pgp({
   host: 'localhost',
   user: 'postgres',
   port: 5432,
-  // password: 'password123',
-  password: 'database',
+  password: 'password123',
+  // password: 'database',
   database: 'postgres',
 })
 
@@ -300,65 +300,6 @@ db.connect()
     //   },
     // })
 
-    // app.post('/api/sendEmail', async (req, res) => {
-    //   try {
-    //     const { purchaseno } = req.body
-
-    //     // Fetch data related to the purchase request
-    //     const data = await db.any(
-    //       'SELECT DISTINCT ON (purchaseno) * FROM purchaserequest WHERE purchaseno = $1',
-    //       purchaseno
-    //     )
-
-    //     // Prepare email content
-    //     const mailOptions = {
-    //       from: 'trifecta1611@gmail.com',
-    //       to: 'erickahannah.delacruz@gmail.com', // Change this to the appropriate recipient email address
-    //       subject: 'New Purchase Order: [Purchase Request Number]',
-    //       text: `Dear Supplier,
-
-    //     We hope this message finds you well.
-
-    //     We are reaching out to inform you that we have initiated a new purchase order with the following details:
-
-    //     Purchase Request Number: [Purchase Request Number]
-
-    //     Items:
-    //     - [Item 1]: [Quantity]
-    //     - [Item 2]: [Quantity]
-    //     - [Item 3]: [Quantity]
-    //       ...
-    //       (List all items and their respective quantities)
-
-    //     As part of our standard procedure, we kindly request that you provide us with the corresponding invoice detailing the prices for the above items. Please ensure that the invoice includes all relevant information and any applicable taxes or fees.
-
-    //     We appreciate your prompt attention to this matter and look forward to receiving the invoice at your earliest convenience.
-
-    //     If you have any questions or need further clarification, please don't hesitate to contact us.
-
-    //     Thank you for your cooperation.
-
-    //     Sincerely,
-    //     [Your Company Name]`,
-    //       html: '<p>HTML content</p>', // Add the HTML content
-    //     }
-
-    //     // Send email
-    //     transporter.sendMail(mailOptions, function (error, info) {
-    //       if (error) {
-    //         console.error('Error sending email:', error) // Log the error
-    //         res.status(500).json({ error: 'Failed to send email' })
-    //       } else {
-    //         console.log('Email sent: ' + info.response)
-    //         res.status(200).json({ message: 'Email sent successfully' })
-    //       }
-    //     })
-    //   } catch (error) {
-    //     console.error('Error sending email:', error)
-    //     res.status(500).json({ error: 'Internal Server Error' })
-    //   }
-    // })
-
     const transporter = nodemailer.createTransport({
       service: 'gmail', // Use the correct service name
       host: 'smtp.gmail.com',
@@ -368,30 +309,116 @@ db.connect()
         pass: 'vpculguarmwostue',
       },
     })
-    app.post('/api/sendEmail', (req, res) => {
-      const mailOptions = {
-        from: 'trifecta1611@gmail.com',
-        to: 'erickahannah.delacruz@gmail.com',
-        subject: 'Test Email: Hello from Your Company',
-        text: `Hello,
+    app.post('/api/sendEmail', async (req, res) => {
+      try {
+        const { purchaseno, suppliername } = req.body
 
-        This is a test email from Your Company. We are testing the email sending functionality.
+        // Fetch data related to the purchase request
+        const data = await db.any(
+          'SELECT DISTINCT ON (purchaseno) * FROM purchaserequest WHERE purchaseno = $1',
+          purchaseno
+        )
 
-        Thank you.`,
-        html: '<p>Hello,<br><br>This is a test email from Your Company. We are testing the email sending functionality.<br><br>Thank you.</p>',
-      }
+        // Fetch item names and quantities associated with the purchase request
+        const items = await db.any(
+          'SELECT itemname, quantity FROM purchaserequest WHERE purchaseno = $1',
+          purchaseno
+        )
 
-      // Send the email
-      transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-          console.error('Error sending email:', error)
-          res.status(500).json({ error: 'Failed' })
-        } else {
-          console.log('Email sent: ' + info.response)
-          res.status(200).json({ message: 'Email sent successfully' })
+        // Prepare email content
+        let itemsList = ''
+        items.forEach((item) => {
+          itemsList += `${item.itemname}: ${item.quantity}\n          `
+        })
+
+        // Prepare email content
+        const mailOptions = {
+          from: 'trifecta1611@gmail.com',
+          to: 'erickahannah.delacruz@gmail.com', // Change this to the appropriate recipient email address
+          subject: 'New Purchase Order: ' + purchaseno,
+          html: `
+            <p>Dear ${suppliername},</p>
+            <p>We hope this message finds you well.</p>
+            <p>We are reaching out to inform you that we have initiated a new purchase order with the following details:</p>
+            <p>Purchase Request Number: ${purchaseno}</p>
+            <p>Items:</p>
+            <table border="1">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${items
+                  .map(
+                    (item) => `
+                  <tr>
+                    <td>${item.itemname}</td>
+                    <td>${item.quantity}</td>
+                  </tr>
+                `
+                  )
+                  .join('')}
+              </tbody>
+            </table>
+            <p>As part of our standard procedure, we kindly request that you provide us with the <strong>corresponding invoice detailing the prices for the above items.</strong> Please ensure that the invoice includes all relevant information and any applicable taxes or fees.</p>
+            <p>We appreciate your prompt attention to this matter and look forward to receiving the invoice at your earliest convenience.</p>
+            <p>If you have any questions or need further clarification, please don't hesitate to contact us.</p>
+            <p>Thank you for your cooperation.</p>
+            <p>Sincerely,</p>
+          `,
         }
-      })
+
+        // Send email
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.error('Error sending email:', error) // Log the error
+            res.status(500).json({ error: 'Failed to send email' })
+          } else {
+            console.log('Email sent: ' + info.response)
+            res.status(200).json({ message: 'Email sent successfully' })
+          }
+        })
+      } catch (error) {
+        console.error('Error sending email:', error)
+        res.status(500).json({ error: 'Internal Server Error' })
+      }
     })
+
+    // const transporter = nodemailer.createTransport({
+    //   service: 'gmail', // Use the correct service name
+    //   host: 'smtp.gmail.com',
+    //   port: 465, // Specify the port number here
+    //   auth: {
+    //     user: 'trifecta1611@gmail.com',
+    //     pass: 'vpculguarmwostue',
+    //   },
+    // })
+    // app.post('/api/sendEmail', (req, res) => {
+    //   const mailOptions = {
+    //     from: 'trifecta1611@gmail.com',
+    //     to: 'erickahannah.delacruz@gmail.com',
+    //     subject: 'Test Email: Hello from Your Company',
+    //     text: `Hello,
+
+    //     This is a test email from Your Company. We are testing the email sending functionality.
+
+    //     Thank you.`,
+    //     html: '<p>Hello,<br><br>This is a test email from Your Company. We are testing the email sending functionality.<br><br>Thank you.</p>',
+    //   }
+
+    //   // Send the email
+    //   transporter.sendMail(mailOptions, function (error, info) {
+    //     if (error) {
+    //       console.error('Error sending email:', error)
+    //       res.status(500).json({ error: 'Failed' })
+    //     } else {
+    //       console.log('Email sent: ' + info.response)
+    //       res.status(200).json({ message: 'Email sent successfully' })
+    //     }
+    //   })
+    // })
 
     // Start the Express server
     const PORT = process.env.PORT || 3001
@@ -402,3 +429,33 @@ db.connect()
   .catch((error) => {
     console.error('Error connecting to the database:', error)
   })
+
+// - [Item 2]: [Quantity]
+// - [Item 3]: [Quantity]
+//   ...
+//   (List all items and their respective quantities)
+
+// text: `Dear Supplier,
+
+//         We hope this message finds you well.
+
+//         We are reaching out to inform you that we have initiated a new purchase order with the following details:
+
+//         Purchase Request Number: ${purchaseno}
+
+//         Items:
+
+//         ${itemsList}
+
+//         As part of our standard procedure, we kindly request that you provide us with the corresponding invoice detailing the prices for the above items. Please ensure that the invoice includes all relevant information and any applicable taxes or fees.
+
+//         We appreciate your prompt attention to this matter and look forward to receiving the invoice at your earliest convenience.
+
+//         If you have any questions or need further clarification, please don't hesitate to contact us.
+
+//         Thank you for your cooperation.
+
+//         Sincerely,
+//         `,
+//           // html: '<p>HTML content</p>', // Add the HTML content
+//         }
