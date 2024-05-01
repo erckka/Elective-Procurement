@@ -15,8 +15,8 @@ const db = pgp({
   host: 'localhost',
   user: 'postgres',
   port: 5432,
-  // password: 'password123',
-  password: 'database',
+  password: 'password123',
+  // password: 'database',
   database: 'postgres',
 })
 
@@ -296,8 +296,8 @@ db.connect()
       try {
         // Example query to fetch data from a PostgreSQL table
         const data = await db.any(
-          'SELECT DISTINCT ON (purchaseno) * FROM purchaserequest WHERE status = $1',
-          ['Approved']
+          'SELECT DISTINCT ON (purchaseno) * FROM purchaserequest WHERE status = $1 OR status = $2',
+          ['Approved', 'Pending']
         )
         res.json(data)
       } catch (error) {
