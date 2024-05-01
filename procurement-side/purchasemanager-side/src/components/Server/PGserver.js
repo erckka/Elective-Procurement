@@ -166,6 +166,20 @@ db.connect()
       }
     })
 
+    app.delete('/api/deleteSupplier/', async (req, res) => {
+      try {
+        const { supplierId } = req.params
+
+        // Delete the supplier from the database
+        await db.none('DELETE FROM supplier WHERE supplierid = $1', supplierId)
+
+        res.status(200).json({ message: 'Supplier deleted successfully' })
+      } catch (error) {
+        console.error('Error deleting supplier:', error)
+        res.status(500).json({ error: 'Internal Server Error' })
+      }
+    })
+
     app.post('/api/addPR', async (req, res) => {
       try {
         const { id, suppliername, companyemail, targetDeliveryDate, items } =
@@ -299,6 +313,65 @@ db.connect()
     //     user: 'trifecta1611@gmail.com',
     //     pass: 'vpculguarmwostue',
     //   },
+    // })
+
+    // app.post('/api/sendEmail', async (req, res) => {
+    //   try {
+    //     const { purchaseno } = req.body
+
+    //     // Fetch data related to the purchase request
+    //     const data = await db.any(
+    //       'SELECT DISTINCT ON (purchaseno) * FROM purchaserequest WHERE purchaseno = $1',
+    //       purchaseno
+    //     )
+
+    //     // Prepare email content
+    //     const mailOptions = {
+    //       from: 'trifecta1611@gmail.com',
+    //       to: 'erickahannah.delacruz@gmail.com', // Change this to the appropriate recipient email address
+    //       subject: 'New Purchase Order: [Purchase Request Number]',
+    //       text: `Dear Supplier,
+
+    //     We hope this message finds you well.
+
+    //     We are reaching out to inform you that we have initiated a new purchase order with the following details:
+
+    //     Purchase Request Number: [Purchase Request Number]
+
+    //     Items:
+    //     - [Item 1]: [Quantity]
+    //     - [Item 2]: [Quantity]
+    //     - [Item 3]: [Quantity]
+    //       ...
+    //       (List all items and their respective quantities)
+
+    //     As part of our standard procedure, we kindly request that you provide us with the corresponding invoice detailing the prices for the above items. Please ensure that the invoice includes all relevant information and any applicable taxes or fees.
+
+    //     We appreciate your prompt attention to this matter and look forward to receiving the invoice at your earliest convenience.
+
+    //     If you have any questions or need further clarification, please don't hesitate to contact us.
+
+    //     Thank you for your cooperation.
+
+    //     Sincerely,
+    //     [Your Company Name]`,
+    //       html: '<p>HTML content</p>', // Add the HTML content
+    //     }
+
+    //     // Send email
+    //     transporter.sendMail(mailOptions, function (error, info) {
+    //       if (error) {
+    //         console.error('Error sending email:', error) // Log the error
+    //         res.status(500).json({ error: 'Failed to send email' })
+    //       } else {
+    //         console.log('Email sent: ' + info.response)
+    //         res.status(200).json({ message: 'Email sent successfully' })
+    //       }
+    //     })
+    //   } catch (error) {
+    //     console.error('Error sending email:', error)
+    //     res.status(500).json({ error: 'Internal Server Error' })
+    //   }
     // })
 
     const transporter = nodemailer.createTransport({
