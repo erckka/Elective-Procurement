@@ -145,7 +145,9 @@ const PRStatus = () => {
 
   return (
     <div className="mx-2 ml-6 mt-6 md:mx-6 md:ml-[6rem] lg:mx-36 ">
-      {isEmailModalOpen && <EmailModal closeModal={closeModal} />}
+      {isEmailModalOpen && (
+        <EmailModal closeModal={closeModal} type="Email" row={selectedRow} />
+      )}
       {isPRSummaryModalOpen && (
         <PRSummary
           closeModal={closeModal}

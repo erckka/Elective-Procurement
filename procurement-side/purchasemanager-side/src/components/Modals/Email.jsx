@@ -1,11 +1,37 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { MdEmail } from 'react-icons/md'
+import axios from 'axios'
 
-const Email = ({ closeModal }) => {
-  const [isOpen, setIsOpen] = React.useState(false)
+const Email = ({ closeModal, purchaseNo }) => {
+  const [isLoading, setIsLoading] = React.useState(false)
+  const [error, setError] = React.useState(null)
 
-  const openModal = () => {
-    setIsOpen(true)
+  const sendEmail = async () => {
+    try {
+      setIsLoading(true)
+
+      // Call the API to send the email
+      const response = await axios.post(
+        'http://localhost:3001/api/sendEmail',
+        {},
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+
+      if (!response.data || response.data.error) {
+        throw new Error('Failed to send')
+      }
+
+      closeModal() // Close the modal if email is sent successfully
+    } catch (error) {
+      console.error('Error sending email:', error)
+      setError('Failed to send')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -19,11 +45,18 @@ const Email = ({ closeModal }) => {
           className=" rounded-sm  h-16 mt-4 my-4 cursor-pointer"
         />
         <h1 className="font-bold text-center text-[9px] my-2">
-          This will send an email to supplier{' '}
+          This will send an email to the supplier{' '}
         </h1>
+        {error && <p className="text-red-500">{error}</p>}
         <div className="flex flex-row gap-x-2 py-2">
-          <button className="bg-green-500 w-[5rem] font-bold py-[0.2rem] text-[12px]">
-            Proceed
+          <button
+            className={`bg-green-500 w-[5rem] font-bold py-[0.2rem] text-[12px] ${
+              isLoading && 'opacity-50 cursor-not-allowed'
+            }`}
+            onClick={sendEmail}
+            disabled={isLoading}
+          >
+            {isLoading ? 'Sending...' : 'Proceed'}
           </button>
           <button
             className="bg-red-500 w-[5rem] font-bold rounded-sm text-[12px]"

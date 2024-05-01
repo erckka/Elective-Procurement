@@ -5,6 +5,7 @@ import cors from 'cors'
 // import fs from 'fs'
 // import csvParser from 'csv-parser'
 // import path from 'path'
+import nodemailer from 'nodemailer'
 
 const app = express()
 const pgp = pgPromise()
@@ -290,29 +291,106 @@ db.connect()
       }
     })
 
-    var nodemailer = require('nodemailer')
+    // Define the transporter outside the route handler
+    // const transporter = nodemailer.createTransport({
+    //   service: 'gmail', // Use the correct service name
+    //   auth: {
+    //     user: 'trifecta1611@gmail.com',
+    //     pass: 'vpculguarmwostue',
+    //   },
+    // })
 
-    var transporter = nodemailer.createTransport({
-      service: 'gmail',
+    // app.post('/api/sendEmail', async (req, res) => {
+    //   try {
+    //     const { purchaseno } = req.body
+
+    //     // Fetch data related to the purchase request
+    //     const data = await db.any(
+    //       'SELECT DISTINCT ON (purchaseno) * FROM purchaserequest WHERE purchaseno = $1',
+    //       purchaseno
+    //     )
+
+    //     // Prepare email content
+    //     const mailOptions = {
+    //       from: 'trifecta1611@gmail.com',
+    //       to: 'erickahannah.delacruz@gmail.com', // Change this to the appropriate recipient email address
+    //       subject: 'New Purchase Order: [Purchase Request Number]',
+    //       text: `Dear Supplier,
+
+    //     We hope this message finds you well.
+
+    //     We are reaching out to inform you that we have initiated a new purchase order with the following details:
+
+    //     Purchase Request Number: [Purchase Request Number]
+
+    //     Items:
+    //     - [Item 1]: [Quantity]
+    //     - [Item 2]: [Quantity]
+    //     - [Item 3]: [Quantity]
+    //       ...
+    //       (List all items and their respective quantities)
+
+    //     As part of our standard procedure, we kindly request that you provide us with the corresponding invoice detailing the prices for the above items. Please ensure that the invoice includes all relevant information and any applicable taxes or fees.
+
+    //     We appreciate your prompt attention to this matter and look forward to receiving the invoice at your earliest convenience.
+
+    //     If you have any questions or need further clarification, please don't hesitate to contact us.
+
+    //     Thank you for your cooperation.
+
+    //     Sincerely,
+    //     [Your Company Name]`,
+    //       html: '<p>HTML content</p>', // Add the HTML content
+    //     }
+
+    //     // Send email
+    //     transporter.sendMail(mailOptions, function (error, info) {
+    //       if (error) {
+    //         console.error('Error sending email:', error) // Log the error
+    //         res.status(500).json({ error: 'Failed to send email' })
+    //       } else {
+    //         console.log('Email sent: ' + info.response)
+    //         res.status(200).json({ message: 'Email sent successfully' })
+    //       }
+    //     })
+    //   } catch (error) {
+    //     console.error('Error sending email:', error)
+    //     res.status(500).json({ error: 'Internal Server Error' })
+    //   }
+    // })
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail', // Use the correct service name
+      host: 'smtp.gmail.com',
+      port: 465, // Specify the port number here
       auth: {
         user: 'trifecta1611@gmail.com',
-        pass: 'faorozfyegilspme ',
+        pass: 'vpculguarmwostue',
       },
     })
+    app.post('/api/sendEmail', (req, res) => {
+      const mailOptions = {
+        from: 'trifecta1611@gmail.com',
+        to: 'erickahannah.delacruz@gmail.com',
+        subject: 'Test Email: Hello from Your Company',
+        text: `Hello,
 
-    var mailOptions = {
-      from: 'trifecta1611@gmail.com',
-      to: 'myfriend@yahoo.com',
-      subject: 'Purchase Request',
-      text: 'This is Trifecta',
-    }
+        This is a test email from Your Company. We are testing the email sending functionality.
 
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error)
-      } else {
-        console.log('Email sent: ' + info.response)
+        Thank you.`,
+        html: '<p>Hello,<br><br>This is a test email from Your Company. We are testing the email sending functionality.<br><br>Thank you.</p>',
       }
+
+      // Send the email
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.error('Error sending email:', error)
+          res.status(500).json({ error: 'Failed' })
+        } else {
+          console.log('Email sent: ' + info.response)
+          res.status(200).json({ message: 'Email sent successfully' })
+        }
+      })
     })
 
     // Start the Express server
