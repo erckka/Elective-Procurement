@@ -282,7 +282,8 @@ db.connect()
       try {
         // Example query to fetch data from a PostgreSQL table
         const data = await db.any(
-          'SELECT DISTINCT ON (purchaseno) * FROM purchaserequest'
+          'SELECT DISTINCT ON (purchaseno) * FROM purchaserequest WHERE status = $1',
+          ['Approved']
         )
         res.json(data)
       } catch (error) {
