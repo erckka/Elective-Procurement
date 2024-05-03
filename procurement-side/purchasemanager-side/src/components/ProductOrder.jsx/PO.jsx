@@ -20,18 +20,24 @@ const PO = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3001/api/dataProductStatus'
+          'http://localhost:3001/api/dataPurchaseOrder'
         )
         // Map the response data to extract only required fields
         const mappedData = response.data.map((data) => ({
-          purchaseno: data.purchaseno,
+          purchaseordernum: data.purchaseordernum,
           suppliername: data.suppliername,
-          targetdeliverydate: data.targetdeliverydate,
+          targetdeliverydate: formatDate(data.targetdeliverydate),
           ordercreated: formatDate(data.ordercreated),
-          itemname: data.itemname,
-          itemdesc: data.itemdesc,
+          item: data.item,
+          itemdescription: data.itemdescription,
           quantity: data.quantity,
+          statusPO: data.status,
+          unitprice: data.unitprice,
+          totalamount: data.totalamount,
+          invoiceno: data.invoiceno,
           status: data.status,
+          orderreceived: formatDate(data.orderreceived),
+          orderpaid: formatDate(data.orderpaid),
         }))
         setData(mappedData)
         console.log(mappedData)
@@ -93,7 +99,7 @@ const PO = () => {
   const columns = [
     {
       name: 'PO#',
-      selector: (row) => row.purchaseno,
+      selector: (row) => row.purchaseordernum,
       sortable: true,
     },
     {
@@ -101,35 +107,36 @@ const PO = () => {
       selector: (row) => row.suppliername,
       sortable: true,
     },
-    {
-      name: 'Invoice No.',
-      cell: (row, index) => (
-        <input
-          type="number"
-          // value={row.OrderCreated}
-          onChange={(e) => handleInvoiceChange(index, e)}
-          className="h-8 px-2 border rounded-md focus:outline-none w-[7rem] focus:ring focus:ring-blue-300"
-        />
-      ),
-      sortable: true,
-    },
+    // {
+    //   name: 'Invoice No.',
+    //   cell: (row, index) => (
+    //     <input
+    //       type="number"
+    //       // value={row.OrderCreated}
+    //       onChange={(e) => handleInvoiceChange(index, e)}
+    //       className="h-8 px-2 border rounded-md focus:outline-none w-[7rem] focus:ring focus:ring-blue-300"
+    //     />
+    //   ),
+    //   sortable: true,
+    // },
     {
       name: 'Status',
-      cell: (row, index) => (
-        <div style={{ width: '120px' }}>
-          {' '}
-          {/* Adjust the width value as needed */}
-          <Select
-            options={statusOptions}
-            // value={statusOptions.find((option) => option.value)}
-            value={status}
-            onChange={(selectedOption) =>
-              handleStatusChange(index, selectedOption)
-            }
-            menuPosition="fixed" // Fix the dropdown menu position
-          />
-        </div>
-      ),
+      // cell: (row, index) => (
+      //   <div style={{ width: '120px' }}>
+      //     {' '}
+      //     {/* Adjust the width value as needed */}
+      //     <Select
+      //       options={statusOptions}
+      //       // value={statusOptions.find((option) => option.value)}
+      //       value={status}
+      //       onChange={(selectedOption) =>
+      //         handleStatusChange(index, selectedOption)
+      //       }
+      //       menuPosition="fixed" // Fix the dropdown menu position
+      //     />
+      //   </div>
+      // ),
+      selector: (row) => row.status,
       sortable: true,
     },
 
@@ -149,7 +156,11 @@ const PO = () => {
   return (
     <div className="mx-2 mt-6">
       {isPRSummaryModalOpen && (
-        <PRSummary closeModal={closeModal} type="PurchaseOrder" />
+        <PRSummary
+          closeModal={closeModal}
+          type="PurchaseOrder"
+          row={selectedRow}
+        />
       )}
       <div className="flex justify-center text-center whitespace-nowrap mt-12 my-4 font-bold">
         Purchase Order
