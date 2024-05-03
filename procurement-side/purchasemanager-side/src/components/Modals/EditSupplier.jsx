@@ -31,7 +31,7 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
     }
   }
   const handleDelete = () => {
-    setIsDeleteModalOpen(true) // Show the DeleteS modal
+    setIsDeleteModalOpen(true)
   }
   const handleDeleteSupplier = async () => {
     try {
