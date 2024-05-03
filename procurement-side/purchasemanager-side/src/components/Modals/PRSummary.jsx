@@ -14,7 +14,7 @@ const PRSummary = ({ closeModal, type, row, items }) => {
   const [selectedStatus, setSelectedStatus] = useState(row.status || 'Pending')
   const [invoicenum, setInvoicenum] = useState(row.invoiceno || '')
   const [selectedDate, setSelectedDate] = useState(null)
-  const [currentSelectedDate, setCurrentSelectedDate] = useState(null)
+  const [receivedDate, setReceivedDate] = useState(null)
 
   const {
     purchaseno,
@@ -35,8 +35,6 @@ const PRSummary = ({ closeModal, type, row, items }) => {
     orderreceived,
     orderpaid,
   } = row
-
-  console.log(invoicenum)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,13 +72,23 @@ const PRSummary = ({ closeModal, type, row, items }) => {
     setIsOpen(true)
   }
 
-  const handleDateChange = (date) => {
+  const handleOrderPaidDateChange = (date) => {
     setSelectedDate(date)
-    if (date !== null) {
-      setSelectedStatus('Paid')
-    }
-    console.log('Selected Date:', date) // Add this line
+    setSelectedStatus('Paid')
   }
+
+  const handleOrderReceivedDateChange = (date) => {
+    setReceivedDate(date)
+    setSelectedStatus('Received')
+  }
+
+  useEffect(() => {
+    console.log('Selected Date:', selectedDate)
+  }, [selectedDate])
+
+  useEffect(() => {
+    console.log('Selected Date:', receivedDate)
+  }, [receivedDate])
 
   const nextEntry = () => {
     if (currentIndex < PRdata.length - 1) {
@@ -101,8 +109,8 @@ const PRSummary = ({ closeModal, type, row, items }) => {
   }
 
   const handleInputChange = (index, value) => {
-    const updatedItems = [...data] // Assuming data contains the items
-    updatedItems[index].unitprice = value // Update the unit price
+    const updatedItems = [...data]
+    updatedItems[index].unitprice = value
     setData(updatedItems)
   }
 
@@ -116,22 +124,14 @@ const PRSummary = ({ closeModal, type, row, items }) => {
     setTotal(0)
   }, [currentIndex, type])
 
-  useEffect(() => {
-    if (selectedStatus === 'Received') {
-      const currentDate = new Date()
-      setCurrentSelectedDate(currentDate)
-      console.log('Current Date:', currentSelectedDate)
-    }
-  }, [selectedStatus])
-
   const handleSave = async () => {
     try {
-      // let currentDate
-
-      // if (selectedStatus === 'Received') {
-      //   setCurrentSelectedDate(new Date())
-      //   console.log('Current Date:', currentSelectedDate)
-      // }
+      const adjustedSelectedDate = selectedDate
+        ? new Date(selectedDate.getTime() + 24 * 60 * 60 * 1000)
+        : orderpaid
+      const adjustedReceivedDate = receivedDate
+        ? new Date(receivedDate.getTime() + 24 * 60 * 60 * 1000)
+        : orderreceived
 
       const response = await axios.post(
         'http://localhost:3001/api/addPurchaseOrderInfo',
@@ -144,12 +144,11 @@ const PRSummary = ({ closeModal, type, row, items }) => {
             unitprice: item.unitprice,
           })),
           totalcost: totalAmount(),
-          orderreceived: currentSelectedDate,
-          orderpaid: selectedDate,
+          orderreceived: adjustedReceivedDate,
+          orderpaid: adjustedSelectedDate,
         }
       )
       console.log(response.data)
-      // Close modal or show success message
       closeModal()
       window.location.reload()
     } catch (error) {
@@ -187,14 +186,15 @@ const PRSummary = ({ closeModal, type, row, items }) => {
                 <h1 className="font-semibold flex items-center">Order Paid:</h1>
                 <DatePicker
                   selected={selectedDate}
-                  onChange={handleDateChange}
+                  onChange={handleOrderPaidDateChange}
                   value={
                     orderpaid !== '01-01-1970' ? orderpaid : '' || selectedDate
                   }
                   // value={orderpaid || selectedDate}
-                  dateFormat="dd-MM-yyyy"
+                  dateFormat="MM-dd-yyyy"
                   minDate={new Date()}
                   placeholderText="Select a date"
+                  disabled={orderpaid !== '01-01-1970'}
                   className="  w-28 flex justify-center items-center rounded py-1 px-2 border border-blue-500"
                 />{' '}
               </div>
@@ -202,25 +202,27 @@ const PRSummary = ({ closeModal, type, row, items }) => {
             {type === 'PurchaseOrder' && (
               <div className="pt-1 px-4   grid grid-cols-2">
                 <h1 className="font-semibold ">Order Received:</h1>
-                <h1 className="font-light mb-2 ml-2">
-                  {orderreceived !== '01-01-1970' ? orderreceived : ''}
+                <h1 className="font-light mb-2 ">
+                  {/* {orderreceived !== '01-01-1970' ? orderreceived : ''} */}
+                  <DatePicker
+                    selected={receivedDate}
+                    onChange={handleOrderReceivedDateChange}
+                    value={
+                      orderreceived !== '01-01-1970'
+                        ? orderreceived
+                        : '' || receivedDate
+                    }
+                    // value={orderpaid || selectedDate}
+                    dateFormat="MM-dd-yyyy"
+                    minDate={new Date()}
+                    placeholderText="Select a date"
+                    disabled={
+                      orderreceived !== '01-01-1970' ||
+                      orderpaid === '01-01-1970'
+                    }
+                    className="  w-28 flex justify-center items-center rounded py-1 px-2 border border-blue-500"
+                  />{' '}
                 </h1>
-              </div>
-            )}
-            {type === 'PurchaseOrder' && (
-              <div className="pt-2 px-4   grid grid-cols-2">
-                <h1 className="font-semibold flex items-center">Status:</h1>
-                {/* <h1 className="font-light mb-2 ml-2">33</h1> */}
-                <select
-                  className="border border-blue-500 rounded p-1 w-[100px] "
-                  defaultValue={status}
-                  onChange={(e) => setSelectedStatus(e.target.value)}
-                  // disabled={orderpaid !== '01-01-1970'}
-                >
-                  <option value="Pending">Pending</option>
-                  <option value="Paid">Paid</option>
-                  <option value="Received">Received</option>
-                </select>
               </div>
             )}
             {type === 'PurchaseOrder' && (

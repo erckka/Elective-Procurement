@@ -38,6 +38,7 @@ const Email = ({ closeModal, row }) => {
       }
 
       closeModal() // Close the modal if email is sent successfully
+      window.location.reload()
     } catch (error) {
       console.error('Error sending email:', error)
       setError('Failed to send')
