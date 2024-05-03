@@ -166,7 +166,7 @@ db.connect()
       }
     })
 
-    app.delete('/api/deleteSupplier/', async (req, res) => {
+    app.delete('/api/deleteSupplier/:supplierId', async (req, res) => {
       try {
         const { supplierId } = req.params
 

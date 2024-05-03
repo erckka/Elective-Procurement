@@ -33,6 +33,20 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
   const handleDelete = () => {
     setIsDeleteModalOpen(true) // Show the DeleteS modal
   }
+  const handleDeleteSupplier = async () => {
+    try {
+      // Make an HTTP DELETE request to delete the supplier
+      const response = await axios.delete(
+        `http://localhost:3001/api/deleteSupplier/${selectedSupplier.id}`
+      )
+      console.log(response.data) // Log the response from the backend
+      // Handle any success message or logic here
+      closeModal() // Close the modal after successful delete
+    } catch (error) {
+      console.error('Error deleting supplier:', error)
+      // Handle error if delete operation fails
+    }
+  }
 
   const handleDiscardChanges = () => {
     setFormData(initialData)
@@ -193,11 +207,7 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
         <DeleteSupplier
           isOpen={isDeleteModalOpen}
           closeModal={() => setIsDeleteModalOpen(false)}
-          onDelete={() => {
-            // Handle delete logic here
-            // Once delete is successful, you can close the modal
-            setIsDeleteModalOpen(false)
-          }}
+          onDelete={handleDeleteSupplier} // Call handleDeleteSupplier function
         />
       )}
     </div>

@@ -1,28 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import { FaTimes } from 'react-icons/fa'
 import CloseBtn from '../Buttons/CloseBtn'
-import axios from 'axios' // Import axios
+import axios from 'axios'
 
-const DeleteS = ({ isOpen, closeModal }) => {
+const DeleteS = ({ isOpen, closeModal, supplierId }) => {
   const [isProceed, setIsProceed] = useState(false)
 
   useEffect(() => {
     const deleteSupplier = async () => {
       try {
         if (isProceed) {
-          // Call the delete supplier API
           const response = await axios.delete(
-            'http://localhost:3001/api/deleteSupplier', // Replace 1001 with the actual supplier ID
+            `http://localhost:3001/api/deleteSupplier/${supplierId}`,
             {
               headers: {
                 'Content-Type': 'application/json',
               },
             }
           )
-          if (!response.ok) {
+          if (response.status !== 200) {
             throw new Error('Failed to delete supplier')
           }
-          setIsDeleted(true)
           closeModal()
         }
       } catch (error) {
@@ -31,8 +29,10 @@ const DeleteS = ({ isOpen, closeModal }) => {
       }
     }
 
-    deleteSupplier()
-  }, [isProceed, closeModal])
+    if (isOpen && isProceed) {
+      deleteSupplier()
+    }
+  }, [isOpen, isProceed, closeModal, supplierId])
 
   return (
     <>
