@@ -29,6 +29,7 @@ const PRStatus = () => {
           itemdesc: data.itemdesc,
           quantity: data.quantity,
           status: data.status,
+          companyemail: data.companyemail,
         }))
         setData(mappedData)
         console.log(mappedData)

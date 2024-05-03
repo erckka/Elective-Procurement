@@ -18,6 +18,13 @@ const Email = ({ closeModal, row }) => {
         {
           purchaseno: row.purchaseno,
           suppliername: row.suppliername,
+          targetdeliverydate: row.targetdeliverydate,
+          ordercreated: formatDate(row.ordercreated),
+          itemname: row.itemname,
+          itemdesc: row.itemdesc,
+          quantity: row.quantity,
+          status: row.status,
+          companyemail: row.companyemail,
         },
         {
           headers: {
@@ -37,6 +44,14 @@ const Email = ({ closeModal, row }) => {
     } finally {
       setIsLoading(false)
     }
+  }
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString)
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const day = date.getDate().toString().padStart(2, '0')
+    const year = date.getFullYear()
+    return `${month}-${day}-${year}`
   }
 
   return (

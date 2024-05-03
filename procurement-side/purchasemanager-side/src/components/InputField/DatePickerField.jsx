@@ -2,7 +2,7 @@ import React from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-const DatePickerField = ({ selectedDate, handleDateChange }) => {
+const DatePickerField = ({ selectedDate, handleDateChange, value }) => {
   return (
     <div className="pt-1 px-4 ">
       <DatePicker
@@ -12,6 +12,7 @@ const DatePickerField = ({ selectedDate, handleDateChange }) => {
         minDate={new Date()}
         placeholderText="Select a date"
         className="w-full"
+        value={value}
       />
     </div>
   )

@@ -77,6 +77,9 @@ export default function InputField({ type, value, onChange, disabled }) {
   } else if (type === 'Unit Price') {
     htmlForValue = 'unitPrice'
     inputType = 'number'
+  } else if (type === 'Invoice Number') {
+    htmlForValue = 'invoiceno'
+    inputType = 'number'
   }
 
   return (
@@ -95,7 +98,8 @@ export default function InputField({ type, value, onChange, disabled }) {
             id={htmlForValue}
             name={htmlForValue}
             onChange={(e) => onChange(e)}
-            className="border px-2 text-sm rounded  py-1 mt-[-5px] focus:outline-none focus:border-blue-500 w-24"
+            value={value}
+            className="border px-2 text-sm rounded  py-1 mt-[-5px] focus:outline-none focus:border-blue-500 w-24 text-center"
           />
         </div>
       )}
