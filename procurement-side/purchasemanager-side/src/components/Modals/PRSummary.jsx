@@ -215,7 +215,7 @@ const PRSummary = ({ closeModal, type, row, items }) => {
                   className="border border-blue-500 rounded p-1 w-[100px] "
                   defaultValue={status}
                   onChange={(e) => setSelectedStatus(e.target.value)}
-                  disabled={orderpaid !== '01-01-1970'}
+                  // disabled={orderpaid !== '01-01-1970'}
                 >
                   <option value="Pending">Pending</option>
                   <option value="Paid">Paid</option>
