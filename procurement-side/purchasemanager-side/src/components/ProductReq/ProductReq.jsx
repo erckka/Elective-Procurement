@@ -140,8 +140,7 @@ const ProductReq = (type) => {
           columns={columns}
           data={data}
           pagination
-          paginationPerPage={10}
-          paginationRowsPerPageOptions={[10, 15]}
+          paginationRowsPerPageOptions={[5, 8]}
           customStyles={customStyles}
         />
       </div>

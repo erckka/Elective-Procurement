@@ -128,6 +128,7 @@ const Row_supplier = () => {
         selectableRows={false}
         selectableRowsVisible={false}
         pagination
+        paginationRowsPerPageOptions={[5, 8]}
         paginationPosition="bottom"
         className=" rounded-lg shadow-sm"
         customStyles={customStyles}

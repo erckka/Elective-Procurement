@@ -4,6 +4,8 @@ import PRdata from '../ProductReq/PRdata'
 import { PiDotsThreeDuotone } from 'react-icons/pi'
 import PRSummary from '../Modals/PRSummary'
 import Select from 'react-select'
+import { MdDelete } from 'react-icons/md'
+
 import axios from 'axios'
 
 const PO = () => {
@@ -148,6 +150,10 @@ const PO = () => {
             className="bg-gray-700 text-white text-[18px] rounded-sm shadow-sm w-auto h-6 lg:h-6 p-[0.2rem] cursor-pointer"
             onClick={() => openPRSummary(row)}
           />
+          <MdDelete
+            className="bg-red-700 text-white text-[18px] rounded-sm shadow-sm w-auto h-6 lg:h-6 p-[0.2rem] cursor-pointer"
+            onClick={() => openPRSummary(row)}
+          />
         </div>
       ),
     },
@@ -172,8 +178,9 @@ const PO = () => {
           data={data}
           pagination
           paginationPerPage={8}
-          paginationRowsPerPageOptions={[10, 15]}
+          paginationRowsPerPageOptions={[5, 8]}
           customStyles={customStyles}
+          searchable={true}
 
           // customStyles={{
           //   headRow: {

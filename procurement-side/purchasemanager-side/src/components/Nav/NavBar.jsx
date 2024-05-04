@@ -4,6 +4,7 @@ import { BiSolidPurchaseTag } from 'react-icons/bi'
 import { FaClipboardList } from 'react-icons/fa'
 import { HiOutlineViewBoards, HiOutlineLogout } from 'react-icons/hi'
 import { IoMdArrowDropdownCircle } from 'react-icons/io'
+import { FaChevronCircleRight } from 'react-icons/fa'
 
 import { NavLink } from 'react-router-dom'
 
@@ -116,7 +117,7 @@ const NavBar = () => {
                       setShowProductReqDropdown(!showProductReqDropdown)
                     }
                   >
-                    <IoMdArrowDropdownCircle className="text-lg" />
+                    <FaChevronCircleRight className="text-lg" />
                   </span>
                 )}
               </NavLink>
