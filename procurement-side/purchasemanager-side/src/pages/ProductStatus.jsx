@@ -4,6 +4,7 @@ import PRheading from '../components/Header/prheading'
 import NavBarMobile from '../components/Nav/NavBarMobile'
 import NavBar from '../components/Nav/NavBar'
 import PRStatus from '../components/ProductReq/PRStatus'
+import Report from '../components/ProductReq/Report'
 
 const ProductStatus = () => {
   return (
@@ -15,6 +16,7 @@ const ProductStatus = () => {
       <div className="h-screen md:w-full flex flex-col overflow-x-auto">
         <PRheading />
         <PRStatus />
+        <Report />
       </div>
     </div>
   )

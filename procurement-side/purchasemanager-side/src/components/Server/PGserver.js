@@ -289,6 +289,29 @@ db.connect()
       }
     })
 
+    // app.post('/api/rejectedStatus', async (req, res) => {
+    //   try {
+    //     const { purchaseno, reason } = req.body // Extracting reason from request body
+
+    //     // Prepare the update query to set the status to 'Rejected' and update the reason
+    //     const updateQuery = `
+    //       UPDATE purchaserequest
+    //       SET status = 'Rejected', reason = $2
+    //       WHERE purchaseno = $1
+    //     `
+
+    //     // Execute the update query
+    //     await db.none(updateQuery, [purchaseno, reason])
+
+    //     res
+    //       .status(200)
+    //       .json({ message: 'Status updated to Rejected successfully' })
+    //   } catch (error) {
+    //     console.error('Error updating status:', error)
+    //     res.status(500).json({ error: 'Internal Server Error' })
+    //   }
+    // })
+
     app.get('/api/dataProductStatus', async (req, res) => {
       try {
         // Example query to fetch data from a PostgreSQL table

@@ -120,15 +120,13 @@ const Row_supplier = () => {
   // console.log('SupplierInfo:', SupplierInfo) // Check SupplierInfo array
 
   return (
-    <div className="flex flex-col mx-4 mt-10  md:mx-6 md:ml-[6rem] lg:mx-28">
+    <div className="flex flex-col mx-4 mt-10  md:mx-6 md:ml-[6rem] lg:mx-28 rounded-lg shadow-md">
       <DataTable
         columns={columns}
         data={data}
         dense
-        selectableRows={false}
-        selectableRowsVisible={false}
         pagination
-        paginationRowsPerPageOptions={[5, 8]}
+        paginationRowsPerPageOptions={[5, 10]}
         paginationPosition="bottom"
         className=" rounded-lg shadow-sm"
         customStyles={customStyles}

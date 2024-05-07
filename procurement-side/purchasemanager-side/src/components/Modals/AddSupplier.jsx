@@ -31,32 +31,6 @@ const AddModal = () => {
     setIsOpen(false)
   }
 
-  // const handleSaveChanges = () => {
-  //   // Logic to save changes (e.g., send data to server)
-  //   console.log('Changes saved:', formData)
-  //   closeModal()
-  // }
-
-  // const finalSubmit = () => {
-  //   if (
-  //     formData.companyName &&
-  //     formData.contactPerson &&
-  //     formData.companyEmail &&
-  //     formData.address &&
-  //     formData.city &&
-  //     formData.state &&
-  //     formData.zipCode &&
-  //     formData.country
-  //   ) {
-  //     toast.success('Form submitted successfully')
-  //     setTimeout(() => {
-  //       closeModal()
-  //     }, 5000)
-  //   } else {
-  //     toast.error('Please fill up all input fields')
-  //   }
-  // }
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
@@ -72,7 +46,7 @@ const AddModal = () => {
     <div className="">
       <button
         onClick={() => setIsOpen(true)}
-        className="bg-brand-purple text-xs mt-4 w-[9rem] mx-4 p-2 flex items-center justify-center rounded-md shadow-md text-white cursor-pointer"
+        className="bg-brand-purple text-xs mt-4 w-[9rem] mx-2 lg:mx-24 p-2 flex items-center justify-center rounded-md shadow-md text-white cursor-pointer"
       >
         <span className="text-base mr-2">
           <RiFileAddFill />

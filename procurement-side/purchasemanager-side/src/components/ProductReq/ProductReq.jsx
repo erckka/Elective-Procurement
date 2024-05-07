@@ -118,7 +118,7 @@ const ProductReq = (type) => {
   ]
 
   return (
-    <div className="mx-2 ml-6 mt-6 md:mx-6 md:ml-[6rem] z-[0]">
+    <div className="mx-2 ml-6 mt-6 md:mx-6 md:ml-[6rem] lg:mx-36">
       {isApproveModalOpen && (
         <ApprovePR closeModal={closeModal} row={selectedRow} />
       )}
@@ -132,10 +132,10 @@ const ProductReq = (type) => {
           row={selectedRow}
         />
       )}{' '}
-      <div className="flex justify-center text-center whitespace-nowrap mt-12 my-4 font-bold">
+      <div className="flex justify-center text-center whitespace-nowrap text-xl mt-12 my-4 font-bold">
         Pending For Approval
       </div>
-      <div className="overflow-auto rounded-lg shadow w-full">
+      <div className="overflow-auto rounded-lg shadow-md    w-full">
         <DataTable
           columns={columns}
           data={data}

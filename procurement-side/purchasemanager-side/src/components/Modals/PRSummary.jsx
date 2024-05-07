@@ -165,24 +165,28 @@ const PRSummary = ({ closeModal, type, row, items }) => {
             : 'Purchase Order Summary'}
         </h1>
 
-        <div className="border-b-[0.1rem] w-[16rem] border-transparent border-gradient my-[0.3rem] mb-4"></div>
+        <div className="border-b-[0.1rem] w-[23rem] border-transparent border-gradient my-[0.3rem] mb-4"></div>
 
         <div className="flex justify-start mt-1 text-sm ">
           <div className=" text-left ">
             {type === 'PurchaseOrder' && (
-              <div className="pt-1 px-4  grid grid-cols-2 ">
+              <div className="pt-1 px-4  grid grid-cols-2 mb-2 ">
                 <h1 className="  font-semibold ">Order Created:</h1>
-                <h1 className="font-light ml-2">{ordercreated}</h1>
+                <h1 className="font-light  border shadow w-28 py-1 px-2 rounded items-center">
+                  {ordercreated}
+                </h1>
               </div>
             )}
             {type === 'PurchaseOrder' && (
-              <div className="pt-1 px-4 grid grid-cols-2 ">
+              <div className="pt-1 px-4 grid grid-cols-2 mb-2 ">
                 <h1 className="font-semibold">Target Delivery Date:</h1>
-                <h1 className="font-light ml-2">{targetdeliverydate}</h1>
+                <h1 className="font-light  border shadow w-28 py-1 px-2 rounded items-center">
+                  {targetdeliverydate}
+                </h1>
               </div>
             )}
             {type === 'PurchaseOrder' && (
-              <div className=" px-4 mt-1  grid grid-cols-2">
+              <div className=" px-4 mt-1  grid grid-cols-2 mb-2">
                 <h1 className="font-semibold flex items-center">Order Paid:</h1>
                 <DatePicker
                   selected={selectedDate}
@@ -195,7 +199,7 @@ const PRSummary = ({ closeModal, type, row, items }) => {
                   minDate={new Date()}
                   placeholderText="Select a date"
                   disabled={orderpaid !== '01-01-1970'}
-                  className="  w-28 flex justify-center items-center rounded py-1 px-2 border border-blue-500"
+                  className="  w-28 flex justify-center items-center rounded py-1 px-2 border shadow "
                 />{' '}
               </div>
             )}
@@ -220,13 +224,13 @@ const PRSummary = ({ closeModal, type, row, items }) => {
                       orderreceived !== '01-01-1970' ||
                       orderpaid === '01-01-1970'
                     }
-                    className="  w-28 flex justify-center items-center rounded py-1 px-2 border border-blue-500"
+                    className="  w-28 flex justify-center items-center rounded py-1 px-2 border shadow"
                   />{' '}
                 </h1>
               </div>
             )}
             {type === 'PurchaseOrder' && (
-              <div className=" px-4   grid grid-cols-2 border-b border-black mb-2 ">
+              <div className=" px-4   grid grid-cols-2  mb-2 ">
                 <h1 className="font-semibold flex items-center">
                   Invoice Number:
                 </h1>
@@ -238,6 +242,29 @@ const PRSummary = ({ closeModal, type, row, items }) => {
                   placeholder="Enter invoice number"
                   className="border border-blue-500 w-[20px] "
                 />
+              </div>
+            )}
+            {type === 'PurchaseOrder' && (
+              <div className=" px-4   grid grid-cols-2 border-b border-black py-2  ">
+                <h1 className="font-semibold flex items-center">
+                  Attach file:
+                </h1>
+                {/* <h1 className="font-light mb-2 ml-2">33</h1> */}
+                <input
+                  type="file"
+                  // onChange={handleFileChange}
+                  className="hidden"
+                  accept=".pdf,image/*" // Specify accepted file types
+                  id="attachmentInput"
+                />
+                <label
+                  htmlFor="attachmentInput"
+                  className="cursor-pointer bg-slate-100 shadow py-1 px-4 rounded "
+                >
+                  Choose File
+                </label>
+                {/* Display selected file name */}
+                {/* {file && <p className="ml-2">{file.name}</p>} */}
               </div>
             )}
             {/* Supplier Info */}

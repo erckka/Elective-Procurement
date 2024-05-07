@@ -157,16 +157,18 @@ const PRStatus = () => {
         />
       )}
 
-      <div className="flex justify-center text-center whitespace-nowrap mt-12 my-4 font-bold mb-8">
+      <div className="flex justify-center text-center whitespace-nowrap mt-12 my-4 font-bold mb-8 text-xl">
         Product Requisition Status
       </div>
-      <DataTable
-        columns={columns}
-        data={data}
-        pagination
-        paginationRowsPerPageOptions={[5, 8]}
-        customStyles={customStyles}
-      />
+      <div className="overflow-auto rounded-lg shadow-md w-full">
+        <DataTable
+          columns={columns}
+          data={data}
+          pagination
+          paginationRowsPerPageOptions={[5, 8]}
+          customStyles={customStyles}
+        />
+      </div>
     </div>
   )
 }

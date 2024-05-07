@@ -160,7 +160,7 @@ const PO = () => {
   ]
 
   return (
-    <div className="mx-2 mt-6">
+    <div className=" mx-2 ml-6 mt-6 md:mx-6 md:ml-[6rem] lg:mx-36">
       {isPRSummaryModalOpen && (
         <PRSummary
           closeModal={closeModal}
@@ -168,7 +168,7 @@ const PO = () => {
           row={selectedRow}
         />
       )}
-      <div className="flex justify-center text-center whitespace-nowrap mt-12 my-4 font-bold">
+      <div className="flex justify-center text-center whitespace-nowrap mt-12 my-4 font-bold text-xl ">
         Purchase Order
       </div>
 
@@ -177,23 +177,12 @@ const PO = () => {
           columns={columns}
           data={data}
           pagination
+          selectableRows={false}
+          selectableRowsVisible={false}
           paginationPerPage={8}
           paginationRowsPerPageOptions={[5, 8]}
           customStyles={customStyles}
           searchable={true}
-
-          // customStyles={{
-          //   headRow: {
-          //     style: {
-          //       zIndex: 2,
-          //     },
-          //   },
-          //   rows: {
-          //     style: {
-          //       zIndex: 2,
-          //     },
-          //   },
-          // }}
         />
       </div>
     </div>
