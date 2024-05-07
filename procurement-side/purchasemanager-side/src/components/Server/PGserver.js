@@ -3,6 +3,8 @@ import bodyParser from 'body-parser'
 import pgPromise from 'pg-promise'
 import cors from 'cors'
 import nodemailer from 'nodemailer'
+import fs from 'fs'
+import { Parser } from 'json2csv'
 
 const app = express()
 const pgp = pgPromise()
@@ -532,6 +534,75 @@ db.connect()
           .json({ message: 'Purchase order information updated successfully' })
       } catch (error) {
         console.error('Error updating purchase order information:', error)
+        res.status(500).json({ error: 'Internal Server Error' })
+      }
+    })
+
+    app.get('/api/downloadPurchaseOrder', async (req, res) => {
+      try {
+        // Fetch data from the purchaseorder table
+        const data = await db.any('SELECT * FROM purchaseorder')
+
+        // Convert data to CSV format
+        const fields = [
+          'purchaseordernum',
+          'suppliername',
+          'ordercreated',
+          'targetdeliverydate',
+          'orderpaid',
+          'orderreceived',
+          'invoiceno',
+          'status',
+          'item',
+          'itemdescription',
+          'quantity',
+          'unitprice',
+          'totalamount',
+        ] // Define fields to include in the CSV
+        const json2csvParser = new Parser({ fields })
+        const csv = json2csvParser.parse(data)
+
+        // Set response headers to trigger file download
+        res.header('Content-Type', 'text/csv')
+        res.attachment('purchaseorder.csv')
+
+        // Send the CSV as response
+        res.send(csv)
+      } catch (error) {
+        console.error('Error generating CSV:', error)
+        res.status(500).json({ error: 'Internal Server Error' })
+      }
+    })
+
+    app.get('/api/downloadPurchaseRequest', async (req, res) => {
+      try {
+        const data = await db.any('SELECT * FROM purchaserequest')
+
+        // Convert data to CSV format
+        const fields = [
+          'purchaseno',
+          'suppliername',
+          'ordercreated',
+          'targetdeliverydate',
+          'companyemail',
+          'itemname',
+          'itemdesc',
+          'quantity',
+          'unitprice',
+          'status',
+          'reason',
+        ] // Define fields to include in the CSV
+        const json2csvParser = new Parser({ fields })
+        const csv = json2csvParser.parse(data)
+
+        // Set response headers to trigger file download
+        res.header('Content-Type', 'text/csv')
+        res.attachment('purchaserequest.csv')
+
+        // Send the CSV as response
+        res.send(csv)
+      } catch (error) {
+        console.error('Error generating CSV:', error)
         res.status(500).json({ error: 'Internal Server Error' })
       }
     })

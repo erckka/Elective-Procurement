@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
 import { IoDownloadOutline } from 'react-icons/io5'
+import axios from 'axios'
 
 const Report = () => {
   const [selectedOption, setSelectedOption] = useState('')
 
   const handleChange = (e) => {
     setSelectedOption(e.target.value)
+  }
+
+  const handleDownloadCSV = () => {
+    window.open('http://localhost:3001/api/downloadPurchaseRequest', '_blank')
   }
 
   return (
@@ -23,7 +28,10 @@ const Report = () => {
         <option value="pending">Pending</option>
         <option value="approved">Approved</option>
       </select>
-      <button className="bg-brand-blue px-4 py-2 rounded-md flex">
+      <button
+        onClick={handleDownloadCSV}
+        className="bg-brand-blue px-4 py-2 rounded-md flex"
+      >
         <IoDownloadOutline className="text-xl mr-2" />
         <h1>CSV</h1>
       </button>
