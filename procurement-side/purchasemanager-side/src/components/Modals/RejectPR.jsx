@@ -6,7 +6,7 @@ import axios from 'axios'
 const RejectPR = ({ isOpen, closeModal, row }) => {
   const [isRejected, setIsRejected] = useState(false)
   const [reason, setReason] = useState('')
-  const [isReasonProvided, setIsReasonProvided] = useState(true)
+  const [isReasonProvided, setIsReasonProvided] = useState('true')
 
   const {
     purchaseno,
@@ -34,6 +34,7 @@ const RejectPR = ({ isOpen, closeModal, row }) => {
   }, [isRejected, closeModal])
 
   const handleRejectClick = async () => {
+    console.log(reason)
     if (!reason) {
       // If reason is not provided, set isReasonProvided to false
       setIsReasonProvided(false)
@@ -43,6 +44,7 @@ const RejectPR = ({ isOpen, closeModal, row }) => {
     try {
       await axios.post('http://localhost:3001/api/rejectedStatus', {
         purchaseno,
+        reason,
       })
       setIsRejected(true)
       window.location.reload()

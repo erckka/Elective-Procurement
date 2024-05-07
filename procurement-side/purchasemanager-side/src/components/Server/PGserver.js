@@ -14,8 +14,8 @@ const db = pgp({
   host: 'localhost',
   user: 'postgres',
   port: 5432,
-  // password: 'password123',
-  password: 'database',
+  password: 'password123',
+  // password: 'database',
   database: 'postgres',
 })
 
@@ -270,17 +270,17 @@ db.connect()
 
     app.post('/api/rejectedStatus', async (req, res) => {
       try {
-        const { purchaseno } = req.body
+        const { purchaseno, reason } = req.body
 
         // Prepare the update query to set the status to 'Approved'
         const updateQuery = `
           UPDATE purchaserequest
-          SET status = 'Rejected'
-          WHERE purchaseno = $1
+          SET status = 'Rejected', reason = $1
+          WHERE purchaseno = $2
         `
 
         // Execute the update query
-        await db.none(updateQuery, [purchaseno])
+        await db.none(updateQuery, [reason, purchaseno])
 
         res
           .status(200)

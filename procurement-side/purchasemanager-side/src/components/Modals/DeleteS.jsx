@@ -4,6 +4,7 @@ import CloseBtn from '../Buttons/CloseBtn'
 import axios from 'axios'
 
 const DeleteS = ({ isOpen, closeModal, supplierId }) => {
+  console.log(supplierId)
   const deleteSupplier = async () => {
     try {
       console.log('Deleting supplier...')
