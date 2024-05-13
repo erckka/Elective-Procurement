@@ -9,8 +9,16 @@ const Report = () => {
     setSelectedOption(e.target.value)
   }
 
-  const handleDownloadCSV = () => {
+  const handleDownloadCSV = async () => {
+    console.log(selectedOption)
     window.open('http://localhost:3001/api/downloadPurchaseRequest', '_blank')
+    // try {
+    //   await axios.post('http://localhost:3001/api/downloadPurchaseRequest', {
+    //     selectedOption,
+    //   })
+    // } catch (error) {
+    //   console.error('Error updating status:', error)
+    // }
   }
 
   return (
@@ -24,9 +32,9 @@ const Report = () => {
         <option value="" className="text-gray-200">
           Filter by Action
         </option>
-        <option value="rejected">Rejected</option>
-        <option value="pending">Pending</option>
-        <option value="approved">Approved</option>
+        <option value="Rejected">Rejected</option>
+        <option value="Pending">Pending</option>
+        <option value="Approved">Approved</option>
       </select>
       <button
         onClick={handleDownloadCSV}

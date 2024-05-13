@@ -15,6 +15,7 @@ const PRSummary = ({ closeModal, type, row, items }) => {
   const [invoicenum, setInvoicenum] = useState(row.invoiceno || '')
   const [selectedDate, setSelectedDate] = useState(null)
   const [receivedDate, setReceivedDate] = useState(null)
+  const [file, setFile] = useState(null)
 
   const {
     purchaseno,
@@ -67,6 +68,11 @@ const PRSummary = ({ closeModal, type, row, items }) => {
 
     fetchData()
   }, [purchaseno])
+
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0]
+    setFile(selectedFile)
+  }
 
   const openModal = () => {
     setIsOpen(true)
@@ -252,16 +258,20 @@ const PRSummary = ({ closeModal, type, row, items }) => {
                 {/* <h1 className="font-light mb-2 ml-2">33</h1> */}
                 <input
                   type="file"
-                  // onChange={handleFileChange}
+                  onChange={handleFileChange}
                   className="hidden"
                   accept=".pdf,image/*" // Specify accepted file types
                   id="attachmentInput"
                 />
                 <label
                   htmlFor="attachmentInput"
-                  className="cursor-pointer bg-slate-100 shadow py-1 px-4 rounded "
+                  className="cursor-pointer bg-slate-100 shadow py-1 px-4 rounded whitespace-nowrap"
                 >
-                  Choose File
+                  {file ? (
+                    <p className="ml-2">{file.name}</p>
+                  ) : (
+                    <p>Choose File</p>
+                  )}
                 </label>
                 {/* Display selected file name */}
                 {/* {file && <p className="ml-2">{file.name}</p>} */}

@@ -170,7 +170,9 @@ db.connect()
         const { supplierId } = req.params
 
         // Delete the supplier from the database
-        await db.none('DELETE FROM supplier WHERE supplierid = $1', supplierId)
+        await db.none('DELETE FROM supplier WHERE supplierid = $1', [
+          supplierId,
+        ])
 
         res.status(200).json({ message: 'Supplier deleted successfully' })
       } catch (error) {

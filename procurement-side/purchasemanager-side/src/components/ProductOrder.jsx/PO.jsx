@@ -40,6 +40,7 @@ const PO = () => {
           status: data.status,
           orderreceived: formatDate(data.orderreceived),
           orderpaid: formatDate(data.orderpaid),
+          attachment: data.attachment,
         }))
         setData(mappedData)
         console.log(mappedData)

@@ -33,20 +33,20 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
   const handleDelete = () => {
     setIsDeleteModalOpen(true)
   }
-  const handleDeleteSupplier = async () => {
-    try {
-      // Make an HTTP DELETE request to delete the supplier
-      const response = await axios.delete(
-        `http://localhost:3001/api/deleteSupplier/${selectedSupplier.id}`
-      )
-      console.log(response.data) // Log the response from the backend
-      // Handle any success message or logic here
-      closeModal() // Close the modal after successful delete
-    } catch (error) {
-      console.error('Error deleting supplier:', error)
-      // Handle error if delete operation fails
-    }
-  }
+  // const handleDeleteSupplier = async () => {
+  //   try {
+  //     // Make an HTTP DELETE request to delete the supplier
+  //     const response = await axios.delete(
+  //       `http://localhost:3001/api/deleteSupplier/${formData.supplierid}`
+  //     )
+  //     console.log(response.data) // Log the response from the backend
+  //     // Handle any success message or logic here
+  //     closeModal() // Close the modal after successful delete
+  //   } catch (error) {
+  //     console.error('Error deleting supplier:', error)
+  //     // Handle error if delete operation fails
+  //   }
+  // }
 
   const handleDiscardChanges = () => {
     setFormData(initialData)
@@ -60,7 +60,7 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
     <div>
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50 shadow bg-[#00000080] ">
-          <div className="inset-0 rounded-md overflow-y-auto no-scrollbar mt-[1rem] bg-white shadow-md w-[20rem] md:w-[20rem] lg:w-[25rem] lg:p-2 lg:px-6 p-2 px-4 max-h-[600px] border border-blue-500">
+          <div className="inset-0 rounded-md overflow-y-auto no-scrollbar mt-[1rem] bg-white shadow-md w-[20rem] md:w-[20rem] lg:w-[25rem] lg:p-2 lg:px-6 p-2 px-4 max-h-[600px] ">
             <h1 className="text-xl text-center font-bold mb-4 mt-4">
               Edit Supplier
             </h1>
@@ -207,7 +207,8 @@ const EditModal = ({ isOpen, closeModal, initialData, onSave }) => {
         <DeleteSupplier
           isOpen={isDeleteModalOpen}
           closeModal={() => setIsDeleteModalOpen(false)}
-          onDelete={handleDeleteSupplier} // Call handleDeleteSupplier function
+          // onDelete={handleDeleteSupplier} // Call handleDeleteSupplier function
+          supplierId={formData.supplierid}
         />
       )}
     </div>

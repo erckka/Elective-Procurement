@@ -7,24 +7,14 @@ const DeleteS = ({ isOpen, closeModal, supplierId }) => {
   console.log(supplierId)
   const deleteSupplier = async () => {
     try {
-      console.log('Deleting supplier...')
       const response = await axios.delete(
-        `http://localhost:3001/api/deleteSupplier/${supplierId}`,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
+        `http://localhost:3001/api/deleteSupplier/${supplierId}`
       )
-      if (response.status === 200) {
-        console.log('Supplier deleted successfully')
-        closeModal() // Close modal after successful delete
-      } else {
-        throw new Error('Failed to delete supplier')
-      }
+      console.log(response.data)
+      closeModal()
+      window.location.reload()
     } catch (error) {
       console.error('Error deleting supplier:', error)
-      // Handle error or show a notification to the user
     }
   }
   return (
