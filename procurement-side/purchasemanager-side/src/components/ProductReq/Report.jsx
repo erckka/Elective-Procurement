@@ -23,7 +23,7 @@ const Report = () => {
 
   return (
     <div className="flex justify-end lg:mx-[9rem] mt-[15rem] text-left py-4">
-      <h1 className="py-2">Filter by action:</h1>
+      {/* <h1 className="py-2">Filter by action:</h1>
       <select
         onChange={handleChange}
         value={selectedOption}
@@ -35,7 +35,7 @@ const Report = () => {
         <option value="Rejected">Rejected</option>
         <option value="Pending">Pending</option>
         <option value="Approved">Approved</option>
-      </select>
+      </select> */}
       <button
         onClick={handleDownloadCSV}
         className="bg-brand-blue px-4 py-2 rounded-md flex"

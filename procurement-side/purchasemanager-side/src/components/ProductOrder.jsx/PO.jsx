@@ -151,10 +151,10 @@ const PO = () => {
             className="bg-gray-700 text-white text-[18px] rounded-sm shadow-sm w-auto h-6 lg:h-6 p-[0.2rem] cursor-pointer"
             onClick={() => openPRSummary(row)}
           />
-          <MdDelete
+          {/* <MdDelete
             className="bg-red-700 text-white text-[18px] rounded-sm shadow-sm w-auto h-6 lg:h-6 p-[0.2rem] cursor-pointer"
             onClick={() => openPRSummary(row)}
-          />
+          /> */}
         </div>
       ),
     },

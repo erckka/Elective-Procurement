@@ -17,7 +17,7 @@ const POReport = () => {
 
   return (
     <div className="flex justify-end lg:mx-[9rem] mt-[15rem] text-left py-4  ">
-      <h1 className="py-2">Filter by action:</h1>
+      {/* <h1 className="py-2">Filter by action:</h1>
       <select
         onChange={handleChange}
         value={selectedOption}
@@ -31,7 +31,7 @@ const POReport = () => {
         </option>
         <option value="paid">Paid</option>
         <option value="received">Received</option>
-      </select>
+      </select> */}
       <button
         onClick={handleDownloadCSV}
         className="bg-brand-blue px-4 py-2 rounded-md flex"
