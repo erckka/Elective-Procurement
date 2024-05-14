@@ -6,7 +6,7 @@ import CustomBarChart from '../components/Dashboard/CustomBarChart.jsx'
 import DonutChart from '../components/Dashboard/DonutChart.jsx'
 import ScatterAnalytics from '../components/Dashboard/ScatterAnalytics.jsx'
 import DateComponent from '../components/Dashboard/DateComponent.jsx'
-
+import DashboardLayout from '../components/Dashboard/DashboardLayout.jsx'
 const Dashboard = () => {
   return (
     <div className="flex flex-col h-screen md:flex-row">
@@ -19,9 +19,10 @@ const Dashboard = () => {
         <div className="flex flex-col w-full">
           <DateComponent />
           <div className="flex flex-row gap-5 justify-center items-center">
+            <DashboardLayout />
+            {/* <DonutChart />
             <DonutChart />
-            <DonutChart />
-            <DonutChart />
+            <DonutChart /> */}
           </div>
           <div className="flex flex-row gap-5 ml-24 mt-5 items-center">
             {/* <ScatterAnalytics /> */}

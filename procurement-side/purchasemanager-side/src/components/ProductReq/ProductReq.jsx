@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
-import PReqData from './PRdata'
 import { FaCheck, FaTimes } from 'react-icons/fa'
 import ApprovePR from '../Modals/ApprovePR'
 import RejectPR from '../Modals/RejectPR'
 import PRSummary from '../Modals/PRSummary'
+
 import { PiDotsThreeDuotone } from 'react-icons/pi'
 import axios from 'axios'
 
@@ -76,7 +76,7 @@ const ProductReq = (type) => {
   const closeModal = () => {
     setIsApproveModalOpen(false)
     setIsRejectModalOpen(false)
-    setIsPRSummaryModalOpen(false)
+    setIsPRSummarayModalOpen(false)
   }
 
   const columns = [

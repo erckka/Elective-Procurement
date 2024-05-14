@@ -48,6 +48,58 @@ db.connect()
       }
     })
 
+    app.get('/api/totalPurchaseRequests', async (req, res) => {
+      try {
+        const result = await db.any('SELECT COUNT(*) FROM purchaserequest')
+        const totalCount = result[0].count
+        res.json({ totalCount: parseInt(totalCount, 10) })
+      } catch (error) {
+        console.error('Error fetching total purchase requests count:', error)
+        res.status(500).json({ error: 'Internal Server Error' })
+      }
+    })
+
+    app.get('/api/pendingPurchaseRequests', async (req, res) => {
+      try {
+        const result = await db.one(
+          'SELECT COUNT(*) FROM purchaserequest WHERE status = $1',
+          ['Pending']
+        )
+        const pendingCount = parseInt(result.count, 10)
+        res.json({ pendingCount })
+      } catch (error) {
+        console.error('Error fetching pending purchase requests count:', error)
+        res.status(500).json({ error: 'Internal Server Error' })
+      }
+    })
+
+    app.get('/api/approvedPurchaseRequests', async (req, res) => {
+      try {
+        const result = await db.one(
+          'SELECT COUNT(*) FROM purchaserequest WHERE status = $1',
+          ['Approved']
+        )
+        const pendingCount = parseInt(result.count, 10)
+        res.json({ pendingCount })
+      } catch (error) {
+        console.error('Error fetching pending purchase requests count:', error)
+        res.status(500).json({ error: 'Internal Server Error' })
+      }
+    })
+
+    app.get('/api/rejectedPurchaseRequests', async (req, res) => {
+      try {
+        const result = await db.one(
+          'SELECT COUNT(*) FROM purchaserequest WHERE status = $1',
+          ['Rejected']
+        )
+        const pendingCount = parseInt(result.count, 10)
+        res.json({ pendingCount })
+      } catch (error) {
+        console.error('Error fetching pending purchase requests count:', error)
+        res.status(500).json({ error: 'Internal Server Error' })
+      }
+    })
     app.post('/api/updateSupplier', async (req, res) => {
       try {
         const {
@@ -455,6 +507,24 @@ db.connect()
         })
       } catch (error) {
         console.error('Error sending email:', error)
+        res.status(500).json({ error: 'Internal Server Error' })
+      }
+    })
+
+    app.get('/api/dashboardProductStatus', async (req, res) => {
+      try {
+        // Example query to fetch data from a PostgreSQL table
+        const data = await db.any(
+          `SELECT DISTINCT ON (purchaseno) *
+          FROM purchaserequest
+          WHERE purchaseno NOT IN (
+            SELECT purchaseordernum FROM purchaseorder
+          ) AND status IN ($1, $2, $3)`,
+          ['Approved', 'Pending', 'Rejected']
+        )
+        res.json(data)
+      } catch (error) {
+        console.error('Error fetching data:', error)
         res.status(500).json({ error: 'Internal Server Error' })
       }
     })
