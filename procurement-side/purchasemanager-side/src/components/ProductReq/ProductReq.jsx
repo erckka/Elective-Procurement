@@ -76,7 +76,7 @@ const ProductReq = (type) => {
   const closeModal = () => {
     setIsApproveModalOpen(false)
     setIsRejectModalOpen(false)
-    setIsPRSummarayModalOpen(false)
+    setIsPRSummaryModalOpen(false)
   }
 
   const columns = [
